@@ -1,0 +1,6 @@
+## dotfiles for RANCID clogin
+add user * mpenning
+# Uncomment after adding passwords
+#add password * {CHANGEME} {CHANGEME}
+add autoenable * {0}
+add method * {ssh}

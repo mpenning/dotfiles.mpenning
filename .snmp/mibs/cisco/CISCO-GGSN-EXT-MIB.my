@@ -1,0 +1,512 @@
+-- $ID$
+-- *****************************************************************
+-- CISCO-GGSN-EXT-MIB.my
+--   
+-- Oct 2007, Annie Mishalini Devasahayam.
+--   
+-- Copyright (c) 2008 by cisco Systems, Inc.
+--   
+-- All rights reserved.
+-- ****************************************************************
+-- $Endlog$
+
+CISCO-GGSN-EXT-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY,
+    OBJECT-TYPE,
+    Counter32,
+    Gauge32,
+    Integer32,
+    Unsigned32
+        FROM SNMPv2-SMI
+    MODULE-COMPLIANCE,
+    OBJECT-GROUP
+        FROM SNMPv2-CONF
+    CounterBasedGauge64
+        FROM HCNUM-TC
+    ciscoMgmt
+        FROM CISCO-SMI;
+
+
+ciscoGgsnExtMIB MODULE-IDENTITY
+    LAST-UPDATED    "200801290000Z"
+    ORGANIZATION    "Cisco Systems, Inc."
+    CONTACT-INFO
+            "Cisco Systems
+            Customer Service
+
+            Postal: 170 W Tasman Drive
+            San Jose, CA  95134
+            USA
+
+            Tel: +1 800 553-NETS
+
+            E-mail: cs-gprs@cisco.com"
+    DESCRIPTION
+        "This MIB module extends the CISCO-GGSN-MIB.
+
+        This MIB module manages the Gateway GPRS Support
+        Node (GGSN) devices.
+
+        A GGSN device provides interworking with external
+        packet-data network of a particular GPRS service
+        provider. It provides a combination of IP routing
+        and GPRS specific functionality to support mobile
+        users.
+
+        Acronyms and terms:
+        COA       Change of Authorization
+        DT        Direct Tunnel
+        GGSN      Gateway GPRS Support Node
+        GPRS      General Packet Radio Service
+        GTP       GPRS Tunneling Protocol
+        PDP       Packet Data Protocol
+        PPP       Point-to-Point Protocol
+        RNC       Radio Network Controller
+        SGSN      Serving GPRS Support Node
+
+        REFERENCE
+
+        [1] GSM 03.60: Digital cellular telecommunications
+            system (Phase 2+); General Packet Radio Service
+            (GPRS); Service description; Stage 2. V7.1.0
+
+        [2] GSM 09.60: Digital cellular telecommunication
+            system (Phase 2+); General Packet Radio Service
+            (GPRS); GPRS Tunnelling Protocol (GTP) across
+            Gn and Gp Interface. V7.3.0
+
+        [3] 3GPP; Technical Specification Group Services
+            and System Aspects; QoS Concept and Architecture.
+            3G TS 23.107 v3.2.0.
+
+        [4] 3GPP; Technical Specification Group Core Network;
+            General Packet Radio Service(GPRS); GPRS
+            Tunnelling Protocol (GTP) across Gn and Gp
+            Interface (Release 7). 3G TS 29.060 v7.5.1.
+
+        [5] 3GPP: Technical Specification Group Core Network;
+            Policy control over Go interface (Release 5).
+            3GPP TS 29.207 V5.2.0
+
+        [6] 3GPP: Technical Specification Group Services and 
+           System Aspects; General Packet Radio Service (GPRS);
+           Service Description (Release 7) 3GPP TS 23.060 V7.4.0
+
+        [7] 3GPP: Technical Specification Group Services and 
+            System Aspects; One Tunnel Functional description;
+            (Release 7) 3GPP TR 23.809 V1.0.0"
+    REVISION        "200801290000Z"
+    DESCRIPTION
+        "Initial version of this MIB module."
+    ::= { ciscoMgmt 647 }
+
+
+-- Object definitions
+
+ciscoGgsnExtMIBNotifs  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIB 0 }
+
+ciscoGgsnExtMIBObjects  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIB 1 }
+
+ciscoGgsnExtMIBConform  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIB 2 }
+
+ciscoGgsnExtStatistics  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBObjects 1 }
+
+ciscoGgsnExtConfigurations  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBObjects 2 }
+
+ciscoGgsnExtStatus  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBObjects 3 }
+
+ciscoGgsnExtNotifMgmt  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBObjects 4 }
+
+ciscoGgsnExtNotifInfo  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBObjects 5 }
+
+
+-- MIBObjects
+--   
+-- Statistics
+
+cGgsnExtNoWaitSgsnLocalDelPDPs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "pdps"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of PDPs deleted
+        in GGSN without waiting for a delete context response
+        from the SGSN." 
+    ::= { ciscoGgsnExtStatistics 1 }
+
+cGgsnExtNoReqSgsnLocalDelPDPs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "pdps"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of PDPs deleted
+        in GGSN without sending a delete request to the SGSN." 
+    ::= { ciscoGgsnExtStatistics 2 }
+
+cGgsnExtSentPdpUpdateReqs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of GGSN
+        initiated update PDP context requests sent to SGSN." 
+    ::= { ciscoGgsnExtStatistics 3 }
+
+cGgsnExtRcvdSuccPdpUpdateResponses OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object represents the total number of update PDP
+        context responses received from the SGSN for the GGSN
+        initiated update requests." 
+    ::= { ciscoGgsnExtStatistics 4 }
+
+cGgsnExtRcvdCoaMsgs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of Change of
+        Authorization (COA) messages received at GGSN."
+    REFERENCE
+        "RFC 3576 - Dynamic Authorization Extensions to Remote
+         Authentication Dial In User Service (RADIUS)" 
+    ::= { ciscoGgsnExtStatistics 5 }
+
+cGgsnExtDiscardedCoaMsgs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of COA
+        messges dropped at GGSN." 
+    ::= { ciscoGgsnExtStatistics 6 }
+
+cGgsnExtSentCoaUpdateReqs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of COA
+        initiated update PDP requests for QOS change sent
+        from GGSN." 
+    ::= { ciscoGgsnExtStatistics 7 }
+
+cGgsnExtSentErrorIndications OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the number of error indication
+        messages sent from GGSN.
+
+        Trigger condition:  A error indication message will be
+        sent from GGSN when a data packet is received for a 
+        non-existent PDP context."
+    REFERENCE
+        "3GPP TS 23.060 V7.4.0 General Packet Radio Service (GPRS);
+         Service description; Stage 2 (Release 7)" 
+    ::= { ciscoGgsnExtStatistics 8 }
+
+cGgsnExtRcvdErrorIndications OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the number of error indication
+        messages received on GGSN."
+    REFERENCE
+        "3GPP TS 23.060 v7.4.0 General Packet Radio Service (GPRS);
+         Service description; Stage 2 (Release 7)" 
+    ::= { ciscoGgsnExtStatistics 9 }
+
+cGgsnExtTotalDtEnabled OBJECT-TYPE
+    SYNTAX          Counter32
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the number of times Direct
+        tunnel is enabled for the PDP contexts in GGSN." 
+    ::= { ciscoGgsnExtStatistics 10 }
+
+cGgsnExtRcvdDtPdpErrorIndications OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "messages"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of error
+        indications received for Direct Tunnel PDP contexts
+        from the RNC."
+    REFERENCE
+        "3GPP TR 23.809 v1.0.0: 3rd Generation Partnership Project;
+         Technical Specification Group Services and System Aspects;
+         One Tunnel Functional description;(Release 7)" 
+    ::= { ciscoGgsnExtStatistics 11 }
+
+cGgsnExtTotalDtUpdFailDeletedPDPs OBJECT-TYPE
+    SYNTAX          Counter32
+    UNITS           "pdps"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of Direct
+        tunnel PDP contexts deleted due to update response
+        failure.
+
+        Trigger condition:
+        If the GGSN initiated update request is triggered
+        by the error indication from RNC and the response
+        is received with cause value other than 'request
+        accepted' then the PDP is deleted locally in GGSN." 
+    ::= { ciscoGgsnExtStatistics 12 }
+
+cGgsnExtThruputStatsTable OBJECT-TYPE
+    SYNTAX          SEQUENCE OF CGgsnExtThruputStatsEntry 
+    MAX-ACCESS      not-accessible
+    STATUS          current
+    DESCRIPTION
+        "This table contains the global GTP throughput statistics
+        on this GGSN for a configurable duration set in
+        cGgsnThruputIntervalOne and cGgsnThruputIntervalTwo.
+
+        Once the cGgsnThruputIntervalOne is set to some valid
+        value, the data throughput collections gets started.
+        The data throughput collection is updated periodically
+        for each expiry of configured throughput interval to the
+        corresponding objects in the cGgsnThruputStatsTable.
+
+        cGgsnThruputIntervalTwo is just an option for a second
+        throughput collection for a different throughput
+        interval time."
+    ::= { ciscoGgsnExtStatistics 13 }
+
+cGgsnExtThruputStatsEntry OBJECT-TYPE
+    SYNTAX          CGgsnExtThruputStatsEntry
+    MAX-ACCESS      not-accessible
+    STATUS          current
+    DESCRIPTION
+        "Creation of row(s) will happen when there is a valid value
+        set to cGgsnThruputIntervalOne or cGgsnThruputIntervalTwo.
+
+        Deletion of row(s) will happen when the throughput intervals
+        (cGgsnThruputIntervalOne, cGgsnThruputIntervalTwo) are
+        unset."
+    INDEX           { cGgsnExtThruputInterval } 
+    ::= { cGgsnExtThruputStatsTable 1 }
+
+CGgsnExtThruputStatsEntry ::= SEQUENCE {
+        cGgsnExtThruputInterval      Integer32,
+        cGgsnExtThruputLastCollected Integer32,
+        cGgsnExtUpstreamByteCount    CounterBasedGauge64,
+        cGgsnExtDownstreamByteCount  CounterBasedGauge64,
+        cGgsnExtUpstreamPktCount     Gauge32,
+        cGgsnExtDownstreamPktCount   Gauge32
+}
+
+cGgsnExtThruputInterval OBJECT-TYPE
+    SYNTAX          Integer32 (1..65535 )
+    UNITS           "minutes"
+    MAX-ACCESS      not-accessible
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the time interval at which the
+        statistics are sampled. The objects cGgsnThruputIntervalOne
+        and cGgsnThruputIntervalTwo in the CISCO-GGSN-MIB represent
+        the configuration values of the intervals." 
+    ::= { cGgsnExtThruputStatsEntry 1 }
+
+cGgsnExtThruputLastCollected OBJECT-TYPE
+    SYNTAX          Integer32 (0..65535 )
+    UNITS           "minutes"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the delta value between the time
+        when this data is collected and the time it is been
+        retrieved. It means the time elapsed after the previous
+        collection/updation of the data." 
+    ::= { cGgsnExtThruputStatsEntry 2 }
+
+cGgsnExtUpstreamByteCount OBJECT-TYPE
+    SYNTAX          CounterBasedGauge64
+    UNITS           "bytes"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of upstream
+        traffic bytes sent in the last sampling period
+        specified by cGgsnExtThruputInterval." 
+    ::= { cGgsnExtThruputStatsEntry 3 }
+
+cGgsnExtDownstreamByteCount OBJECT-TYPE
+    SYNTAX          CounterBasedGauge64
+    UNITS           "bytes"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the total number of downstream
+        traffic bytes sent in the last sampling period
+        specified by cGgsnExtThruputInterval." 
+    ::= { cGgsnExtThruputStatsEntry 4 }
+
+cGgsnExtUpstreamPktCount OBJECT-TYPE
+    SYNTAX          Gauge32
+    UNITS           "packets"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object indicates the number of upstream packets
+        sent in the last sampling period specified by
+        cGgsnExtThruputInterval." 
+    ::= { cGgsnExtThruputStatsEntry 5 }
+
+cGgsnExtDownstreamPktCount OBJECT-TYPE
+    SYNTAX          Gauge32
+    UNITS           "packets"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object represents the number of downstream packets
+        sent in the last sampling period specified by
+        cGgsnExtThruputInterval." 
+    ::= { cGgsnExtThruputStatsEntry 6 }
+ 
+
+
+-- Configurations
+
+cGgsnExtAaaAccountInterPeriod OBJECT-TYPE
+    SYNTAX          Unsigned32 (0 |  15..71582 )
+    UNITS           "minutes"
+    MAX-ACCESS      read-write
+    STATUS          current
+    DESCRIPTION
+        "This object specifies the global periodic accounting
+        timer interval value. When this object is set to a 
+        value, 'interim' type accounting records will be sent
+        at the specified interval for the PDP contexts."
+    DEFVAL          { 0 } 
+    ::= { ciscoGgsnExtConfigurations 1 }
+
+-- Status
+
+cGgsnExtGtpPppRegenCreatedIntfs OBJECT-TYPE
+    SYNTAX          Gauge32
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object represents the number of device specific
+        interface constructs created for association with
+        PPP-Regen PDP contexts." 
+    ::= { ciscoGgsnExtStatus 1 }
+
+cGgsnExtGtpDtActivePDPs OBJECT-TYPE
+    SYNTAX          Gauge32
+    UNITS           "pdps"
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object represents the number of active PDP
+        contexts with Direct tunnel enabled." 
+    ::= { ciscoGgsnExtStatus 2 }
+-- *********************************************************************
+-- Conformance Information
+-- *********************************************************************
+
+cGgsnExtMIBCompliances  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBConform 1 }
+
+cGgsnExtMIBGroups  OBJECT IDENTIFIER
+    ::= { ciscoGgsnExtMIBConform 2 }
+
+
+-- Compliance statements
+
+cGgsnExtMIBCompliance MODULE-COMPLIANCE
+    STATUS          current
+    DESCRIPTION
+        "The compliance statements for entities which
+        implement the CISCO-GGSN-EXT-MIB."
+    MODULE          -- this module
+    MANDATORY-GROUPS {
+                        cGgsnExtStatisticsGroup,
+                        cGgsnExtStatusGroup,
+                        cGgsnExtConfigurationsGroup,
+                        cGgsnExtThruputGroup
+                    }
+    ::= { cGgsnExtMIBCompliances 1 }
+
+-- units of conformance
+
+cGgsnExtStatisticsGroup OBJECT-GROUP
+    OBJECTS         {
+                        cGgsnExtNoWaitSgsnLocalDelPDPs,
+                        cGgsnExtNoReqSgsnLocalDelPDPs,
+                        cGgsnExtSentPdpUpdateReqs,
+                        cGgsnExtRcvdSuccPdpUpdateResponses,
+                        cGgsnExtRcvdCoaMsgs,
+                        cGgsnExtDiscardedCoaMsgs,
+                        cGgsnExtSentCoaUpdateReqs,
+                        cGgsnExtSentErrorIndications,
+                        cGgsnExtRcvdErrorIndications,
+                        cGgsnExtTotalDtEnabled,
+                        cGgsnExtRcvdDtPdpErrorIndications,
+                        cGgsnExtTotalDtUpdFailDeletedPDPs
+                    }
+    STATUS          current
+    DESCRIPTION
+        "A collection of statistics objects in GGSN."
+    ::= { cGgsnExtMIBGroups 1 }
+
+cGgsnExtStatusGroup OBJECT-GROUP
+    OBJECTS         {
+                        cGgsnExtGtpPppRegenCreatedIntfs,
+                        cGgsnExtGtpDtActivePDPs
+                    }
+    STATUS          current
+    DESCRIPTION
+        "A collection of statistics objects in GGSN."
+    ::= { cGgsnExtMIBGroups 2 }
+
+cGgsnExtConfigurationsGroup OBJECT-GROUP
+    OBJECTS         { cGgsnExtAaaAccountInterPeriod }
+    STATUS          current
+    DESCRIPTION
+        "A collection of configuration objects in GGSN."
+    ::= { cGgsnExtMIBGroups 3 }
+
+cGgsnExtThruputGroup OBJECT-GROUP
+    OBJECTS         {
+                        cGgsnExtThruputLastCollected,
+                        cGgsnExtUpstreamByteCount,
+                        cGgsnExtDownstreamByteCount,
+                        cGgsnExtUpstreamPktCount,
+                        cGgsnExtDownstreamPktCount
+                    }
+    STATUS          current
+    DESCRIPTION
+        "A collection of throughput statistics objects in GGSN."
+    ::= { cGgsnExtMIBGroups 4 }
+
+END

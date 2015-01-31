@@ -1,0 +1,39 @@
+[ui]
+username = mpenning <mike@pennington.net>
+merge = vimdiff
+ssh = ssh -C
+
+[extensions]
+pager =
+color =
+graphlog =
+hggit =
+hgext.convert =
+hgext.bookmarks =
+hgext.extdiff =
+
+[git]
+intree = 1
+
+[extdiff]
+# add new command that runs GNU diff(1) in 'side-by-side' mode
+cmd.sdiff = diff
+opts.sdiff = -dbB --left-column -y
+
+cmd.sdiff80 = diff
+opts.sdiff80 = -dbB --left-column --side-by-side -W 80
+
+cmd.cdiff = colordiff
+opts.cdiff = -uprN
+
+cmd.vimdiff = gvim
+opts.vimdiff = -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+# http://mercurial.selenic.com/wiki/MergingWithVim
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
+
+[pager]
+pager = LESS='FSRX' less
+attend = cat, diff, sdiff, glog, log, incoming, outgoing, lg, show, lga
