@@ -2,11 +2,14 @@
 
 This project helps to safely manage your dotfiles on github with 
 minimal effort.  Perhaps you know that revision control tools like
-``git`` and ``hg`` only store the executable bit in revision 
-control; this project:
+``git`` and ``hg`` only store the executable bit from your 
+file system in revision control; this means if you have a file as
+750, these permissions could be different when you pull that
+repo again.  This project:
 
-- Keeps track of changes to your dotfile permissions on github
-- Restores permissions during new installations
+- Keeps track of changes to your dotfile contents on github
+- Keeps track of changes to your dotfile *permissions* on github
+- *Restores permissions* during new installations
 - Archives your existing dotfile conflicts before clobbering them
 
 The guts of the project are in two files:
@@ -40,12 +43,20 @@ If you only want to use my dotfiles, then type...
     cd ~/dotfiles
     make install
 
-This will archive your conflicting dotfiles into ~/dotfiles.orig.[timestamp]
-and move them into that directory.  Then it will symlink the dotfiles in 
-~/dotfiles to your home directory.
+``make install`` will:
+- create an archive directory called ~/dotfiles.orig.[timestamp]
+- move any conflicting dotfiles into that directory
+- symlink the dotfiles in ~/dotfiles to your home directory.  
+- Walk your ~/dotfiles directory and change permissions to those you saved the last time you performed ``make import``
 
 ### Adding some of your own dotfiles into revision control...
 
 Just ``cd`` to your home directory and move the dotfiles / dot directories
-of your choice into ~/dotfiles.  Now type ``make import``, add/commit to your
-repo, and push to your github account.
+of your choice into ~/dotfiles.  Now type ``make import``, ``make install``, 
+add/commit to your local repo, and push to your github account.
+
+``make import`` is the piece which saves your permissions on github.  It uses
+``manage_dotfiles.py`` to save all your dotfile permissions in 
+``~/dotfiles/permissions.json``.  When you pull the repo from github and do
+``make install``, the permissions are read from ``permissions.json`` and 
+appled to your repo.
