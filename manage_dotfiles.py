@@ -1,3 +1,11 @@
+"""
+    manage_dotfiles.py
+    ~~~~~~~~~~~~~~~~~~
+    A project to simplify dotfile management.
+    :copyright: (c) 2015 by David Michael Pennington
+    :license: BSD, see LICENSE for more details.
+"""
+
 from logging.handlers import TimedRotatingFileHandler
 from logging.handlers import MemoryHandler
 from optparse import OptionParser
