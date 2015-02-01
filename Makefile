@@ -9,6 +9,10 @@ clean:
 .PHONY: import
 import:
 	python manage_dotfiles.py -p
+.PHONY: repo-push
+repo-push:
+	hg bookmark master
+	-hg push git+ssh://git@github.com:mpenning/dotfiles.git
 .PHONY: help
 help:
 	@echo ""
