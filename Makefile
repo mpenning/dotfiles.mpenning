@@ -21,4 +21,5 @@ help:
 	@echo ""
 	@echo "  make install      : Install these dotfiles as symlinks"
 	@echo "  make clean        : Archive your existing dotfiles"
+	@echo "  make delete       : Delete your existing dotfile symlinks (Use with caution!)"
 	@echo "  make import       : Import dotfiles into permissions.json"
