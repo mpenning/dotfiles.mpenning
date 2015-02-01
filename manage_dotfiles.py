@@ -201,6 +201,7 @@ if __name__=="__main__":
                         # Always remove links if they link to the ~/dotfile dir
                         os.remove(dotfile_homedir)
                 elif not os.path.islink(dotfile_homedir) or opts.force:
+                    print("[INFO] {} is not a symbolic link; building archive {}".format(dotfile_homedir, dotfile_archive))
                     if not archive_dir:
                         log.info("    [CREATE] Archive directory: {}".format(dotfile_archive))
                         os.mkdir(dotfile_archive)  # Build dotfile archive dir
