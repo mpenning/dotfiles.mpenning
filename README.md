@@ -57,12 +57,23 @@ If you only want to use my dotfiles, then type...
 
 ### Adding some of your own dotfiles into revision control...
 
-Just ``cd`` to your home directory and move the dotfiles / dot directories
-of your choice into ~/dotfiles.  Now type ``make import``, ``make install``, 
-add/commit to your local repo, and push to your github account.
+If you want to add some of your own dotfiles, (or remove some of mine)...
 
-``make import`` is the piece which saves your permissions on github.  It uses
-``manage_dotfiles.py`` to save all your dotfile permissions in 
+- ``cd`` to your home directory and move the dotfiles / dot directories
+of your choice into ~/dotfiles.
+- ``cd ~/dotfiles``
+- ``make delete``. This option will delete all existing symlinks into ``~/dotfiles``
+- Add or delete my dotfiles as you wish.  Be sure you do not touch the ``~/dotfiles/.git`` or ``~dotfiles/.hg`` directories, which contain all the repo metadata
+- ``make import``
+- ``make install``
+- add/commit to your local repo, and push to your github account.
+
+``make import`` is a ``Makefile`` target which saves your permissions on 
+github.  It uses ``manage_dotfiles.py`` to save all your dotfile permissions in 
 ``~/dotfiles/permissions.json``.  When you pull the repo from github and do
 ``make install``, the permissions are read from ``permissions.json`` and 
 appled to your repo.
+
+## License and Copyright
+
+This software is licensed with a BSD 3-clause license; Copyright 2015 (c) David Michael Pennington
