@@ -22,7 +22,8 @@ import re
 import os
 
 NO_PERMISSION_METADATA = ['snmp']
-EXCLUDE_AS_DOTFILES = set(['.hg', '.git', 'README.md', 'Makefile', 'manage_dotfiles.py', 'permissions.json'])
+EXCLUDE_AS_DOTFILES = set(['.hg', '.git', 'README.md', 'LICENSE', 'Makefile', 
+    'manage_dotfiles.py', 'permissions.json'])
 
 ## no .pyc file...
 sys.dont_write_bytecode = True
@@ -35,6 +36,9 @@ def parse_options():
     parser.add_option("-c", "--create", dest="create", action='store_true',
                       default=False,
                       help="Create symlink'd dotfiles in your home directory")
+    parser.add_option("-d", "--delete", dest="delete_links", action='store_true',
+                      default=False,
+                      help="Delete symlinks to ~/dotfiles from your home directory")
     parser.add_option("-f", "--force", dest="force", action='store_true',
                       default=False,
                       help="Force action")
@@ -215,6 +219,18 @@ if __name__=="__main__":
         else:
             log.info("    [ERROR] Refusing to overwrite archive {}, it already exists".format(dotfile_archive))
             warn("Refusing to overwrite {}".format(dotfile_archive))
+
+    elif opts.delete_links:
+        dotfiles_github = valid_dotfile_targets(full_path=True)
+        log.info("Deleting all symlinks to ~/dotfiles")
+        for file in valid_dotfile_targets(full_path=False):
+            dotfile_homedir = os.path.join(home_dir, file)
+            dotfile_target = os.readlink(dotfile_homedir)
+            link_to = filter(lambda x: dotfile_target==x, dotfiles_github)
+            if len(link_to)>0:
+                os.remove(dotfile_homedir)
+                log.info("    [DELETE] {} -> {}".format(dotfile_homedir, link_to[0]))
+
     elif opts.wpermissions:
         log.info("Imported permissions for ~/dotfiles: {}".format(valid_dotfile_targets()))
         permissions = valid_dotfile_permissions()

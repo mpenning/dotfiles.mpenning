@@ -9,6 +9,9 @@ clean:
 .PHONY: import
 import:
 	python manage_dotfiles.py -p
+.PHONY: delete
+delete:
+	python manage_dotfiles.py -d
 .PHONY: repo-push
 repo-push:
 	hg bookmark master
