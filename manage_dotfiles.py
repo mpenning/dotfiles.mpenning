@@ -117,20 +117,31 @@ def recurse_valid_dotfiles(directory):
     """Return a list of valid dotfiles, recursing through any """
     """required dot directories.  Administrative files are removed"""
     """(i.e. remove dotfiles/README, dotfiles/Makefile, etc...)"""
-    files = list()
+    files = set([])
     exclude_paths = excludes(full_path=True)
     for root, dirnames, filenames in os.walk(directory):
-      for filename in fnmatch.filter(filenames, '*'):
-          candidate = os.path.join(root, filename)
-          if filter(lambda x: x in candidate, NO_PERMISSION_METADATA):
-              # Remove any paths in NO_PERMISSION_METADATA
-              continue
-          elif filter(lambda x: x in candidate, exclude_paths):
-              # Remove any paths in EXCLUDE_AS_DOTFILES
-              continue
-          else:
-              files.append(candidate)
-    return files
+
+        for dir in dirnames:
+            dirpath = os.path.join(root, dir)
+            if filter(lambda x: x in dirpath, NO_PERMISSION_METADATA):
+                # Remove any paths in NO_PERMISSION_METADATA
+                continue
+            elif filter(lambda x: x in dirpath, exclude_paths):
+                # Remove any paths in EXCLUDE_AS_DOTFILES
+                continue
+            files.add(dirpath)
+
+        for filename in fnmatch.filter(filenames, '*'):
+            candidate = os.path.join(root, filename)
+            if filter(lambda x: x in candidate, NO_PERMISSION_METADATA):
+                # Remove any paths in NO_PERMISSION_METADATA
+                continue
+            elif filter(lambda x: x in candidate, exclude_paths):
+                # Remove any paths in EXCLUDE_AS_DOTFILES
+                continue
+            else:
+                files.add(candidate)
+    return sorted(files)
 
 def build_dotfile_symlinks():
     pass
