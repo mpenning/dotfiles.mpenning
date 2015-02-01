@@ -11,11 +11,17 @@ repo again.  This project:
 - Keeps track of changes to your dotfile *permissions* on github
 - *Restores permissions* during new installations
 - Archives your existing dotfile conflicts before clobbering them
+- Logs activity in case you need to figure out what happened (see ``~/dotfiles.log``)
 
 The guts of the project are in two files:
 
 - ``dotfiles/Makefile``:  The main user interface
 - ``dotfiles/manage_dotfiles.py``: Most of the smarts mentioned above are here
+
+This script will always ignore the following dotfiles:
+
+- ``.hg``: Mercurial uses this directory for repository metadata
+- ``.git``: Git uses this directory for repository metadata
 
 ## Initial installation (from github)
 
