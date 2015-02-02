@@ -14,6 +14,7 @@ hgext.bookmarks =
 hgext.extdiff =
 
 [alias]
+logg = !$HG log -G
 now = !$HG log -r . --template "{label('log.changeset', rev)} {label('branches.active', '    {branch}')} {label('bookmarks.current', '    {bookmarks}')}\n" ; $HG status
 
 [git]
