@@ -1,5 +1,6 @@
 [ui]
 username = mpenning <mike@pennington.net>
+editor = vim
 merge = vimdiff
 ssh = ssh -C
 
@@ -12,13 +13,17 @@ hgext.convert =
 hgext.bookmarks =
 hgext.extdiff =
 
+[alias]
+now = !$HG log -r . --template "{label('log.changeset', rev)} {label('branches.active', '    {branch}')} {label('bookmarks.current', '    {bookmarks}')}\n" ; $HG status
+
 [git]
 intree = 1
 
 [extdiff]
 # add new command that runs GNU diff(1) in 'side-by-side' mode
-cmd.sdiff = diff
-opts.sdiff = -dbB --left-column -y
+cmd.sdiff = bash
+# I can't run sdiff through [pager] for some reason... manually run less here
+opts.sdiff = -c 'diff -dbB --left-column -y -W `tput cols` $0 $1 | less -FRX'
 
 cmd.sdiff80 = diff
 opts.sdiff80 = -dbB --left-column --side-by-side -W 80
@@ -35,5 +40,5 @@ vimdiff.executable = vim
 vimdiff.args = -d $base $local $output $other +close +close
 
 [pager]
-pager = LESS='FSRX' less
-attend = cat, diff, sdiff, glog, log, incoming, outgoing, lg, show, lga
+pager = LESS='FRX' less
+attend = cat, diff, glog, log, incoming, outgoing, lg, show, lga
