@@ -157,10 +157,10 @@ if __name__=="__main__":
     if opts.create:
         links = zip(valid_dotfile_targets(full_path=True), 
             valid_dotfile_targets())
-        log.info("Creating symbolic links for {} in {}".format([link[1] for link in links], 
+        log.info("Creating symbolic links for {0} in {1}".format([link[1] for link in links], 
             os.path.expanduser('~/')))
         for link in links:
-            log.info("  Evaluating symlink for ~/dotfiles/{}".format(link[1]))
+            log.info("  Evaluating symlink for ~/dotfiles/{0}".format(link[1]))
             dotfile_homedir = os.path.join(home_dir, link[1])
             dotfile_github = link[0]    # File in the ~/dotfiles directory
             skip_link = False
@@ -171,9 +171,9 @@ if __name__=="__main__":
             elif os.readlink(dotfile_homedir)==dotfile_github:
                 # Skip the symbolic link
                 skip_link = True
-                log.info("    [SKIP] Symlink for {}, because it already exists".format(dotfile_homedir))
+                log.info("    [SKIP] Symlink for {0}, because it already exists".format(dotfile_homedir))
             elif opts.force:
-                log.info("    [REMOVE] Symlink: {} -> {}".format(dotfile_homedir, os.readlink(dotfile_homedir)))
+                log.info("    [REMOVE] Symlink: {0} -> {1}".format(dotfile_homedir, os.readlink(dotfile_homedir)))
                 os.remove(dotfile_homedir)
 
             # Symbolic link to ~/dotfiles...
@@ -181,18 +181,18 @@ if __name__=="__main__":
                 continue
             elif (not os.path.islink(dotfile_homedir)):
                 if not os.path.exists(dotfile_homedir):
-                    log.info("    [CREATE] Symlink: {} -> {}".format(dotfile_homedir, dotfile_github))
+                    log.info("    [CREATE] Symlink: {0} -> {1}".format(dotfile_homedir, dotfile_github))
                     os.symlink(dotfile_github, dotfile_homedir)
                 else:
-                    log.info("    [WARNING] Refusing to overwrite {}; please archive first.".format(dotfile_homedir))
+                    log.info("    [WARNING] Refusing to overwrite {0}; please archive first.".format(dotfile_homedir))
                     warn("Refusing to overwrite file {}; please archive first.".format(dotfile_homedir))
             else:
-                log.info("    [WARNING] Refusing to overwrite link {}; please archive first.".format(dotfile_homedir))
-                warn("Refusing to overwrite symlink for {}".format(link[0]))
+                log.info("    [WARNING] Refusing to overwrite link {0}; please archive first.".format(dotfile_homedir))
+                warn("Refusing to overwrite symlink for {0}".format(link[0]))
     elif opts.archive:
 
         tt = datetime.now().strftime("%Y%m%d-%H%M%S")
-        dotfile_archive = os.path.join(home_dir, 'dotfiles.orig.{}'.format(tt))
+        dotfile_archive = os.path.join(home_dir, 'dotfiles.orig.{0}'.format(tt))
         archive_dir = False    # Has the archive directory been created?
 
         dotfiles_github = valid_dotfile_targets(full_path=True)
@@ -205,20 +205,20 @@ if __name__=="__main__":
                         # Always remove links if they link to the ~/dotfile dir
                         os.remove(dotfile_homedir)
                 elif not os.path.islink(dotfile_homedir) or opts.force:
-                    print("[INFO] {} is not a symbolic link; building archive {}".format(dotfile_homedir, dotfile_archive))
+                    print("[INFO] {0} is not a symbolic link; building archive {1}".format(dotfile_homedir, dotfile_archive))
                     if not archive_dir:
-                        log.info("    [CREATE] Archive directory: {}".format(dotfile_archive))
+                        log.info("    [CREATE] Archive directory: {0}".format(dotfile_archive))
                         os.mkdir(dotfile_archive)  # Build dotfile archive dir
                         archive_dir = True
                     try:
                         move(dotfile_homedir, dotfile_archive)
-                        log.info("    [MOVE] {} -> Archive".format(dotfile_homedir))
+                        log.info("    [MOVE] {0} -> Archive".format(dotfile_homedir))
                     except IOError:
                         # Can't archive dotfile_homedir... it's new
                         pass
         else:
-            log.info("    [ERROR] Refusing to overwrite archive {}, it already exists".format(dotfile_archive))
-            warn("Refusing to overwrite {}".format(dotfile_archive))
+            log.info("    [ERROR] Refusing to overwrite archive {0}, it already exists".format(dotfile_archive))
+            warn("Refusing to overwrite {0}".format(dotfile_archive))
 
     elif opts.delete_links:
         dotfiles_github = valid_dotfile_targets(full_path=True)
@@ -229,10 +229,10 @@ if __name__=="__main__":
             link_to = filter(lambda x: dotfile_target==x, dotfiles_github)
             if len(link_to)>0:
                 os.remove(dotfile_homedir)
-                log.info("    [DELETE] {} -> {}".format(dotfile_homedir, link_to[0]))
+                log.info("    [DELETE] {0} -> {1}".format(dotfile_homedir, link_to[0]))
 
     elif opts.wpermissions:
-        log.info("Imported permissions for ~/dotfiles: {}".format(valid_dotfile_targets()))
+        log.info("Imported permissions for ~/dotfiles: {0}".format(valid_dotfile_targets()))
         permissions = valid_dotfile_permissions()
         with open('permissions.json', 'w') as fh:
             json.dump(permissions, fh)
@@ -244,4 +244,4 @@ if __name__=="__main__":
         for dotfile_github, perm in permissions.items():
             # Permissions are stored as octal strings
             os.chmod(dotfile_github, int(perm, 8))
-            log.info("    [CHMOD] {} to {}".format(dotfile_github, perm))
+            log.info("    [CHMOD] {0} to {1}".format(dotfile_github, perm))
