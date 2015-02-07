@@ -16,9 +16,29 @@ alias 'rebash'='source ~/.bash_profile'
 # I hate emacs line editing, use vi
 set -o vi
 
+HISTSIZE=2000
+HISTFILESIZE=$HISTSIZE
+HISTCONTROL=ignorespace:ignoredups
+HISTTIMEFORMAT="%y-%m-%d %T "
+
+history() {
+  _bash_history_sync
+  builtin history "$@"
+}
+
+_bash_history_sync() {
+  builtin history -a         #1
+  HISTFILESIZE=$HISTSIZE     #2
+  builtin history -c         #3
+  builtin history -r         #4
+}
+
+PROMPT_COMMAND=_bash_history_sync
+
 # Set a default bash prompt...
 PS1='[\u@\h \W]\$ '
-export PS1
+
+export PS1 PROMPT_COMMAND HISTFILESIZE HISTTIMEFORMAT HISTCONTROL HISTSIZE
 
 # Get the LOCAL aliases and functions
 if [ -f ~/.bashrc.local ]; then
