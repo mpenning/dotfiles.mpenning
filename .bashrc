@@ -16,6 +16,10 @@ alias 'rebash'='source ~/.bash_profile'
 # I hate emacs line editing, use vi
 set -o vi
 
+# Set a default bash prompt...
+PS1='[\u@\h \W]\$ '
+export PS1
+
 # Get the LOCAL aliases and functions
 if [ -f ~/.bashrc.local ]; then
         . ~/.bashrc.local
