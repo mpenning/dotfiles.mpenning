@@ -18,7 +18,7 @@ The guts of the project are in two files:
 - ``dotfiles/Makefile``:  The main user interface
 - ``dotfiles/manage_dotfiles.py``: Most of the smarts mentioned above are here
 
-This script will always ignore the following dotfiles:
+This script will *always* ignore the following dotfiles / dot directories:
 
 - ``.hg``: Mercurial uses this directory for repository metadata
 - ``.git``: Git uses this directory for repository metadata
@@ -50,7 +50,7 @@ If you only want to use my dotfiles, then type...
     make install
 
 ``make install`` will:
-- create an archive directory called ~/dotfiles.orig.[timestamp]
+- create an archive directory called ~/dotfiles.orig.[timestamp], if requried
 - move any conflicting dotfiles into that directory
 - symlink the dotfiles in ~/dotfiles to your home directory.  
 - Walk your ~/dotfiles directory and change permissions to those you saved the last time you performed ``make import``
