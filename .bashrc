@@ -10,6 +10,7 @@ alias 'awhois'='gwhois -h whois.arin.net'
 alias 'cgrep'='grep --color=always'
 alias 'wgrep'='grep -w --color=always'
 alias tmux="TERM=screen-256color tmux"
+alias tn="tmux new bash"  # The easiest way to ensure bash initializes well
 alias 'vi'='vim'
 alias 'rebash'='source ~/.bash_profile'
 
