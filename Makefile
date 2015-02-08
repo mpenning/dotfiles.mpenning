@@ -3,8 +3,8 @@ install:
 	python manage_dotfiles.py -a
 	python manage_dotfiles.py -c
 	python manage_dotfiles.py -P
-.PHONY: clean
-clean:
+.PHONY: archive
+archive:
 	python manage_dotfiles.py -a
 .PHONY: import
 import:
@@ -20,6 +20,6 @@ repo-push:
 help:
 	@echo ""
 	@echo "  make install      : Install these dotfiles as symlinks"
-	@echo "  make clean        : Archive your existing dotfiles"
-	@echo "  make delete       : Delete your existing dotfile symlinks (Use with caution!)"
+	@echo "  make archive      : Archive your existing dotfiles"
+	@echo "  make delete       : Delete all existing dotfile symlinks (Use with caution!)"
 	@echo "  make import       : Import dotfiles into permissions.json"
