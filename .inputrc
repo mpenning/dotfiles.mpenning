@@ -1,0 +1,2 @@
+# Most readline programs (such as the python shell) use ~/.inputrc
+set editing-mode vi
