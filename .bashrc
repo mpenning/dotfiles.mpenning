@@ -15,7 +15,7 @@ alias 'vi'='vim'
 alias 'rebash'='source ~/.bash_profile'
 
 # I hate emacs line editing, use vi
-set -o vi
+#set -o vi
 
 HISTSIZE=2000
 HISTFILESIZE=$HISTSIZE
