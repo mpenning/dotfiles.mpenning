@@ -165,10 +165,15 @@ if __name__=="__main__":
             dotfile_github = link[0]    # File in the ~/dotfiles directory
             skip_link = False
 
+            try:
+                homedir_dotfile_target = os.readlink(dotfile_homedir)
+            except:
+                homedir_dotfile_target = ''
+
             # Remove conflicts, selectively 
             if not os.path.exists(dotfile_homedir):
                 pass
-            elif os.readlink(dotfile_homedir)==dotfile_github:
+            elif homedir_dotfile_target==dotfile_github:
                 # Skip the symbolic link
                 skip_link = True
                 log.info("    [SKIP] Symlink for {0}, because it already exists".format(dotfile_homedir))
@@ -196,6 +201,7 @@ if __name__=="__main__":
         archive_dir = False    # Has the archive directory been created?
 
         dotfiles_github = valid_dotfile_targets(full_path=True)
+        dotfiles_to_archive = list()   # List of dotfiles to archive
         log.info("Archiving dotfiles in ~/")
         if not os.path.exists(dotfile_archive):
             for file in valid_dotfile_targets(full_path=False):
@@ -204,21 +210,30 @@ if __name__=="__main__":
                     if filter(lambda x: dotfile_homedir==x, dotfiles_github):
                         # Always remove links if they link to the ~/dotfile dir
                         os.remove(dotfile_homedir)
-                elif not os.path.islink(dotfile_homedir) or opts.force:
-                    print("[INFO] {0} is not a symbolic link; building archive {1}".format(dotfile_homedir, dotfile_archive))
-                    if not archive_dir:
-                        log.info("    [CREATE] Archive directory: {0}".format(dotfile_archive))
-                        os.mkdir(dotfile_archive)  # Build dotfile archive dir
-                        archive_dir = True
-                    try:
-                        move(dotfile_homedir, dotfile_archive)
-                        log.info("    [MOVE] {0} -> Archive".format(dotfile_homedir))
-                    except IOError:
-                        # Can't archive dotfile_homedir... it's new
-                        pass
+                elif os.path.exists(dotfile_homedir) and not os.path.islink(dotfile_homedir):
+                    dotfiles_to_archive.append(dotfile_homedir)
         else:
             log.info("    [ERROR] Refusing to overwrite archive {0}, it already exists".format(dotfile_archive))
             warn("Refusing to overwrite {0}".format(dotfile_archive))
+
+        if dotfiles_to_archive:
+
+            if not archive_dir:
+                log.info("    [CREATE] Archive directory: {0}".format(dotfile_archive))
+                os.mkdir(dotfile_archive)  # Build dotfile archive dir
+                archive_dir = True
+
+            for dotfile_homedir in dotfiles_to_archive:
+                ### Move original files to the archive directory
+                if not os.path.islink(dotfile_homedir) or opts.force:
+                    print("[INFO] {0} is not a symbolic link; building archive {1}".format(dotfile_homedir, dotfile_archive))
+                    try:
+                        move(dotfile_homedir, dotfile_archive)
+                        log.info("    [MOVE] {0} -> Archive".format(dotfile_homedir))
+                    except IOError as e:
+                        log.info("    [MOVE FAIL] {0} -> Archive: {1}".format(dotfile_homedir, e))
+                        # Can't archive dotfile_homedir... it's new
+                        pass
 
     elif opts.delete_links:
         dotfiles_github = valid_dotfile_targets(full_path=True)
