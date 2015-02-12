@@ -80,6 +80,9 @@ endif
 " NOTE: map  works in command mode
 " NOTE: map! works in insert mode
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 "" Miscellaneous finger-savers
 map q :q<CR>             " exit vim with q if no changes were made
 map ;N :set number<CR>   " toggle line numbers on with ;N
