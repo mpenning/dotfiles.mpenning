@@ -9,6 +9,7 @@ alias 'ifbrief'='ifconfig | grep -E "Link|ether|inet|^[a-zA-Z]"'
 alias 'awhois'='gwhois -h whois.arin.net'
 alias 'cgrep'='grep --color=always'
 alias 'wgrep'='grep -w --color=always'
+alias 'minicom'='minicom -w'
 alias tmux="TERM=screen-256color tmux"
 alias tn="tmux new bash"  # The easiest way to ensure bash initializes well
 alias 'vi'='vim'
