@@ -1,0 +1,5 @@
+# Execute with 'sudo -E minicom' (-E retains the config in your home dir)
+pu port             /dev/ttyUSB0
+pu baudrate         9600
+pu rtscts           No
+pu xonxoff          No
