@@ -248,6 +248,11 @@ if __name__=="__main__":
 
     elif opts.wpermissions:
         log.info("Imported permissions for ~/dotfiles: {0}".format(valid_dotfile_targets()))
+        try:
+            # Remove the old copy to prevent problems...
+            os.remove('permissions.json')
+        except:
+            pass
         permissions = valid_dotfile_permissions()
         with open('permissions.json', 'w') as fh:
             json.dump(permissions, fh)
