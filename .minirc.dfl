@@ -1,6 +1,6 @@
 # Execute with 'sudo -E minicom' (-E retains the config in your home dir)
 pu port             /dev/ttyUSB0
-pu baudrate         115200
+pu baudrate         9600
 pu bits             8
 pu parity           N
 pu stopbits         1
