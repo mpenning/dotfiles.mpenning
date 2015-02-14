@@ -1,5 +1,6 @@
 " Misc ************************************************************************
 " set nocompatible " disable vi compat... DONT put below the 1st vimrc line
+set nocompatible
 let loaded_matchparen = 1 " Stop auto-paren highlighting (if enabled)
 set backspace=indent,eol,start
 "" Show line numbers
@@ -31,6 +32,10 @@ set smartcase " Ignore case when searching lowercase
 set gdefault  " Use 'g' flag by default with :s/foo/bar/.
 
 " Vim UI *****************************************************************
+set history=1000
+set undolevels=1000
+set title
+set visualbell
 set showcmd     " shows what you type for a command
 set modeline    " Enable modeline display
 set ruler " Show ruler
@@ -38,6 +43,7 @@ set noerrorbells
 set cmdheight=1 " the command bar is 1 high
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
+set hidden      " http://nvie.com/posts/how-i-boosted-my-vim/
 
 
 "" Terminal hack for colors in PuTTY
