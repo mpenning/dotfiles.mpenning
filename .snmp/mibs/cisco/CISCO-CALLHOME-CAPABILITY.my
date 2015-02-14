@@ -5,7 +5,7 @@
 -- March 2004, Dipesh Gorashia
 -- Sept  2004, Arul Mozhi
 --   
--- Copyright (c) 2004, 2006-2007 by Cisco Systems Inc.
+-- Copyright (c) 2004, 2006-2012 by Cisco Systems Inc.
 -- All rights reserved.
 -- ****************************************************************
 
@@ -21,6 +21,8 @@ IMPORTS
         FROM SNMP-FRAMEWORK-MIB
     RowStatus
         FROM SNMPv2-TC
+    InetAddress
+        FROM INET-ADDRESS-MIB
     CiscoURLString
         FROM CISCO-TC
     CallHomeTransportMethod
@@ -30,7 +32,7 @@ IMPORTS
 
 
 ciscoCallHomeCapability MODULE-IDENTITY
-    LAST-UPDATED    "200707300000Z"
+    LAST-UPDATED    "201212050000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems
@@ -47,6 +49,55 @@ ciscoCallHomeCapability MODULE-IDENTITY
     DESCRIPTION
         "The capabilities description of
         CISCO-CALLHOME-MIB."
+    REVISION        "201212050000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
+        cCallHomeCapV15R0101SYPCat6k.
+
+        Updated VARIATION of ccmPeriodicAlertGroupInterval for the
+        following agent capabilities statements:
+            cCallHomeCapV12R0233SXHPCat6k
+            cCallHomeCapV12R0233SXIPCat6k
+            cCallHomeCapV12R0233SXI2PCat6k
+            cCallHomeCapV12R0250SYPCat6k
+            cCallHomeCapV12R0252SGPCat4k
+            cCallHomeCapV15R0002SGPCat4K"
+    REVISION        "201104140000Z"
+    DESCRIPTION
+        "Add the agent capabilities statement
+        cCallHomeCapV15R0002SGPCat4K.
+
+        Updated VARIATION of ccmAlertRateLimit for the following
+        agent capabilities statements:
+            cCallHomeCapV12R0233SXHPCat6k
+            cCallHomeCapV12R0233SXIPCat6k
+            cCallHomeCapV12R0233SXI2PCat6k
+            cCallHomeCapV12R0250SYPCat6k
+            cCallHomeCapV12R0252SGPCat4k"
+    REVISION        "201011100000Z"
+    DESCRIPTION
+        "Add the agent capabilities statement
+        cCallHomeCapV12R0250SYPCat6k."
+    REVISION        "200907100000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
+        cCallHomeCapV12R0233SXI2PCat6k."
+    REVISION        "200906170000Z"
+    DESCRIPTION
+        "Updated the PRODUCT-RELEASE on agent capabilities statement
+        cCallHomeCapV12R0252SGPCat4k."
+    REVISION        "200905070000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
+        cCallHomeCapV12R0252SGPCat4k.
+
+        Added VARIATION statements of ccmPeriodicAlertGroupEnable and
+        ccmEventAlertGroupEnable to cCallHomeCapV12R0233SXHPCat6k and
+        cCallHomeCapV12R0233SXIPCat6k."
+    REVISION        "200810270000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
+        cCallHomeCapV12R0233SXIPCat6k."
     REVISION        "200707300000Z"
     DESCRIPTION
         "Added the agent capabilities statement
@@ -66,7 +117,7 @@ ciscoCallHomeCapability MODULE-IDENTITY
     REVISION        "200403300000Z"
     DESCRIPTION
         "Initial version of this MIB module."
-          ::= { ciscoAgentCapability 355 }
+    ::= { ciscoAgentCapability 355 }
 
 
 
@@ -74,7 +125,8 @@ cCallHomeCapCatOSV08R0101Cat6k AGENT-CAPABILITIES
     PRODUCT-RELEASE "Cisco CatOS 8.1(1) on Catalyst 6000/6500
                           and Cisco 7600 series devices."
     STATUS          current
-    DESCRIPTION     "CISCO-CALLHOME-MIB capabilities."
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
 
     SUPPORTS        CISCO-CALLHOME-MIB
     INCLUDES        {
@@ -111,7 +163,7 @@ cCallHomeCapCatOSV08R0101Cat6k AGENT-CAPABILITIES
         supported."
 
     VARIATION       callHomeDestProfileMaxMsgSize
-    SYNTAX          Unsigned32 (0..159 )
+    SYNTAX          Unsigned32 (0..159)
     DESCRIPTION
         "Message size in the range 0 to 159 is
         supported."
@@ -170,7 +222,8 @@ cCallHomeCapCatOSV08R0101Cat6k AGENT-CAPABILITIES
     SYNTAX          INTEGER  {
                         ipv4(1)
                     }
-    DESCRIPTION     "Implementation only supports IPv4 addresses."
+    DESCRIPTION
+        "Implementation only supports IPv4 addresses."
 
     VARIATION       ccmSmtpServersPort
     ACCESS          read-only
@@ -194,7 +247,8 @@ cCallHomeCapSanOSV20R1MDS9000 AGENT-CAPABILITIES
     PRODUCT-RELEASE "Cisco SanOS 2.0(1) on Cisco MDS 9000 series 
                      devices."
     STATUS          current
-    DESCRIPTION     "Cisco CallHome MIB capabilities"
+    DESCRIPTION
+        "Cisco CallHome MIB capabilities"
 
     SUPPORTS        CISCO-CALLHOME-MIB
     INCLUDES        {
@@ -221,7 +275,8 @@ cCallHomeCapSanOSV20R1MDS9000 AGENT-CAPABILITIES
                         createAndGo(4),
                         destroy(6)
                     }
-    DESCRIPTION     "Only limited set of values are supported."
+    DESCRIPTION
+        "Only a limited set of values is supported."
 
     VARIATION       callHomeDestEmailAddressStatus
     SYNTAX          INTEGER  {
@@ -229,11 +284,13 @@ cCallHomeCapSanOSV20R1MDS9000 AGENT-CAPABILITIES
                         createAndGo(4),
                         destroy(6)
                     }
-    DESCRIPTION     "Only limited set of values are supported."
+    DESCRIPTION
+        "Only a limited set of values is supported."
 
     VARIATION       ccmSmtpServerFailNotif
     ACCESS          not-implemented
-    DESCRIPTION     "Not Supported."
+    DESCRIPTION
+        "Not Supported."
 
     ::= { ciscoCallHomeCapability 2 }
 
@@ -241,7 +298,8 @@ cCallHomeCapSanOSV30R1MDS9000 AGENT-CAPABILITIES
     PRODUCT-RELEASE "Cisco SanOS 3.0(1) on Cisco MDS 9000 series 
                      devices."
     STATUS          current
-    DESCRIPTION     "Cisco CallHome MIB capabilities"
+    DESCRIPTION
+        "Cisco CallHome MIB capabilities"
 
     SUPPORTS        CISCO-CALLHOME-MIB
     INCLUDES        {
@@ -269,7 +327,8 @@ cCallHomeCapSanOSV30R1MDS9000 AGENT-CAPABILITIES
                         createAndGo(4),
                         destroy(6)
                     }
-    DESCRIPTION     "Only limited set of values are supported."
+    DESCRIPTION
+        "Only a limited set of values is supported."
 
     VARIATION       callHomeDestEmailAddressStatus
     SYNTAX          INTEGER  {
@@ -277,11 +336,13 @@ cCallHomeCapSanOSV30R1MDS9000 AGENT-CAPABILITIES
                         createAndGo(4),
                         destroy(6)
                     }
-    DESCRIPTION     "Only limited set of values are supported."
+    DESCRIPTION
+        "Only a limited set of values is supported."
 
     VARIATION       ccmSmtpServerFailNotif
     ACCESS          not-implemented
-    DESCRIPTION     "Not Supported."
+    DESCRIPTION
+        "Not Supported."
 
     ::= { ciscoCallHomeCapability 3 }
 
@@ -289,7 +350,8 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
     PRODUCT-RELEASE "Cisco IOS 12.2(33)SXH on Catalyst 6000/6500
                          series devices."
     STATUS          current
-    DESCRIPTION     "CISCO-CALLHOME-MIB capabilities."
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
 
     SUPPORTS        CISCO-CALLHOME-MIB
     INCLUDES        {
@@ -354,8 +416,9 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
         size 0 to 200 octets."
 
     VARIATION       callHomeDestProfileMaxMsgSize
-    SYNTAX          Unsigned32 (50..1000000 )
-    DESCRIPTION     "Only limited set of values are supported."
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
 
     VARIATION       callHomeDestProfileTrnsprtMthd
     SYNTAX          CallHomeTransportMethod {
@@ -364,7 +427,7 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         emailAndHttp(4)
                     }
     DESCRIPTION
-        "Only limited set of enumerated values are
+        "Only a limited set of enumerated values is
         supported."
 
     VARIATION       callHomeDestProfileStatus
@@ -374,14 +437,14 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         destroy(6)
                     }
     DESCRIPTION
-        "Only limited set of enumerated values are
+        "Only a limited set of enumerated values is
         supported.
         For the system created profile with
         callHomeDestProfileName as 'CiscoTAC-1',
         the only enumeration supported is 'active'."
 
     VARIATION       callHomeDestProfileHiMaxMsgSize
-    SYNTAX          Unsigned32 (50..3145728 )
+    SYNTAX          Unsigned32 (50..3145728)
     DESCRIPTION
         "The object supports only the values in the
         range of 50 to 3145728."
@@ -399,7 +462,7 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         destroy(6)
                     }
     DESCRIPTION
-        "Only limited set of enumerated values are
+        "Only a limited set of enumerated values is
         supported.
         For the system created profile with
         callHomeDestProfileName as 'CiscoTAC-1',
@@ -433,22 +496,31 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         destroy(6)
                     }
     DESCRIPTION
-        "Only limited set of enumerated values are
+        "Only a limited set of enumerated values is
         supported."
 
     VARIATION       ccmAlertGroupTypeAddedNotif
     ACCESS          not-implemented
-    DESCRIPTION     "Object not implemented."
+    DESCRIPTION
+        "Object not implemented."
 
     VARIATION       ccmAlertGroupTypeDeletedNotif
     ACCESS          not-implemented
-    DESCRIPTION     "Object not implemented."
+    DESCRIPTION
+        "Object not implemented."
 
     VARIATION       ccmDestProfileTestMessage
     SYNTAX          SnmpAdminString (SIZE (0..128))
     DESCRIPTION
         "Implementation supports test message of
         only up to 128 octets."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
 
     VARIATION       ccmPatternAlertGroupStorage
     ACCESS          read-only
@@ -463,13 +535,1470 @@ cCallHomeCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         destroy(6)
                     }
     DESCRIPTION
-        "Only limited set of enumerated values are
+        "Only a limited set of enumerated values is
         supported."
 
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
     VARIATION       ccmAlertRateLimit
-    SYNTAX          Unsigned32 (0..60 )
-    DESCRIPTION     "Only limited set of values are supported."
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
 
     ::= { ciscoCallHomeCapability 4 }
 
+cCallHomeCapV12R0233SXIPCat6k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(33)SXI on Catalyst 6000/6500
+                     series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Unable to set this object on Catalyst 6500
+        devices running IOS."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Unable to set this object on Catalyst 6500
+        devices running IOS."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    ::= { ciscoCallHomeCapability 5 }
+
+cCallHomeCapV12R0252SGPCat4k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(52)SG on Catalyst 4000 family
+                    switches, except LAN Base images."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup,
+                        ccmCallHomeVrfGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Unable to set this object."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Unable to set this object."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    ::= { ciscoCallHomeCapability 6 }
+
+cCallHomeCapV12R0233SXI2PCat6k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(33)SXI2 on Catalyst 6000/6500
+                     series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup,
+                        ccmCallHomeVrfGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    ::= { ciscoCallHomeCapability 7 }
+
+cCallHomeCapV12R0250SYPCat6k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(50)SY on Catalyst 6000/6500
+                     series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup,
+                        ccmCallHomeVrfGroup,
+                        ccmMessageSourceGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmMsgSourceIpAddrType
+    SYNTAX          INTEGER  {
+                        unknown(0),
+                        ipv4(1)
+                    }
+    DESCRIPTION
+        "Only limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    ::= { ciscoCallHomeCapability 8 }
+
+cCallHomeCapV15R0002SGPCat4K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 15.0(2)SG on Catalyst 4000 family
+                    switches, except LAN Base images."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup,
+                        ccmCallHomeVrfGroup,
+                        ccmMessageSourceGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmMsgSourceIpAddrType
+    SYNTAX          INTEGER  {
+                        unknown(0),
+                        ipv4(1)
+                    }
+    DESCRIPTION
+        "Only limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    ::= { ciscoCallHomeCapability 9 }
+
+cCallHomeCapV15R0101SYPCat6k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 15.1(1)SY on Catalyst 6000/6500
+                     series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-CALLHOME-MIB capabilities."
+
+    SUPPORTS        CISCO-CALLHOME-MIB
+    INCLUDES        {
+                        chSystemInformationGroup1,
+                        ccmConfigurationGroup3,
+                        chMultipleSmtpServersGroup,
+                        chStatisticsGroup,
+                        ccmMIBNotificationsConfigGroup,
+                        ccmMIBNotificationsGroup1,
+                        ccmProfileActivationGroup,
+                        ccmProfileTestGroup,
+                        ccmProfileAlertGroupsGroup,
+                        ccmProfileAlertGroupControlGroup,
+                        ccmSmtpServersPriorityGroup,
+                        ccmAlertGroupCapabilityGroup,
+                        ccmHttpCfgGroup,
+                        ccmSeverityAlertGroupCfgGroup,
+                        ccmPeriodicAlertGroupCfgGroup,
+                        ccmPatternAlertGroupCfgGroup,
+                        ccmEventAlertGroupCfgGroup,
+                        ccmSmtpMsgSendFailNotifCtrlGroup,
+                        ccmSmtpMsgSendFailNotifGroup,
+                        ccmAlertHCStatisticsGroup,
+                        ccmAlertRateLimitGroup,
+                        ccmSmtpServerStatusGroup,
+                        ccmProfileHiMessageSizeGroup,
+                        ccmOnDemandMsgSendControlGroup,
+                        ccmOnDemandMsgStatusGroup,
+                        ccmSmartCallHomeGroup,
+                        ccmEventStatsGroup,
+                        ccmCallHomeVrfGroup,
+                        ccmMessageSourceGroup,
+                        ccmHttpProxyServerGroup,
+                        ccmUserDefCmdGroup,
+                        ccmCallHomePeriodicMinutesGroup,
+                        ccmOnDemandCliMsgGroup,
+                        ccmCallHomeDiagSignatureGroup,
+                        ccmCallHomeSecurityLevelGroup,
+                        ccmCallHomeAnonymousReportingGroup,
+                        ccmCallHomeAaaGroup
+                    }
+    VARIATION       sysContactEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeCustomerId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeContractId
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeSiteId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailFrom
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeEmailReplyTo
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileMaxMsgSize
+    SYNTAX          Unsigned32 (50..1000000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestProfileTrnsprtMthd
+    SYNTAX          CallHomeTransportMethod {
+                        email(1),
+                        http(3),
+                        emailAndHttp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       callHomeDestProfileStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestProfileHiMaxMsgSize
+    SYNTAX          Unsigned32 (50..3145728)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddress
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeDestEmailAddressStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported.
+        For the system created profile with
+        callHomeDestProfileName as 'CiscoTAC-1',
+        the only enumeration supported is 'active'."
+
+    VARIATION       callHomeDestHttpUrl
+    SYNTAX          CiscoURLString (SIZE (1..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmtpServersAddrType
+    SYNTAX          INTEGER  {
+                        ipv4(1),
+                        dns(16)
+                    }
+    DESCRIPTION
+        "Implementation only supports IPv4 and DNS
+        addresses."
+
+    VARIATION       callHomeSmtpServerPort
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmSmtpServersStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmAlertGroupTypeAddedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmAlertGroupTypeDeletedNotif
+    ACCESS          not-implemented
+    DESCRIPTION
+        "Object not implemented."
+
+    VARIATION       ccmDestProfileTestMessage
+    SYNTAX          SnmpAdminString (SIZE (0..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmPeriodicAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmEventAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmPatternAlertGroupStorage
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmPatternAlertGroupStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmEventAlertGroupEnable
+    DESCRIPTION
+        "Setting the object to 'false' will cause the
+        profile to unsubscribe the alert group if
+        ccmPeriodicAlertGroupEnable for the profile is
+        also 'false'."
+
+    VARIATION       ccmAlertRateLimit
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmSmartCallHomeAnalysisCmd
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandMsgSendEntPhyIndex
+    DESCRIPTION
+        "Only entPhysicalIndex of Supervisor and Line Card
+        modules are supported."
+
+    VARIATION       ccmSmartCallHomeCcoId
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmMsgSourceIpAddrType
+    SYNTAX          INTEGER  {
+                        unknown(0),
+                        ipv4(1)
+                    }
+    DESCRIPTION
+        "Only limited set of enumerated values is
+        supported."
+
+    VARIATION       ccmHttpProxyServerAddr
+    SYNTAX          InetAddress (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmHttpProxyServerUseEnable
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       ccmPeriodicAlertGroupInterval
+    SYNTAX          INTEGER  {
+                        daily(1),
+                        weekly(2),
+                        monthly(3),
+                        hourly(4),
+                        minutes(5)
+                    }
+    DESCRIPTION
+        "The enumerated values supported are all those
+        defined at the time this clause was written."
+
+    VARIATION       ccmPeriodicAlertGroupIntervalMinutes
+    SYNTAX          Unsigned32 (1..60)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeUserDefCmdName
+    SYNTAX          SnmpAdminString (SIZE (1..128))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       callHomeUserDefCmdRowStatus
+    SYNTAX          RowStatus {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandCliMsgCliList
+    SYNTAX          SnmpAdminString (SIZE (0..127))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandCliMsgEmail
+    SYNTAX          SnmpAdminString (SIZE (0..200))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmOnDemandCliMsgTacServiceReqId
+    SYNTAX          SnmpAdminString (SIZE (0..32))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       ccmAaaAuthUserName
+    SYNTAX          SnmpAdminString (SIZE (0..64))
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    ::= { ciscoCallHomeCapability 10 }
+
 END
+
+
+
+
+

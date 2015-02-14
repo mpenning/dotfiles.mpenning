@@ -5,7 +5,7 @@
 --
 -- Initial Version: Mar 2005: draft-ietf-ipcdn-bpiplus-mib-15.txt 
 --
--- Copyright (c) 2005 by cisco Systems, Inc.
+-- Copyright (c) 2005-2008 by cisco Systems, Inc.
 -- All rights reserved.
 -- *****************************************************************
 
@@ -39,7 +39,7 @@
 
 
 
-       docsBpi2MIB    MODULE-IDENTITY
+       docsIetfBpi2MIB    MODULE-IDENTITY
             LAST-UPDATED "200409071700Z" -- September 7th, 2004
             ORGANIZATION "IETF IP over Cable Data Network (IPCDN)
                           Working Group"
@@ -195,18 +195,18 @@
                            hmacSha196(1)
                       }
 
-       docsBpi2MIBObjects  OBJECT IDENTIFIER ::= { docsBpi2MIB 1 }
+       docsIetfBpi2MIBObjects  OBJECT IDENTIFIER ::= { docsIetfBpi2MIB 1 }
 
        -- Cable Modem Group
 
-       docsBpi2CmObjects OBJECT IDENTIFIER ::= { docsBpi2MIBObjects 1 }
+       docsIetfBpi2CmObjects OBJECT IDENTIFIER ::= { docsIetfBpi2MIBObjects 1 }
 
        --
        -- The BPI+ base and authorization table for CMs,
        -- indexed by ifIndex
        --
 
-       docsBpi2CmBaseTable OBJECT-TYPE
+       docsIetfBpi2CmBaseTable OBJECT-TYPE
             SYNTAX              SEQUENCE OF    DocsBpi2CmBaseEntry
             MAX-ACCESS          not-accessible
             STATUS              current
@@ -214,9 +214,9 @@
                  "This table describes the basic and authorization
             related Baseline Privacy Plus attributes of each CM MAC
             interface."
-            ::= { docsBpi2CmObjects 1 }
+            ::= { docsIetfBpi2CmObjects 1 }
 
-       docsBpi2CmBaseEntry OBJECT-TYPE
+       docsIetfBpi2CmBaseEntry OBJECT-TYPE
             SYNTAX              DocsBpi2CmBaseEntry
             MAX-ACCESS          not-accessible
             STATUS              current
@@ -225,37 +225,37 @@
             one CM MAC interface. An entry in this table exists for
             each ifEntry with an ifType of docsCableMaclayer(127)."
             INDEX               { ifIndex }
-            ::= { docsBpi2CmBaseTable 1 }
+            ::= { docsIetfBpi2CmBaseTable 1 }
 
        DocsBpi2CmBaseEntry ::= SEQUENCE {
-            docsBpi2CmPrivacyEnable             TruthValue,
-            docsBpi2CmPublicKey                 OCTET STRING,
-            docsBpi2CmAuthState                 INTEGER,
-            docsBpi2CmAuthKeySequenceNumber     Integer32,
-            docsBpi2CmAuthExpiresOld            DateAndTime,
-            docsBpi2CmAuthExpiresNew            DateAndTime,
-            docsBpi2CmAuthReset                 TruthValue,
-            docsBpi2CmAuthGraceTime             Integer32,
-            docsBpi2CmTEKGraceTime              Integer32,
-            docsBpi2CmAuthWaitTimeout           Integer32,
-            docsBpi2CmReauthWaitTimeout         Integer32,
-            docsBpi2CmOpWaitTimeout             Integer32,
-            docsBpi2CmRekeyWaitTimeout          Integer32,
-            docsBpi2CmAuthRejectWaitTimeout     Integer32,
-            docsBpi2CmSAMapWaitTimeout          Integer32,
-            docsBpi2CmSAMapMaxRetries           Integer32,
-            docsBpi2CmAuthentInfos              Counter32,
-            docsBpi2CmAuthRequests              Counter32,
-            docsBpi2CmAuthReplies               Counter32,
-            docsBpi2CmAuthRejects               Counter32,
-            docsBpi2CmAuthInvalids              Counter32,
-            docsBpi2CmAuthRejectErrorCode       INTEGER,
-            docsBpi2CmAuthRejectErrorString     SnmpAdminString,
-            docsBpi2CmAuthInvalidErrorCode      INTEGER,
-            docsBpi2CmAuthInvalidErrorString    SnmpAdminString
+            docsIetfBpi2CmPrivacyEnable             TruthValue,
+            docsIetfBpi2CmPublicKey                 OCTET STRING,
+            docsIetfBpi2CmAuthState                 INTEGER,
+            docsIetfBpi2CmAuthKeySequenceNumber     Integer32,
+            docsIetfBpi2CmAuthExpiresOld            DateAndTime,
+            docsIetfBpi2CmAuthExpiresNew            DateAndTime,
+            docsIetfBpi2CmAuthReset                 TruthValue,
+            docsIetfBpi2CmAuthGraceTime             Integer32,
+            docsIetfBpi2CmTEKGraceTime              Integer32,
+            docsIetfBpi2CmAuthWaitTimeout           Integer32,
+            docsIetfBpi2CmReauthWaitTimeout         Integer32,
+            docsIetfBpi2CmOpWaitTimeout             Integer32,
+            docsIetfBpi2CmRekeyWaitTimeout          Integer32,
+            docsIetfBpi2CmAuthRejectWaitTimeout     Integer32,
+            docsIetfBpi2CmSAMapWaitTimeout          Integer32,
+            docsIetfBpi2CmSAMapMaxRetries           Integer32,
+            docsIetfBpi2CmAuthentInfos              Counter32,
+            docsIetfBpi2CmAuthRequests              Counter32,
+            docsIetfBpi2CmAuthReplies               Counter32,
+            docsIetfBpi2CmAuthRejects               Counter32,
+            docsIetfBpi2CmAuthInvalids              Counter32,
+            docsIetfBpi2CmAuthRejectErrorCode       INTEGER,
+            docsIetfBpi2CmAuthRejectErrorString     SnmpAdminString,
+            docsIetfBpi2CmAuthInvalidErrorCode      INTEGER,
+            docsIetfBpi2CmAuthInvalidErrorString    SnmpAdminString
             }
 
-       docsBpi2CmPrivacyEnable  OBJECT-TYPE
+       docsIetfBpi2CmPrivacyEnable  OBJECT-TYPE
             SYNTAX              TruthValue
             MAX-ACCESS          read-only
             STATUS              current
@@ -265,9 +265,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1."
-            ::= { docsBpi2CmBaseEntry 1 }
+            ::= { docsIetfBpi2CmBaseEntry 1 }
 
-       docsBpi2CmPublicKey     OBJECT-TYPE
+       docsIetfBpi2CmPublicKey     OBJECT-TYPE
             SYNTAX             OCTET STRING (SIZE (0..524))
             MAX-ACCESS         read-only
             STATUS             current
@@ -280,9 +280,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.4."
-            ::= { docsBpi2CmBaseEntry 2 }
+            ::= { docsIetfBpi2CmBaseEntry 2 }
 
-       docsBpi2CmAuthState OBJECT-TYPE
+       docsIetfBpi2CmAuthState OBJECT-TYPE
             SYNTAX         INTEGER   {
                            start(1),
                            authWait(2),
@@ -300,9 +300,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.1.2.1."
-            ::= { docsBpi2CmBaseEntry 3 }
+            ::= { docsIetfBpi2CmBaseEntry 3 }
 
-       docsBpi2CmAuthKeySequenceNumber    OBJECT-TYPE
+       docsIetfBpi2CmAuthKeySequenceNumber    OBJECT-TYPE
             SYNTAX              Integer32 (0..15)
             MAX-ACCESS          read-only
             STATUS              current
@@ -312,9 +312,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.10."
-            ::= { docsBpi2CmBaseEntry 4 }
+            ::= { docsIetfBpi2CmBaseEntry 4 }
 
-       docsBpi2CmAuthExpiresOld OBJECT-TYPE
+       docsIetfBpi2CmAuthExpiresOld OBJECT-TYPE
             SYNTAX              DateAndTime
             MAX-ACCESS          read-only
             STATUS              current
@@ -327,9 +327,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.9."
-            ::= { docsBpi2CmBaseEntry 5 }
+            ::= { docsIetfBpi2CmBaseEntry 5 }
 
-       docsBpi2CmAuthExpiresNew OBJECT-TYPE
+       docsIetfBpi2CmAuthExpiresNew OBJECT-TYPE
             SYNTAX              DateAndTime
             MAX-ACCESS          read-only
             STATUS              current
@@ -340,9 +340,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.9."
-            ::= { docsBpi2CmBaseEntry 6 }
+            ::= { docsIetfBpi2CmBaseEntry 6 }
 
-       docsBpi2CmAuthReset OBJECT-TYPE
+       docsIetfBpi2CmAuthReset OBJECT-TYPE
             SYNTAX         TruthValue
             MAX-ACCESS     read-write
             STATUS         current
@@ -356,9 +356,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.1.2.3.4."
-            ::= { docsBpi2CmBaseEntry 7 }
+            ::= { docsIetfBpi2CmBaseEntry 7 }
 
-       docsBpi2CmAuthGraceTime  OBJECT-TYPE
+       docsIetfBpi2CmAuthGraceTime  OBJECT-TYPE
             SYNTAX         Integer32 (1..6047999)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -372,9 +372,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.3."
-            ::= { docsBpi2CmBaseEntry 8 }
+            ::= { docsIetfBpi2CmBaseEntry 8 }
 
-       docsBpi2CmTEKGraceTime   OBJECT-TYPE
+       docsIetfBpi2CmTEKGraceTime   OBJECT-TYPE
             SYNTAX         Integer32 (1..302399)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -387,9 +387,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.6."
-            ::= { docsBpi2CmBaseEntry 9 }
+            ::= { docsIetfBpi2CmBaseEntry 9 }
 
-       docsBpi2CmAuthWaitTimeout     OBJECT-TYPE
+       docsIetfBpi2CmAuthWaitTimeout     OBJECT-TYPE
             SYNTAX         Integer32 (1..30)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -400,9 +400,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.1."
-            ::= { docsBpi2CmBaseEntry 10 }
+            ::= { docsIetfBpi2CmBaseEntry 10 }
 
-       docsBpi2CmReauthWaitTimeout   OBJECT-TYPE
+       docsIetfBpi2CmReauthWaitTimeout   OBJECT-TYPE
             SYNTAX         Integer32 (1..30)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -413,9 +413,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.2."
-            ::= { docsBpi2CmBaseEntry 11 }
+            ::= { docsIetfBpi2CmBaseEntry 11 }
 
-       docsBpi2CmOpWaitTimeout  OBJECT-TYPE
+       docsIetfBpi2CmOpWaitTimeout  OBJECT-TYPE
             SYNTAX         Integer32 (1..10)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -426,9 +426,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.4."
-            ::= { docsBpi2CmBaseEntry 12 }
+            ::= { docsIetfBpi2CmBaseEntry 12 }
 
-       docsBpi2CmRekeyWaitTimeout    OBJECT-TYPE
+       docsIetfBpi2CmRekeyWaitTimeout    OBJECT-TYPE
             SYNTAX         Integer32 (1..10)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -439,9 +439,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.5."
-            ::= { docsBpi2CmBaseEntry 13 }
+            ::= { docsIetfBpi2CmBaseEntry 13 }
 
-       docsBpi2CmAuthRejectWaitTimeout    OBJECT-TYPE
+       docsIetfBpi2CmAuthRejectWaitTimeout    OBJECT-TYPE
             SYNTAX         Integer32 (1..600)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -452,9 +452,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.7."
-            ::= { docsBpi2CmBaseEntry 14 }
+            ::= { docsIetfBpi2CmBaseEntry 14 }
 
-       docsBpi2CmSAMapWaitTimeout    OBJECT-TYPE
+       docsIetfBpi2CmSAMapWaitTimeout    OBJECT-TYPE
             SYNTAX         Integer32 (1..10)
             UNITS          "seconds"
             MAX-ACCESS     read-only
@@ -466,9 +466,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.8."
-            ::= { docsBpi2CmBaseEntry 15 }
+            ::= { docsIetfBpi2CmBaseEntry 15 }
 
-       docsBpi2CmSAMapMaxRetries     OBJECT-TYPE
+       docsIetfBpi2CmSAMapMaxRetries     OBJECT-TYPE
             SYNTAX         Integer32 (0..10)
             UNITS          "count"
             MAX-ACCESS     read-only
@@ -479,9 +479,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.1.1.1.9."
-            ::= { docsBpi2CmBaseEntry 16 }
+            ::= { docsIetfBpi2CmBaseEntry 16 }
 
-       docsBpi2CmAuthentInfos   OBJECT-TYPE
+       docsIetfBpi2CmAuthentInfos   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -495,9 +495,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.9."
-            ::= { docsBpi2CmBaseEntry 17 }
+            ::= { docsIetfBpi2CmBaseEntry 17 }
 
-       docsBpi2CmAuthRequests   OBJECT-TYPE
+       docsIetfBpi2CmAuthRequests   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -511,9 +511,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.1."
-            ::= { docsBpi2CmBaseEntry 18 }
+            ::= { docsIetfBpi2CmBaseEntry 18 }
 
-       docsBpi2CmAuthReplies    OBJECT-TYPE
+       docsIetfBpi2CmAuthReplies    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -528,9 +528,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.2."
-            ::= { docsBpi2CmBaseEntry 19 }
+            ::= { docsIetfBpi2CmBaseEntry 19 }
 
-       docsBpi2CmAuthRejects    OBJECT-TYPE
+       docsIetfBpi2CmAuthRejects    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -544,9 +544,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.3."
-            ::= { docsBpi2CmBaseEntry 20 }
+            ::= { docsIetfBpi2CmBaseEntry 20 }
 
-       docsBpi2CmAuthInvalids   OBJECT-TYPE
+       docsIetfBpi2CmAuthInvalids   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -560,9 +560,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.7."
-            ::= { docsBpi2CmBaseEntry 21 }
+            ::= { docsIetfBpi2CmBaseEntry 21 }
 
-       docsBpi2CmAuthRejectErrorCode OBJECT-TYPE
+       docsIetfBpi2CmAuthRejectErrorCode OBJECT-TYPE
             SYNTAX         INTEGER {
                                   none(1),
                                   unknown(2),
@@ -583,9 +583,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.3 and 4.2.2.15."
-            ::= { docsBpi2CmBaseEntry 22 }
+            ::= { docsIetfBpi2CmBaseEntry 22 }
 
-       docsBpi2CmAuthRejectErrorString    OBJECT-TYPE
+       docsIetfBpi2CmAuthRejectErrorString    OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -597,9 +597,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.3 and 4.2.2.6."
-            ::= { docsBpi2CmBaseEntry 23 }
+            ::= { docsIetfBpi2CmBaseEntry 23 }
 
-       docsBpi2CmAuthInvalidErrorCode     OBJECT-TYPE
+       docsIetfBpi2CmAuthInvalidErrorCode     OBJECT-TYPE
             SYNTAX         INTEGER {
                                   none(1),
                                   unknown(2),
@@ -620,9 +620,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.7 and 4.2.2.15."
-            ::= { docsBpi2CmBaseEntry 24 }
+            ::= { docsIetfBpi2CmBaseEntry 24 }
 
-       docsBpi2CmAuthInvalidErrorString   OBJECT-TYPE
+       docsIetfBpi2CmAuthInvalidErrorString   OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -634,7 +634,7 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.7 and 4.2.2.6."
-            ::= { docsBpi2CmBaseEntry 25 }
+            ::= { docsIetfBpi2CmBaseEntry 25 }
 
 
 
@@ -643,7 +643,7 @@
        -- The CM TEK Table, indexed by ifIndex and SAID
        --
 
-       docsBpi2CmTEKTable  OBJECT-TYPE
+       docsIetfBpi2CmTEKTable  OBJECT-TYPE
             SYNTAX         SEQUENCE OF    DocsBpi2CmTEKEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -652,9 +652,9 @@
             Traffic Encryption Key (TEK) association. The CM maintains
             (no more than) one TEK association per SAID per CM MAC
             interface."
-            ::= { docsBpi2CmObjects 2 }
+            ::= { docsIetfBpi2CmObjects 2 }
 
-       docsBpi2CmTEKEntry  OBJECT-TYPE
+       docsIetfBpi2CmTEKEntry  OBJECT-TYPE
             SYNTAX         DocsBpi2CmTEKEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -665,30 +665,30 @@
             from a Registration Response message, from an Authorization
             Reply message, or from any dynamic SAID establishment
             mechanisms."
-            INDEX     { ifIndex, docsBpi2CmTEKSAId }
-            ::= { docsBpi2CmTEKTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmTEKSAId }
+            ::= { docsIetfBpi2CmTEKTable 1 }
 
        DocsBpi2CmTEKEntry ::= SEQUENCE {
-            docsBpi2CmTEKSAId                  DocsSAId,
-            docsBpi2CmTEKSAType                DocsBpkmSAType,
-            docsBpi2CmTEKDataEncryptAlg        DocsBpkmDataEncryptAlg,
-            docsBpi2CmTEKDataAuthentAlg        DocsBpkmDataAuthentAlg,
-            docsBpi2CmTEKState                 INTEGER,
-            docsBpi2CmTEKKeySequenceNumber     Integer32,
-            docsBpi2CmTEKExpiresOld            DateAndTime,
-            docsBpi2CmTEKExpiresNew            DateAndTime,
-            docsBpi2CmTEKKeyRequests           Counter32,
-            docsBpi2CmTEKKeyReplies            Counter32,
-            docsBpi2CmTEKKeyRejects            Counter32,
-            docsBpi2CmTEKInvalids              Counter32,
-            docsBpi2CmTEKAuthPends             Counter32,
-            docsBpi2CmTEKKeyRejectErrorCode    INTEGER,
-            docsBpi2CmTEKKeyRejectErrorString  SnmpAdminString,
-            docsBpi2CmTEKInvalidErrorCode      INTEGER,
-            docsBpi2CmTEKInvalidErrorString    SnmpAdminString
+            docsIetfBpi2CmTEKSAId                  DocsSAId,
+            docsIetfBpi2CmTEKSAType                DocsBpkmSAType,
+            docsIetfBpi2CmTEKDataEncryptAlg        DocsBpkmDataEncryptAlg,
+            docsIetfBpi2CmTEKDataAuthentAlg        DocsBpkmDataAuthentAlg,
+            docsIetfBpi2CmTEKState                 INTEGER,
+            docsIetfBpi2CmTEKKeySequenceNumber     Integer32,
+            docsIetfBpi2CmTEKExpiresOld            DateAndTime,
+            docsIetfBpi2CmTEKExpiresNew            DateAndTime,
+            docsIetfBpi2CmTEKKeyRequests           Counter32,
+            docsIetfBpi2CmTEKKeyReplies            Counter32,
+            docsIetfBpi2CmTEKKeyRejects            Counter32,
+            docsIetfBpi2CmTEKInvalids              Counter32,
+            docsIetfBpi2CmTEKAuthPends             Counter32,
+            docsIetfBpi2CmTEKKeyRejectErrorCode    INTEGER,
+            docsIetfBpi2CmTEKKeyRejectErrorString  SnmpAdminString,
+            docsIetfBpi2CmTEKInvalidErrorCode      INTEGER,
+            docsIetfBpi2CmTEKInvalidErrorString    SnmpAdminString
             }
 
-       docsBpi2CmTEKSAId   OBJECT-TYPE
+       docsIetfBpi2CmTEKSAId   OBJECT-TYPE
             SYNTAX         DocsSAId
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -698,9 +698,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.12."
-            ::= { docsBpi2CmTEKEntry 1 }
+            ::= { docsIetfBpi2CmTEKEntry 1 }
 
-       docsBpi2CmTEKSAType OBJECT-TYPE
+       docsIetfBpi2CmTEKSAType OBJECT-TYPE
             SYNTAX         DocsBpkmSAType
             MAX-ACCESS     read-only
             STATUS         current
@@ -710,9 +710,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 2.1.3."
-            ::= { docsBpi2CmTEKEntry 2 }
+            ::= { docsIetfBpi2CmTEKEntry 2 }
 
-       docsBpi2CmTEKDataEncryptAlg   OBJECT-TYPE
+       docsIetfBpi2CmTEKDataEncryptAlg   OBJECT-TYPE
             SYNTAX    DocsBpkmDataEncryptAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -722,9 +722,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmTEKEntry 3 }
+            ::= { docsIetfBpi2CmTEKEntry 3 }
 
-       docsBpi2CmTEKDataAuthentAlg   OBJECT-TYPE
+       docsIetfBpi2CmTEKDataAuthentAlg   OBJECT-TYPE
             SYNTAX    DocsBpkmDataAuthentAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -734,9 +734,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmTEKEntry 4 }
+            ::= { docsIetfBpi2CmTEKEntry 4 }
 
-       docsBpi2CmTEKState  OBJECT-TYPE
+       docsIetfBpi2CmTEKState  OBJECT-TYPE
             SYNTAX         INTEGER {
                                    start(1),
                                    opWait(2),
@@ -754,9 +754,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.1.3.1."
-            ::= { docsBpi2CmTEKEntry 5 }
+            ::= { docsIetfBpi2CmTEKEntry 5 }
 
-       docsBpi2CmTEKKeySequenceNumber     OBJECT-TYPE
+       docsIetfBpi2CmTEKKeySequenceNumber     OBJECT-TYPE
             SYNTAX              Integer32 (0..15)
             MAX-ACCESS          read-only
             STATUS              current
@@ -766,9 +766,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.2.10 and 4.2.2.13."
-            ::= { docsBpi2CmTEKEntry 6 }
+            ::= { docsIetfBpi2CmTEKEntry 6 }
 
-       docsBpi2CmTEKExpiresOld  OBJECT-TYPE
+       docsIetfBpi2CmTEKExpiresOld  OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -780,9 +780,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.5 and 4.2.2.9."
-            ::= { docsBpi2CmTEKEntry 7 }
+            ::= { docsIetfBpi2CmTEKEntry 7 }
 
-       docsBpi2CmTEKExpiresNew  OBJECT-TYPE
+       docsIetfBpi2CmTEKExpiresNew  OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -792,9 +792,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.5 and 4.2.2.9."
-            ::= { docsBpi2CmTEKEntry 8 }
+            ::= { docsIetfBpi2CmTEKEntry 8 }
 
-       docsBpi2CmTEKKeyRequests OBJECT-TYPE
+       docsIetfBpi2CmTEKKeyRequests OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -809,9 +809,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.4."
-            ::= { docsBpi2CmTEKEntry 9 }
+            ::= { docsIetfBpi2CmTEKEntry 9 }
 
-       docsBpi2CmTEKKeyReplies  OBJECT-TYPE
+       docsIetfBpi2CmTEKKeyReplies  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -826,9 +826,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.5."
-            ::= { docsBpi2CmTEKEntry 10 }
+            ::= { docsIetfBpi2CmTEKEntry 10 }
 
-       docsBpi2CmTEKKeyRejects  OBJECT-TYPE
+       docsIetfBpi2CmTEKKeyRejects  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -843,9 +843,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.6."
-            ::= { docsBpi2CmTEKEntry 11 }
+            ::= { docsIetfBpi2CmTEKEntry 11 }
 
-       docsBpi2CmTEKInvalids    OBJECT-TYPE
+       docsIetfBpi2CmTEKInvalids    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -860,9 +860,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.8."
-            ::= { docsBpi2CmTEKEntry 12 }
+            ::= { docsIetfBpi2CmTEKEntry 12 }
 
-       docsBpi2CmTEKAuthPends   OBJECT-TYPE
+       docsIetfBpi2CmTEKAuthPends   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -877,9 +877,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.1.3.3.3."
-            ::= { docsBpi2CmTEKEntry 13 }
+            ::= { docsIetfBpi2CmTEKEntry 13 }
 
-       docsBpi2CmTEKKeyRejectErrorCode    OBJECT-TYPE
+       docsIetfBpi2CmTEKKeyRejectErrorCode    OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -896,9 +896,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.1.2.6 and 4.2.2.15."
-            ::= { docsBpi2CmTEKEntry 14 }
+            ::= { docsIetfBpi2CmTEKEntry 14 }
 
-       docsBpi2CmTEKKeyRejectErrorString  OBJECT-TYPE
+       docsIetfBpi2CmTEKKeyRejectErrorString  OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -910,9 +910,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.1.2.6 and 4.2.2.6."
-            ::= { docsBpi2CmTEKEntry 15 }
+            ::= { docsIetfBpi2CmTEKEntry 15 }
 
-       docsBpi2CmTEKInvalidErrorCode OBJECT-TYPE
+       docsIetfBpi2CmTEKInvalidErrorCode OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -929,9 +929,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.1.2.8 and 4.2.2.15."
-            ::= { docsBpi2CmTEKEntry 16 }
+            ::= { docsIetfBpi2CmTEKEntry 16 }
 
-       docsBpi2CmTEKInvalidErrorString    OBJECT-TYPE
+       docsIetfBpi2CmTEKInvalidErrorString    OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -943,22 +943,22 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.1.2.8 and 4.2.2.6."
-            ::= { docsBpi2CmTEKEntry 17 }
+            ::= { docsIetfBpi2CmTEKEntry 17 }
 
 
        --
        -- The CM Multicast Objects Group
        --
 
-       docsBpi2CmMulticastObjects OBJECT IDENTIFIER
-            ::= { docsBpi2CmObjects 3 }
+       docsIetfBpi2CmMulticastObjects OBJECT IDENTIFIER
+            ::= { docsIetfBpi2CmObjects 3 }
 
        --
        -- The CM Dynamic IP Multicast Mapping Table, indexed by
-       -- docsBpi2CmIpMulticastIndex and by ifIndex
+       -- docsIetfBpi2CmIpMulticastIndex and by ifIndex
        --
 
-       docsBpi2CmIpMulticastMapTable OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastMapTable OBJECT-TYPE
             SYNTAX         SEQUENCE OF DocsBpi2CmIpMulticastMapEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -967,9 +967,9 @@
             CM MAC Interface.
             It is intended to map multicast IP addresses associated
             with SA MAP Request messages."
-            ::= { docsBpi2CmMulticastObjects 1 }
+            ::= { docsIetfBpi2CmMulticastObjects 1 }
 
-       docsBpi2CmIpMulticastMapEntry OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastMapEntry OBJECT-TYPE
             SYNTAX         DocsBpi2CmIpMulticastMapEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -980,53 +980,53 @@
 
             An entry may be removed from this table upon the reception
             of an SA Map Reject."
-            INDEX     { ifIndex, docsBpi2CmIpMulticastIndex }
-            ::= { docsBpi2CmIpMulticastMapTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmIpMulticastIndex }
+            ::= { docsIetfBpi2CmIpMulticastMapTable 1 }
 
        DocsBpi2CmIpMulticastMapEntry ::= SEQUENCE {
-            docsBpi2CmIpMulticastIndex               Unsigned32,
-            docsBpi2CmIpMulticastAddressType         InetAddressType,
-            docsBpi2CmIpMulticastAddress             InetAddress,
-            docsBpi2CmIpMulticastSAId                DocsSAIdOrZero,
-            docsBpi2CmIpMulticastSAMapState          INTEGER,
-            docsBpi2CmIpMulticastSAMapRequests       Counter32,
-            docsBpi2CmIpMulticastSAMapReplies        Counter32,
-            docsBpi2CmIpMulticastSAMapRejects        Counter32,
-            docsBpi2CmIpMulticastSAMapRejectErrorCode INTEGER,
-            docsBpi2CmIpMulticastSAMapRejectErrorString SnmpAdminString
+            docsIetfBpi2CmIpMulticastIndex               Unsigned32,
+            docsIetfBpi2CmIpMulticastAddressType         InetAddressType,
+            docsIetfBpi2CmIpMulticastAddress             InetAddress,
+            docsIetfBpi2CmIpMulticastSAId                DocsSAIdOrZero,
+            docsIetfBpi2CmIpMulticastSAMapState          INTEGER,
+            docsIetfBpi2CmIpMulticastSAMapRequests       Counter32,
+            docsIetfBpi2CmIpMulticastSAMapReplies        Counter32,
+            docsIetfBpi2CmIpMulticastSAMapRejects        Counter32,
+            docsIetfBpi2CmIpMulticastSAMapRejectErrorCode INTEGER,
+            docsIetfBpi2CmIpMulticastSAMapRejectErrorString SnmpAdminString
             }
 
-       docsBpi2CmIpMulticastIndex         OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastIndex         OBJECT-TYPE
             SYNTAX         Unsigned32 (1..4294967295)
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The index of this row."
-            ::= { docsBpi2CmIpMulticastMapEntry 1 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 1 }
 
-       docsBpi2CmIpMulticastAddressType   OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastAddressType   OBJECT-TYPE
             SYNTAX         InetAddressType
             MAX-ACCESS     read-only
             STATUS         current
             DESCRIPTION
                  "The type of internet address for
-            docsBpi2CmIpMulticastAddress."
-            ::= { docsBpi2CmIpMulticastMapEntry 2 }
+            docsIetfBpi2CmIpMulticastAddress."
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 2 }
 
-       docsBpi2CmIpMulticastAddress  OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastAddress  OBJECT-TYPE
             SYNTAX         InetAddress
             MAX-ACCESS     read-only
             STATUS         current
             DESCRIPTION
                  "This object represents the IP multicast address
             to be mapped. The type of this address is determined by
-            the value of the docsBpi2CmIpMulticastAddressType object."
+            the value of the docsIetfBpi2CmIpMulticastAddressType object."
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 5.4."
-            ::= { docsBpi2CmIpMulticastMapEntry 3 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 3 }
 
-       docsBpi2CmIpMulticastSAId          OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAId          OBJECT-TYPE
             SYNTAX         DocsSAIdOrZero
             MAX-ACCESS     read-only
             STATUS         current
@@ -1038,9 +1038,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.12."
-            ::= { docsBpi2CmIpMulticastMapEntry 4 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 4 }
 
-       docsBpi2CmIpMulticastSAMapState         OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapState         OBJECT-TYPE
             SYNTAX         INTEGER {
                                   start(1),
                                   mapWait(2),
@@ -1055,9 +1055,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 5.3.1."
-            ::= { docsBpi2CmIpMulticastMapEntry 5 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 5 }
 
-       docsBpi2CmIpMulticastSAMapRequests OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapRequests OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1071,9 +1071,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.10."
-            ::= { docsBpi2CmIpMulticastMapEntry 6 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 6 }
 
-       docsBpi2CmIpMulticastSAMapReplies  OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapReplies  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1087,9 +1087,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.11."
-            ::= { docsBpi2CmIpMulticastMapEntry 7 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 7 }
 
-       docsBpi2CmIpMulticastSAMapRejects  OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapRejects  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1103,9 +1103,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.12."
-            ::= { docsBpi2CmIpMulticastMapEntry 8 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 8 }
 
-       docsBpi2CmIpMulticastSAMapRejectErrorCode    OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapRejectErrorCode    OBJECT-TYPE
             SYNTAX         INTEGER {
                            none(1),
                            unknown(2),
@@ -1123,9 +1123,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.12 and 4.2.2.15."
-            ::= { docsBpi2CmIpMulticastMapEntry 9 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 9 }
 
-       docsBpi2CmIpMulticastSAMapRejectErrorString  OBJECT-TYPE
+       docsIetfBpi2CmIpMulticastSAMapRejectErrorString  OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -1138,30 +1138,30 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.12 and 4.2.2.6."
-            ::= { docsBpi2CmIpMulticastMapEntry 10 }
+            ::= { docsIetfBpi2CmIpMulticastMapEntry 10 }
 
 
        --
        -- CM Cert Objects
        --
 
-       docsBpi2CmCertObjects OBJECT IDENTIFIER
-            ::= { docsBpi2CmObjects 4 }
+       docsIetfBpi2CmCertObjects OBJECT IDENTIFIER
+            ::= { docsIetfBpi2CmObjects 4 }
 
        --
        -- CM Device Cert Table
        --
 
-       docsBpi2CmDeviceCertTable  OBJECT-TYPE
+       docsIetfBpi2CmDeviceCertTable  OBJECT-TYPE
             SYNTAX                SEQUENCE OF DocsBpi2CmDeviceCertEntry
             MAX-ACCESS            not-accessible
             STATUS                current
             DESCRIPTION
                  "This table describes the Baseline Privacy Plus
             device certificates for each CM MAC interface."
-            ::= { docsBpi2CmCertObjects 1 }
+            ::= { docsIetfBpi2CmCertObjects 1 }
 
-       docsBpi2CmDeviceCertEntry  OBJECT-TYPE
+       docsIetfBpi2CmDeviceCertEntry  OBJECT-TYPE
             SYNTAX              DocsBpi2CmDeviceCertEntry
             MAX-ACCESS          not-accessible
             STATUS              current
@@ -1170,17 +1170,17 @@
             one CM MAC interface.  An entry in this table exists for
             each ifEntry with an ifType of docsCableMaclayer(127)."
             INDEX               { ifIndex }
-            ::= { docsBpi2CmDeviceCertTable 1 }
+            ::= { docsIetfBpi2CmDeviceCertTable 1 }
 
 
        DocsBpi2CmDeviceCertEntry ::= SEQUENCE {
-            docsBpi2CmDeviceCmCert
+            docsIetfBpi2CmDeviceCmCert
                                   DocsX509ASN1DEREncodedCertificate,
-            docsBpi2CmDeviceManufCert
+            docsIetfBpi2CmDeviceManufCert
                                   DocsX509ASN1DEREncodedCertificate
             }
 
-       docsBpi2CmDeviceCmCert   OBJECT-TYPE
+       docsIetfBpi2CmDeviceCmCert   OBJECT-TYPE
             SYNTAX        DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS         read-write
             STATUS              current
@@ -1195,9 +1195,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.1."
-            ::= { docsBpi2CmDeviceCertEntry 1 }
+            ::= { docsIetfBpi2CmDeviceCertEntry 1 }
 
-       docsBpi2CmDeviceManufCert     OBJECT-TYPE
+       docsIetfBpi2CmDeviceManufCert     OBJECT-TYPE
             SYNTAX         DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS     read-only
             STATUS         current
@@ -1207,14 +1207,14 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.1."
-            ::= { docsBpi2CmDeviceCertEntry 2 }
+            ::= { docsIetfBpi2CmDeviceCertEntry 2 }
 
 
        --
        -- CM Crypto Suite Table
        --
 
-       docsBpi2CmCryptoSuiteTable    OBJECT-TYPE
+       docsIetfBpi2CmCryptoSuiteTable    OBJECT-TYPE
             SYNTAX         SEQUENCE OF    DocsBpi2CmCryptoSuiteEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -1222,35 +1222,35 @@
                  "This table describes the Baseline Privacy Plus
             cryptographic suite capabilities for each CM MAC
             interface."
-            ::= { docsBpi2CmObjects 5 }
+            ::= { docsIetfBpi2CmObjects 5 }
 
-       docsBpi2CmCryptoSuiteEntry    OBJECT-TYPE
+       docsIetfBpi2CmCryptoSuiteEntry    OBJECT-TYPE
             SYNTAX         DocsBpi2CmCryptoSuiteEntry
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "Each entry contains a cryptographic suite pair
             which this CM MAC supports."
-            INDEX     { ifIndex, docsBpi2CmCryptoSuiteIndex }
-            ::= { docsBpi2CmCryptoSuiteTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmCryptoSuiteIndex }
+            ::= { docsIetfBpi2CmCryptoSuiteTable 1 }
 
        DocsBpi2CmCryptoSuiteEntry ::= SEQUENCE {
-            docsBpi2CmCryptoSuiteIndex              Unsigned32,
-            docsBpi2CmCryptoSuiteDataEncryptAlg
+            docsIetfBpi2CmCryptoSuiteIndex              Unsigned32,
+            docsIetfBpi2CmCryptoSuiteDataEncryptAlg
                                         DocsBpkmDataEncryptAlg,
-            docsBpi2CmCryptoSuiteDataAuthentAlg
+            docsIetfBpi2CmCryptoSuiteDataAuthentAlg
                                         DocsBpkmDataAuthentAlg
             }
 
-       docsBpi2CmCryptoSuiteIndex OBJECT-TYPE
+       docsIetfBpi2CmCryptoSuiteIndex OBJECT-TYPE
             SYNTAX         Unsigned32 (1..1000)
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The index for a cryptographic suite row."
-            ::= { docsBpi2CmCryptoSuiteEntry 1 }
+            ::= { docsIetfBpi2CmCryptoSuiteEntry 1 }
 
-       docsBpi2CmCryptoSuiteDataEncryptAlg     OBJECT-TYPE
+       docsIetfBpi2CmCryptoSuiteDataEncryptAlg     OBJECT-TYPE
             SYNTAX    DocsBpkmDataEncryptAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -1260,9 +1260,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmCryptoSuiteEntry 2 }
+            ::= { docsIetfBpi2CmCryptoSuiteEntry 2 }
 
-       docsBpi2CmCryptoSuiteDataAuthentAlg     OBJECT-TYPE
+       docsIetfBpi2CmCryptoSuiteDataAuthentAlg     OBJECT-TYPE
             SYNTAX    DocsBpkmDataAuthentAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -1272,14 +1272,14 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmCryptoSuiteEntry 3 }
+            ::= { docsIetfBpi2CmCryptoSuiteEntry 3 }
 
 
 
 
        -- Cable Modem Termination System Group
 
-     docsBpi2CmtsObjects OBJECT IDENTIFIER ::= { docsBpi2MIBObjects 2 }
+     docsIetfBpi2CmtsObjects OBJECT IDENTIFIER ::= { docsIetfBpi2MIBObjects 2 }
 
 
        --
@@ -1295,16 +1295,16 @@
        -- The BPI+ base table for CMTSs, indexed by ifIndex
        --
 
-       docsBpi2CmtsBaseTable    OBJECT-TYPE
+       docsIetfBpi2CmtsBaseTable    OBJECT-TYPE
             SYNTAX              SEQUENCE OF    DocsBpi2CmtsBaseEntry
             MAX-ACCESS          not-accessible
             STATUS              current
             DESCRIPTION
                  "This table describes the basic Baseline Privacy
             attributes of each CMTS MAC interface."
-            ::= { docsBpi2CmtsObjects 1 }
+            ::= { docsIetfBpi2CmtsObjects 1 }
 
-       docsBpi2CmtsBaseEntry    OBJECT-TYPE
+       docsIetfBpi2CmtsBaseEntry    OBJECT-TYPE
             SYNTAX              DocsBpi2CmtsBaseEntry
             MAX-ACCESS          not-accessible
             STATUS              current
@@ -1313,24 +1313,24 @@
             one CMTS MAC interface.  An entry in this table exists for
             each ifEntry with an ifType of docsCableMaclayer(127)."
             INDEX     { ifIndex }
-            ::= { docsBpi2CmtsBaseTable 1 }
+            ::= { docsIetfBpi2CmtsBaseTable 1 }
 
        DocsBpi2CmtsBaseEntry ::= SEQUENCE {
-            docsBpi2CmtsDefaultAuthLifetime              Integer32,
-            docsBpi2CmtsDefaultTEKLifetime               Integer32,
-            docsBpi2CmtsDefaultSelfSignedManufCertTrust  INTEGER,
-            docsBpi2CmtsCheckCertValidityPeriods         TruthValue,
-            docsBpi2CmtsAuthentInfos                     Counter32,
-            docsBpi2CmtsAuthRequests                     Counter32,
-            docsBpi2CmtsAuthReplies                      Counter32,
-            docsBpi2CmtsAuthRejects                      Counter32,
-            docsBpi2CmtsAuthInvalids                     Counter32,
-            docsBpi2CmtsSAMapRequests                    Counter32,
-            docsBpi2CmtsSAMapReplies                     Counter32,
-            docsBpi2CmtsSAMapRejects                     Counter32
+            docsIetfBpi2CmtsDefaultAuthLifetime              Integer32,
+            docsIetfBpi2CmtsDefaultTEKLifetime               Integer32,
+            docsIetfBpi2CmtsDefaultSelfSignedManufCertTrust  INTEGER,
+            docsIetfBpi2CmtsCheckCertValidityPeriods         TruthValue,
+            docsIetfBpi2CmtsAuthentInfos                     Counter32,
+            docsIetfBpi2CmtsAuthRequests                     Counter32,
+            docsIetfBpi2CmtsAuthReplies                      Counter32,
+            docsIetfBpi2CmtsAuthRejects                      Counter32,
+            docsIetfBpi2CmtsAuthInvalids                     Counter32,
+            docsIetfBpi2CmtsSAMapRequests                    Counter32,
+            docsIetfBpi2CmtsSAMapReplies                     Counter32,
+            docsIetfBpi2CmtsSAMapRejects                     Counter32
             }
 
-       docsBpi2CmtsDefaultAuthLifetime    OBJECT-TYPE
+       docsIetfBpi2CmtsDefaultAuthLifetime    OBJECT-TYPE
             SYNTAX         Integer32 (1..6048000)
             UNITS          "seconds"
             MAX-ACCESS     read-write
@@ -1344,9 +1344,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.2."
             DEFVAL { 604800 }
-            ::= { docsBpi2CmtsBaseEntry 1 }
+            ::= { docsIetfBpi2CmtsBaseEntry 1 }
 
-       docsBpi2CmtsDefaultTEKLifetime     OBJECT-TYPE
+       docsIetfBpi2CmtsDefaultTEKLifetime     OBJECT-TYPE
             SYNTAX         Integer32 (1..604800)
             UNITS          "seconds"
             MAX-ACCESS     read-write
@@ -1361,9 +1361,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Appendix A.2."
             DEFVAL { 43200 }
-            ::= { docsBpi2CmtsBaseEntry 2 }
+            ::= { docsIetfBpi2CmtsBaseEntry 2 }
 
-       docsBpi2CmtsDefaultSelfSignedManufCertTrust  OBJECT-TYPE
+       docsIetfBpi2CmtsDefaultSelfSignedManufCertTrust  OBJECT-TYPE
             SYNTAX    INTEGER {
                       trusted (1),
                       untrusted (2)
@@ -1373,16 +1373,16 @@
             DESCRIPTION
                  "This object determines the default trust of
             self-signed  manufacturer certificate entries, contained
-            in docsBpi2CmtsCACertTable, created after setting this
+            in docsIetfBpi2CmtsCACertTable, created after setting this
             object.
             This object needs not to persist after re-initialization
              of the managed system."
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.1"
-            ::= { docsBpi2CmtsBaseEntry 3 }
+            ::= { docsIetfBpi2CmtsBaseEntry 3 }
 
-       docsBpi2CmtsCheckCertValidityPeriods    OBJECT-TYPE
+       docsIetfBpi2CmtsCheckCertValidityPeriods    OBJECT-TYPE
             SYNTAX         TruthValue
             MAX-ACCESS     read-write
             STATUS         current
@@ -1400,9 +1400,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.2"
-            ::= { docsBpi2CmtsBaseEntry 4 }
+            ::= { docsIetfBpi2CmtsBaseEntry 4 }
 
-       docsBpi2CmtsAuthentInfos OBJECT-TYPE
+       docsIetfBpi2CmtsAuthentInfos OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1417,9 +1417,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.9."
-            ::= { docsBpi2CmtsBaseEntry 5 }
+            ::= { docsIetfBpi2CmtsBaseEntry 5 }
 
-       docsBpi2CmtsAuthRequests OBJECT-TYPE
+       docsIetfBpi2CmtsAuthRequests OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1434,9 +1434,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.1."
-            ::= { docsBpi2CmtsBaseEntry 6 }
+            ::= { docsIetfBpi2CmtsBaseEntry 6 }
 
-       docsBpi2CmtsAuthReplies  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthReplies  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1451,9 +1451,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.2."
-            ::= { docsBpi2CmtsBaseEntry 7 }
+            ::= { docsIetfBpi2CmtsBaseEntry 7 }
 
-       docsBpi2CmtsAuthRejects  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthRejects  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1468,9 +1468,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.3."
-            ::= { docsBpi2CmtsBaseEntry 8 }
+            ::= { docsIetfBpi2CmtsBaseEntry 8 }
 
-       docsBpi2CmtsAuthInvalids OBJECT-TYPE
+       docsIetfBpi2CmtsAuthInvalids OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1485,9 +1485,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.7."
-            ::= { docsBpi2CmtsBaseEntry 9 }
+            ::= { docsIetfBpi2CmtsBaseEntry 9 }
 
-       docsBpi2CmtsSAMapRequests     OBJECT-TYPE
+       docsIetfBpi2CmtsSAMapRequests     OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1501,9 +1501,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.10."
-            ::= { docsBpi2CmtsBaseEntry 10 }
+            ::= { docsIetfBpi2CmtsBaseEntry 10 }
 
-       docsBpi2CmtsSAMapReplies OBJECT-TYPE
+       docsIetfBpi2CmtsSAMapReplies OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1517,9 +1517,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.11."
-            ::= { docsBpi2CmtsBaseEntry 11 }
+            ::= { docsIetfBpi2CmtsBaseEntry 11 }
 
-       docsBpi2CmtsSAMapRejects OBJECT-TYPE
+       docsIetfBpi2CmtsSAMapRejects OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1533,14 +1533,14 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.12."
-            ::= { docsBpi2CmtsBaseEntry 12 }
+            ::= { docsIetfBpi2CmtsBaseEntry 12 }
 
        --
        -- The CMTS Authorization Table, indexed by ifIndex and CM MAC
        -- address
        --
 
-       docsBpi2CmtsAuthTable    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthTable    OBJECT-TYPE
             SYNTAX         SEQUENCE OF    DocsBpi2CmtsAuthEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -1550,9 +1550,9 @@
             authorization association with each Baseline Privacy-
             enabled CM, registered on each CMTS MAC interface,
             regardless of whether the CM is authorized or rejected."
-            ::= { docsBpi2CmtsObjects 2 }
+            ::= { docsIetfBpi2CmtsObjects 2 }
 
-       docsBpi2CmtsAuthEntry    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthEntry    OBJECT-TYPE
             SYNTAX              DocsBpi2CmtsAuthEntry
             MAX-ACCESS          not-accessible
             STATUS              current
@@ -1562,44 +1562,44 @@
             entry per CM per MAC interface, based on the receipt of an
             Authorization Request message, and MUST not delete the
             entry until the CM loses registration."
-            INDEX     { ifIndex, docsBpi2CmtsAuthCmMacAddress }
-            ::= { docsBpi2CmtsAuthTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmtsAuthCmMacAddress }
+            ::= { docsIetfBpi2CmtsAuthTable 1 }
 
        DocsBpi2CmtsAuthEntry ::= SEQUENCE {
-            docsBpi2CmtsAuthCmMacAddress        MacAddress,
-            docsBpi2CmtsAuthCmBpiVersion        INTEGER,
-            docsBpi2CmtsAuthCmPublicKey         OCTET STRING,
-            docsBpi2CmtsAuthCmKeySequenceNumber Integer32,
-            docsBpi2CmtsAuthCmExpiresOld        DateAndTime,
-            docsBpi2CmtsAuthCmExpiresNew        DateAndTime,
-            docsBpi2CmtsAuthCmLifetime          Integer32,
-            docsBpi2CmtsAuthCmReset             INTEGER,
-            docsBpi2CmtsAuthCmInfos             Counter32,
-            docsBpi2CmtsAuthCmRequests          Counter32,
-            docsBpi2CmtsAuthCmReplies           Counter32,
-            docsBpi2CmtsAuthCmRejects           Counter32,
-            docsBpi2CmtsAuthCmInvalids          Counter32,
-            docsBpi2CmtsAuthRejectErrorCode     INTEGER,
-            docsBpi2CmtsAuthRejectErrorString   SnmpAdminString,
-            docsBpi2CmtsAuthInvalidErrorCode    INTEGER,
-            docsBpi2CmtsAuthInvalidErrorString  SnmpAdminString,
-            docsBpi2CmtsAuthPrimarySAId         DocsSAIdOrZero,
-            docsBpi2CmtsAuthBpkmCmCertValid     INTEGER,
-            docsBpi2CmtsAuthBpkmCmCert
+            docsIetfBpi2CmtsAuthCmMacAddress        MacAddress,
+            docsIetfBpi2CmtsAuthCmBpiVersion        INTEGER,
+            docsIetfBpi2CmtsAuthCmPublicKey         OCTET STRING,
+            docsIetfBpi2CmtsAuthCmKeySequenceNumber Integer32,
+            docsIetfBpi2CmtsAuthCmExpiresOld        DateAndTime,
+            docsIetfBpi2CmtsAuthCmExpiresNew        DateAndTime,
+            docsIetfBpi2CmtsAuthCmLifetime          Integer32,
+            docsIetfBpi2CmtsAuthCmReset             INTEGER,
+            docsIetfBpi2CmtsAuthCmInfos             Counter32,
+            docsIetfBpi2CmtsAuthCmRequests          Counter32,
+            docsIetfBpi2CmtsAuthCmReplies           Counter32,
+            docsIetfBpi2CmtsAuthCmRejects           Counter32,
+            docsIetfBpi2CmtsAuthCmInvalids          Counter32,
+            docsIetfBpi2CmtsAuthRejectErrorCode     INTEGER,
+            docsIetfBpi2CmtsAuthRejectErrorString   SnmpAdminString,
+            docsIetfBpi2CmtsAuthInvalidErrorCode    INTEGER,
+            docsIetfBpi2CmtsAuthInvalidErrorString  SnmpAdminString,
+            docsIetfBpi2CmtsAuthPrimarySAId         DocsSAIdOrZero,
+            docsIetfBpi2CmtsAuthBpkmCmCertValid     INTEGER,
+            docsIetfBpi2CmtsAuthBpkmCmCert
                                  DocsX509ASN1DEREncodedCertificate,
-            docsBpi2CmtsAuthCACertIndexPtr      Unsigned32
+            docsIetfBpi2CmtsAuthCACertIndexPtr      Unsigned32
             }
 
-       docsBpi2CmtsAuthCmMacAddress  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmMacAddress  OBJECT-TYPE
             SYNTAX         MacAddress
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The value of this object is the physical address of
             the CM to which the authorization association applies."
-            ::= { docsBpi2CmtsAuthEntry 1 }
+            ::= { docsIetfBpi2CmtsAuthEntry 1 }
 
-       docsBpi2CmtsAuthCmBpiVersion  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmBpiVersion  OBJECT-TYPE
             SYNTAX         INTEGER {
                              bpi (0),
                              bpiPlus (1)
@@ -1619,9 +1619,9 @@
             Data-Over-Cable Service Interface Specification DOCSIS 1.0
             Baseline Privacy Interface (BPI)"
 
-            ::= { docsBpi2CmtsAuthEntry 2 }
+            ::= { docsIetfBpi2CmtsAuthEntry 2 }
 
-       docsBpi2CmtsAuthCmPublicKey   OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmPublicKey   OBJECT-TYPE
             SYNTAX         OCTET STRING (SIZE (0..524))
             MAX-ACCESS     read-only
             STATUS         current
@@ -1634,9 +1634,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.4."
-            ::= { docsBpi2CmtsAuthEntry 3 }
+            ::= { docsIetfBpi2CmtsAuthEntry 3 }
 
-       docsBpi2CmtsAuthCmKeySequenceNumber     OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmKeySequenceNumber     OBJECT-TYPE
             SYNTAX         Integer32 (0..15)
             MAX-ACCESS     read-only
             STATUS         current
@@ -1646,9 +1646,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.10."
-            ::= { docsBpi2CmtsAuthEntry 4 }
+            ::= { docsIetfBpi2CmtsAuthEntry 4 }
 
-       docsBpi2CmtsAuthCmExpiresOld  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmExpiresOld  OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -1664,9 +1664,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.9."
-            ::= { docsBpi2CmtsAuthEntry 5 }
+            ::= { docsIetfBpi2CmtsAuthEntry 5 }
 
-       docsBpi2CmtsAuthCmExpiresNew  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmExpiresNew  OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -1677,9 +1677,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.2 and 4.2.2.9."
-            ::= { docsBpi2CmtsAuthEntry 6 }
+            ::= { docsIetfBpi2CmtsAuthEntry 6 }
 
-       docsBpi2CmtsAuthCmLifetime    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmLifetime    OBJECT-TYPE
             SYNTAX         Integer32 (1..6048000)
             UNITS          "seconds"
             MAX-ACCESS     read-write
@@ -1690,9 +1690,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.2 and Appendix A.2."
-            ::= { docsBpi2CmtsAuthEntry 7 }
+            ::= { docsIetfBpi2CmtsAuthEntry 7 }
 
-       docsBpi2CmtsAuthCmReset  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmReset  OBJECT-TYPE
             SYNTAX    INTEGER   {
                                 noResetRequested(1),
                                 invalidateAuth(2),
@@ -1723,9 +1723,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.1.2.3.4, 4.1.2.3.5, and 4.1.3.3.5."
-            ::= { docsBpi2CmtsAuthEntry 8 }
+            ::= { docsIetfBpi2CmtsAuthEntry 8 }
 
-       docsBpi2CmtsAuthCmInfos       OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmInfos       OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1740,9 +1740,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.9."
-            ::= { docsBpi2CmtsAuthEntry 9 }
+            ::= { docsIetfBpi2CmtsAuthEntry 9 }
 
-       docsBpi2CmtsAuthCmRequests    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmRequests    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1757,9 +1757,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.1."
-            ::= { docsBpi2CmtsAuthEntry 10 }
+            ::= { docsIetfBpi2CmtsAuthEntry 10 }
 
-       docsBpi2CmtsAuthCmReplies     OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmReplies     OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1774,9 +1774,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.2."
-            ::= { docsBpi2CmtsAuthEntry 11 }
+            ::= { docsIetfBpi2CmtsAuthEntry 11 }
 
-       docsBpi2CmtsAuthCmRejects     OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmRejects     OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1791,9 +1791,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.3."
-            ::= { docsBpi2CmtsAuthEntry 12 }
+            ::= { docsIetfBpi2CmtsAuthEntry 12 }
 
-       docsBpi2CmtsAuthCmInvalids    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCmInvalids    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -1808,9 +1808,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.7."
-            ::= { docsBpi2CmtsAuthEntry 13 }
+            ::= { docsIetfBpi2CmtsAuthEntry 13 }
 
-       docsBpi2CmtsAuthRejectErrorCode    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthRejectErrorCode    OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -1831,9 +1831,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.3 and 4.2.2.15."
-            ::= { docsBpi2CmtsAuthEntry 14 }
+            ::= { docsIetfBpi2CmtsAuthEntry 14 }
 
-       docsBpi2CmtsAuthRejectErrorString  OBJECT-TYPE
+       docsIetfBpi2CmtsAuthRejectErrorString  OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -1846,9 +1846,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.3 and 4.2.2.6."
-            ::= { docsBpi2CmtsAuthEntry 15 }
+            ::= { docsIetfBpi2CmtsAuthEntry 15 }
 
-       docsBpi2CmtsAuthInvalidErrorCode   OBJECT-TYPE
+       docsIetfBpi2CmtsAuthInvalidErrorCode   OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -1869,9 +1869,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.7 and 4.2.2.15."
-            ::= { docsBpi2CmtsAuthEntry 16 }
+            ::= { docsIetfBpi2CmtsAuthEntry 16 }
 
-       docsBpi2CmtsAuthInvalidErrorString OBJECT-TYPE
+       docsIetfBpi2CmtsAuthInvalidErrorString OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -1884,9 +1884,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.7 and 4.2.2.6."
-            ::= { docsBpi2CmtsAuthEntry 17 }
+            ::= { docsIetfBpi2CmtsAuthEntry 17 }
 
-       docsBpi2CmtsAuthPrimarySAId   OBJECT-TYPE
+       docsIetfBpi2CmtsAuthPrimarySAId   OBJECT-TYPE
             SYNTAX         DocsSAIdOrZero
             MAX-ACCESS     read-only
             STATUS         current
@@ -1897,9 +1897,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 2.1.3."
-            ::= { docsBpi2CmtsAuthEntry 18 }
+            ::= { docsIetfBpi2CmtsAuthEntry 18 }
 
-       docsBpi2CmtsAuthBpkmCmCertValid         OBJECT-TYPE
+       docsIetfBpi2CmtsAuthBpkmCmCertValid         OBJECT-TYPE
             SYNTAX    INTEGER {
                               unknown (0),
                               validCmChained (1),
@@ -1907,7 +1907,9 @@
                               invalidCmUntrusted (3),
                               invalidCAUntrusted (4),
                               invalidCmOther (5),
-                              invalidCAOther (6)
+                              invalidCAOther (6),
+                              invalidCmRevoked (7),
+                              invalidCARevoked (8)         
                               }
             MAX-ACCESS     read-only
             STATUS    current
@@ -1919,24 +1921,28 @@
                because it chains to a valid certificate.
             ValidCmTrusted(2) means the certificate is valid
                because it has been provisioned (in the
-               docsBpi2CmtsProvisionedCmCert table) to be trusted.
+               docsIetfBpi2CmtsProvisionedCmCert table) to be trusted.
             InvalidCmUntrusted(3) means the certificate is invalid
                  because it has been provisioned (in the
-                 docsBpi2CmtsProvisionedCmCert table) to be untrusted.
+                 docsIetfBpi2CmtsProvisionedCmCert table) to be untrusted.
             InvalidCAUntrusted(4) means the certificate is invalid
                  because it chains to an untrusted certificate.
             InvalidCmOther(5) and InvalidCAOther(6) refer to
                  errors in parsing, validity periods, etc, which are
                  attributable to the CM certificate or its chain
                  respectively; additional information may be found
-                 in docsBpi2AuthRejectErrorString for these types
-                 of errors."
+                 in docsIetfBpi2AuthRejectErrorString for these types
+                 of errors.
+            InvalidCmRevoked(7) means the certificate is
+               invalid as it was marked as revoked. 
+            InvalidCARevoked(8) means the CA certificate is
+               invalid as it was marked as revoked."
             REFERENCE
-                 "DOCSIS Baseline Privacy Plus Interface Specification,
-            Section 9.4.2."
-            ::= { docsBpi2CmtsAuthEntry 19 }
+                 "DOCSIS Security Specification CM-SP-SECv3.0-I08-080522,
+               Certificate Revocation section."
+            ::= { docsIetfBpi2CmtsAuthEntry 19 }
 
-       docsBpi2CmtsAuthBpkmCmCert    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthBpkmCmCert    OBJECT-TYPE
             SYNTAX         DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS     read-only
             STATUS         current
@@ -1948,28 +1954,28 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2."
-            ::= { docsBpi2CmtsAuthEntry 20 }
+            ::= { docsIetfBpi2CmtsAuthEntry 20 }
 
-       docsBpi2CmtsAuthCACertIndexPtr    OBJECT-TYPE
+       docsIetfBpi2CmtsAuthCACertIndexPtr    OBJECT-TYPE
             SYNTAX         Unsigned32 (0..4294967295)
             MAX-ACCESS     read-only
             STATUS         current
             DESCRIPTION
-                 "A row index into docsBpi2CmtsCACertTable.
-                  Returns the index in docsBpi2CmtsCACertTable which
+                 "A row index into docsIetfBpi2CmtsCACertTable.
+                  Returns the index in docsIetfBpi2CmtsCACertTable which
                   CA certificate this CM is chained to.  A value of
                   0 means it could not be found or not applicable."
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2."
-            ::= { docsBpi2CmtsAuthEntry 21 }
+            ::= { docsIetfBpi2CmtsAuthEntry 21 }
 
 
        --
        -- The CMTS TEK Table, indexed by ifIndex and SAID
        --
 
-       docsBpi2CmtsTEKTable     OBJECT-TYPE
+       docsIetfBpi2CmtsTEKTable     OBJECT-TYPE
             SYNTAX         SEQUENCE OF    DocsBpi2CmtsTEKEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -1978,9 +1984,9 @@
             Traffic Encryption Key (TEK) association. The CMTS
             Maintains one TEK association per SAID on each CMTS MAC
             interface."
-            ::= { docsBpi2CmtsObjects 3 }
+            ::= { docsIetfBpi2CmtsObjects 3 }
 
-       docsBpi2CmtsTEKEntry     OBJECT-TYPE
+       docsIetfBpi2CmtsTEKEntry     OBJECT-TYPE
             SYNTAX         DocsBpi2CmtsTEKEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -1991,30 +1997,30 @@
             based on the receipt of a Key Request message, and MUST not
             delete the entry before the CM authorization for the SAID
             permanently expires."
-            INDEX     { ifIndex, docsBpi2CmtsTEKSAId }
-            ::= { docsBpi2CmtsTEKTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmtsTEKSAId }
+            ::= { docsIetfBpi2CmtsTEKTable 1 }
 
        DocsBpi2CmtsTEKEntry ::= SEQUENCE {
-            docsBpi2CmtsTEKSAId                DocsSAId,
-            docsBpi2CmtsTEKSAType              DocsBpkmSAType,
-            docsBpi2CmtsTEKDataEncryptAlg      DocsBpkmDataEncryptAlg,
-            docsBpi2CmtsTEKDataAuthentAlg      DocsBpkmDataAuthentAlg,
-            docsBpi2CmtsTEKLifetime            Integer32,
-            docsBpi2CmtsTEKKeySequenceNumber   Integer32,
-            docsBpi2CmtsTEKExpiresOld          DateAndTime,
-            docsBpi2CmtsTEKExpiresNew          DateAndTime,
-            docsBpi2CmtsTEKReset               TruthValue,
-            docsBpi2CmtsKeyRequests            Counter32,
-            docsBpi2CmtsKeyReplies             Counter32,
-            docsBpi2CmtsKeyRejects             Counter32,
-            docsBpi2CmtsTEKInvalids            Counter32,
-            docsBpi2CmtsKeyRejectErrorCode     INTEGER,
-            docsBpi2CmtsKeyRejectErrorString   SnmpAdminString,
-            docsBpi2CmtsTEKInvalidErrorCode    INTEGER,
-            docsBpi2CmtsTEKInvalidErrorString  SnmpAdminString
+            docsIetfBpi2CmtsTEKSAId                DocsSAId,
+            docsIetfBpi2CmtsTEKSAType              DocsBpkmSAType,
+            docsIetfBpi2CmtsTEKDataEncryptAlg      DocsBpkmDataEncryptAlg,
+            docsIetfBpi2CmtsTEKDataAuthentAlg      DocsBpkmDataAuthentAlg,
+            docsIetfBpi2CmtsTEKLifetime            Integer32,
+            docsIetfBpi2CmtsTEKKeySequenceNumber   Integer32,
+            docsIetfBpi2CmtsTEKExpiresOld          DateAndTime,
+            docsIetfBpi2CmtsTEKExpiresNew          DateAndTime,
+            docsIetfBpi2CmtsTEKReset               TruthValue,
+            docsIetfBpi2CmtsKeyRequests            Counter32,
+            docsIetfBpi2CmtsKeyReplies             Counter32,
+            docsIetfBpi2CmtsKeyRejects             Counter32,
+            docsIetfBpi2CmtsTEKInvalids            Counter32,
+            docsIetfBpi2CmtsKeyRejectErrorCode     INTEGER,
+            docsIetfBpi2CmtsKeyRejectErrorString   SnmpAdminString,
+            docsIetfBpi2CmtsTEKInvalidErrorCode    INTEGER,
+            docsIetfBpi2CmtsTEKInvalidErrorString  SnmpAdminString
        }
 
-       docsBpi2CmtsTEKSAId OBJECT-TYPE
+       docsIetfBpi2CmtsTEKSAId OBJECT-TYPE
             SYNTAX         DocsSAId
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2024,9 +2030,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.12."
-            ::= { docsBpi2CmtsTEKEntry 1 }
+            ::= { docsIetfBpi2CmtsTEKEntry 1 }
 
-       docsBpi2CmtsTEKSAType    OBJECT-TYPE
+       docsIetfBpi2CmtsTEKSAType    OBJECT-TYPE
             SYNTAX         DocsBpkmSAType
             MAX-ACCESS     read-only
             STATUS         current
@@ -2039,9 +2045,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 2.1.3."
-            ::= { docsBpi2CmtsTEKEntry 2 }
+            ::= { docsIetfBpi2CmtsTEKEntry 2 }
 
-       docsBpi2CmtsTEKDataEncryptAlg OBJECT-TYPE
+       docsIetfBpi2CmtsTEKDataEncryptAlg OBJECT-TYPE
             SYNTAX    DocsBpkmDataEncryptAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -2051,9 +2057,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmtsTEKEntry 3 }
+            ::= { docsIetfBpi2CmtsTEKEntry 3 }
 
-       docsBpi2CmtsTEKDataAuthentAlg OBJECT-TYPE
+       docsIetfBpi2CmtsTEKDataAuthentAlg OBJECT-TYPE
             SYNTAX    DocsBpkmDataAuthentAlg
             MAX-ACCESS     read-only
             STATUS         current
@@ -2063,9 +2069,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
-            ::= { docsBpi2CmtsTEKEntry 4 }
+            ::= { docsIetfBpi2CmtsTEKEntry 4 }
 
-       docsBpi2CmtsTEKLifetime  OBJECT-TYPE
+       docsIetfBpi2CmtsTEKLifetime  OBJECT-TYPE
             SYNTAX         Integer32 (1..604800)
             UNITS          "seconds"
             MAX-ACCESS     read-write
@@ -2077,10 +2083,10 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.5 and Appendix A.2."
-            ::= { docsBpi2CmtsTEKEntry 5 }
+            ::= { docsIetfBpi2CmtsTEKEntry 5 }
 
 
-       docsBpi2CmtsTEKKeySequenceNumber   OBJECT-TYPE
+       docsIetfBpi2CmtsTEKKeySequenceNumber   OBJECT-TYPE
             SYNTAX              Integer32 (0..15)
             MAX-ACCESS          read-only
             STATUS              current
@@ -2090,9 +2096,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.2.10 and 4.2.2.13."
-            ::= { docsBpi2CmtsTEKEntry 6 }
+            ::= { docsIetfBpi2CmtsTEKEntry 6 }
 
-       docsBpi2CmtsTEKExpiresOld     OBJECT-TYPE
+       docsIetfBpi2CmtsTEKExpiresOld     OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -2104,9 +2110,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.5 and 4.2.2.9."
-            ::= { docsBpi2CmtsTEKEntry 7 }
+            ::= { docsIetfBpi2CmtsTEKEntry 7 }
 
-       docsBpi2CmtsTEKExpiresNew     OBJECT-TYPE
+       docsIetfBpi2CmtsTEKExpiresNew     OBJECT-TYPE
             SYNTAX         DateAndTime
             MAX-ACCESS     read-only
             STATUS         current
@@ -2116,9 +2122,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.5 and 4.2.2.9."
-            ::= { docsBpi2CmtsTEKEntry 8 }
+            ::= { docsIetfBpi2CmtsTEKEntry 8 }
 
-       docsBpi2CmtsTEKReset     OBJECT-TYPE
+       docsIetfBpi2CmtsTEKReset     OBJECT-TYPE
             SYNTAX         TruthValue
             MAX-ACCESS     read-write
             STATUS         current
@@ -2132,9 +2138,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.1.3.3.5."
-            ::= { docsBpi2CmtsTEKEntry 9 }
+            ::= { docsIetfBpi2CmtsTEKEntry 9 }
 
-       docsBpi2CmtsKeyRequests  OBJECT-TYPE
+       docsIetfBpi2CmtsKeyRequests  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2148,9 +2154,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.4."
-            ::= { docsBpi2CmtsTEKEntry 10 }
+            ::= { docsIetfBpi2CmtsTEKEntry 10 }
 
-       docsBpi2CmtsKeyReplies   OBJECT-TYPE
+       docsIetfBpi2CmtsKeyReplies   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2164,9 +2170,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.5."
-            ::= { docsBpi2CmtsTEKEntry 11 }
+            ::= { docsIetfBpi2CmtsTEKEntry 11 }
 
-       docsBpi2CmtsKeyRejects   OBJECT-TYPE
+       docsIetfBpi2CmtsKeyRejects   OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2180,9 +2186,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.6."
-            ::= { docsBpi2CmtsTEKEntry 12 }
+            ::= { docsIetfBpi2CmtsTEKEntry 12 }
 
-       docsBpi2CmtsTEKInvalids  OBJECT-TYPE
+       docsIetfBpi2CmtsTEKInvalids  OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2196,9 +2202,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.8."
-            ::= { docsBpi2CmtsTEKEntry 13 }
+            ::= { docsIetfBpi2CmtsTEKEntry 13 }
 
-       docsBpi2CmtsKeyRejectErrorCode     OBJECT-TYPE
+       docsIetfBpi2CmtsKeyRejectErrorCode     OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -2216,9 +2222,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.6 and 4.2.2.15."
-            ::= { docsBpi2CmtsTEKEntry 14 }
+            ::= { docsIetfBpi2CmtsTEKEntry 14 }
 
-       docsBpi2CmtsKeyRejectErrorString   OBJECT-TYPE
+       docsIetfBpi2CmtsKeyRejectErrorString   OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -2231,9 +2237,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.6 and 4.2.2.6."
-            ::= { docsBpi2CmtsTEKEntry 15 }
+            ::= { docsIetfBpi2CmtsTEKEntry 15 }
 
-       docsBpi2CmtsTEKInvalidErrorCode    OBJECT-TYPE
+       docsIetfBpi2CmtsTEKInvalidErrorCode    OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -2251,9 +2257,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.8 and 4.2.2.15."
-            ::= { docsBpi2CmtsTEKEntry 16 }
+            ::= { docsIetfBpi2CmtsTEKEntry 16 }
 
-       docsBpi2CmtsTEKInvalidErrorString  OBJECT-TYPE
+       docsIetfBpi2CmtsTEKInvalidErrorString  OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -2265,7 +2271,7 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.8 and 4.2.2.6."
-            ::= { docsBpi2CmtsTEKEntry 17 }
+            ::= { docsIetfBpi2CmtsTEKEntry 17 }
 
 
 
@@ -2273,15 +2279,15 @@
        -- The CMTS Multicast Objects Group
        --
 
-       docsBpi2CmtsMulticastObjects OBJECT IDENTIFIER
-            ::= { docsBpi2CmtsObjects 4 }
+       docsIetfBpi2CmtsMulticastObjects OBJECT IDENTIFIER
+            ::= { docsIetfBpi2CmtsObjects 4 }
 
        --
        -- The CMTS IP Multicast Mapping Table, indexed by
-       -- docsBpi2CmtsIpMulticastIndex, and by ifIndex
+       -- docsIetfBpi2CmtsIpMulticastIndex, and by ifIndex
        --
 
-       docsBpi2CmtsIpMulticastMapTable         OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastMapTable         OBJECT-TYPE
             SYNTAX         SEQUENCE OF DocsBpi2CmtsIpMulticastMapEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2289,11 +2295,11 @@
                  "This table maps multicast IP addresses to SAIDs.
             If a multicast IP address is mapped by multiple rows
             in the table, the row with the lowest
-            docsBpi2CmtsIpMulticastIndex must be utilized for the
+            docsIetfBpi2CmtsIpMulticastIndex must be utilized for the
             mapping."
-            ::= { docsBpi2CmtsMulticastObjects 1 }
+            ::= { docsIetfBpi2CmtsMulticastObjects 1 }
 
-       docsBpi2CmtsIpMulticastMapEntry         OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastMapEntry         OBJECT-TYPE
             SYNTAX         DocsBpi2CmtsIpMulticastMapEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2303,32 +2309,32 @@
             associated to a CMTS MAC Interface, as well as associated
             message
             counters and error information."
-            INDEX     { ifIndex, docsBpi2CmtsIpMulticastIndex }
-            ::= { docsBpi2CmtsIpMulticastMapTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmtsIpMulticastIndex }
+            ::= { docsIetfBpi2CmtsIpMulticastMapTable 1 }
 
        DocsBpi2CmtsIpMulticastMapEntry ::= SEQUENCE {
-            docsBpi2CmtsIpMulticastIndex            Unsigned32,
-            docsBpi2CmtsIpMulticastAddressType      InetAddressType,
-            docsBpi2CmtsIpMulticastAddress          InetAddress,
-            docsBpi2CmtsIpMulticastMask             InetAddress,
-            docsBpi2CmtsIpMulticastSAId             DocsSAIdOrZero,
-            docsBpi2CmtsIpMulticastSAType           DocsBpkmSAType,
-            docsBpi2CmtsIpMulticastDataEncryptAlg
+            docsIetfBpi2CmtsIpMulticastIndex            Unsigned32,
+            docsIetfBpi2CmtsIpMulticastAddressType      InetAddressType,
+            docsIetfBpi2CmtsIpMulticastAddress          InetAddress,
+            docsIetfBpi2CmtsIpMulticastMask             InetAddress,
+            docsIetfBpi2CmtsIpMulticastSAId             DocsSAIdOrZero,
+            docsIetfBpi2CmtsIpMulticastSAType           DocsBpkmSAType,
+            docsIetfBpi2CmtsIpMulticastDataEncryptAlg
                                             DocsBpkmDataEncryptAlg,
-            docsBpi2CmtsIpMulticastDataAuthentAlg
+            docsIetfBpi2CmtsIpMulticastDataAuthentAlg
                                             DocsBpkmDataAuthentAlg,
-            docsBpi2CmtsIpMulticastSAMapRequests    Counter32,
-            docsBpi2CmtsIpMulticastSAMapReplies     Counter32,
-            docsBpi2CmtsIpMulticastSAMapRejects     Counter32,
-            docsBpi2CmtsIpMulticastSAMapRejectErrorCode
+            docsIetfBpi2CmtsIpMulticastSAMapRequests    Counter32,
+            docsIetfBpi2CmtsIpMulticastSAMapReplies     Counter32,
+            docsIetfBpi2CmtsIpMulticastSAMapRejects     Counter32,
+            docsIetfBpi2CmtsIpMulticastSAMapRejectErrorCode
                                                        INTEGER,
-            docsBpi2CmtsIpMulticastSAMapRejectErrorString
+            docsIetfBpi2CmtsIpMulticastSAMapRejectErrorString
                                                        SnmpAdminString,
-            docsBpi2CmtsIpMulticastMapControl          RowStatus,
-            docsBpi2CmtsIpMulticastMapStorageType      StorageType
+            docsIetfBpi2CmtsIpMulticastMapControl          RowStatus,
+            docsIetfBpi2CmtsIpMulticastMapStorageType      StorageType
             }
 
-       docsBpi2CmtsIpMulticastIndex       OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastIndex       OBJECT-TYPE
             SYNTAX         Unsigned32 (1..4294967295)
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2336,33 +2342,33 @@
                  "The index of this row.
             Conceptual rows having the value 'permanent' need not allow
             write-access to any columnar objects in the row."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 1 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 1 }
 
-       docsBpi2CmtsIpMulticastAddressType OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastAddressType OBJECT-TYPE
             SYNTAX         InetAddressType
             MAX-ACCESS     read-create
             STATUS         current
             DESCRIPTION
                  "The type of internet address for
-            docsBpi2CmtsIpMulticastAddress
-            and docsBpi2CmtsIpMulticastMask."
+            docsIetfBpi2CmtsIpMulticastAddress
+            and docsIetfBpi2CmtsIpMulticastMask."
             DEFVAL { ipv4 }
-            ::= { docsBpi2CmtsIpMulticastMapEntry 2 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 2 }
 
-       docsBpi2CmtsIpMulticastAddress          OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastAddress          OBJECT-TYPE
             SYNTAX         InetAddress
             MAX-ACCESS     read-create
             STATUS         current
             DESCRIPTION
                  "This object represents the IP multicast address
             to be mapped, in conjunction with
-            docsBpi2CmtsIpMulticastMask. The type of this address is
+            docsIetfBpi2CmtsIpMulticastMask. The type of this address is
             determined by the value of the object
-            docsBpi2CmtsIpMulticastAddressType."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 3 }
+            docsIetfBpi2CmtsIpMulticastAddressType."
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 3 }
 
 
-       docsBpi2CmtsIpMulticastMask        OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastMask        OBJECT-TYPE
             SYNTAX         InetAddress
             MAX-ACCESS     read-create
             STATUS         current
@@ -2370,30 +2376,30 @@
                  "This object represents the IP multicast address mask
             for this row.
             An IP multicast address matches this row if the logical
-            AND of the address with docsBpi2CmtsIpMulticastMask is
+            AND of the address with docsIetfBpi2CmtsIpMulticastMask is
             identical to the logical AND of
-            docsBpi2CmtsIpMulticastAddr with
-            docsBpi2CmtsIpMulticastMask. The type of this address is
+            docsIetfBpi2CmtsIpMulticastAddr with
+            docsIetfBpi2CmtsIpMulticastMask. The type of this address is
             determined by the value of the object
-            docsBpi2CmtsIpMulticastAddressType.
+            docsIetfBpi2CmtsIpMulticastAddressType.
              Note: For IPv6 this object needs not to represent a
              contiguous netmask, e.g. to associate an SAID to a
              multicast group matching 'any' multicast scope. The TC
              InetAddressPrefixLength is not used because it only
              represents contiguous netmask."
-             ::= { docsBpi2CmtsIpMulticastMapEntry 4 }
+             ::= { docsIetfBpi2CmtsIpMulticastMapEntry 4 }
 
 
-       docsBpi2CmtsIpMulticastSAId        OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAId        OBJECT-TYPE
             SYNTAX         DocsSAIdOrZero
             MAX-ACCESS     read-create
             STATUS         current
             DESCRIPTION
                  "This object represents the multicast SAID to be
             used in this IP multicast address mapping entry."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 5 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 5 }
 
-       docsBpi2CmtsIpMulticastSAType OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAType OBJECT-TYPE
             SYNTAX         DocsBpkmSAType
             MAX-ACCESS     read-create
             STATUS         current
@@ -2407,9 +2413,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 2.1.3."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 6 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 6 }
 
-       docsBpi2CmtsIpMulticastDataEncryptAlg   OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastDataEncryptAlg   OBJECT-TYPE
             SYNTAX    DocsBpkmDataEncryptAlg
             MAX-ACCESS     read-create
             STATUS         current
@@ -2420,9 +2426,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
             DEFVAL { des56CbcMode }
-            ::= { docsBpi2CmtsIpMulticastMapEntry 7 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 7 }
 
-       docsBpi2CmtsIpMulticastDataAuthentAlg   OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastDataAuthentAlg   OBJECT-TYPE
             SYNTAX    DocsBpkmDataAuthentAlg
             MAX-ACCESS     read-create
             STATUS         current
@@ -2433,9 +2439,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.2.20."
             DEFVAL { none }
-            ::= { docsBpi2CmtsIpMulticastMapEntry 8 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 8 }
 
-       docsBpi2CmtsIpMulticastSAMapRequests    OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAMapRequests    OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2449,9 +2455,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.10."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 9 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 9 }
 
-       docsBpi2CmtsIpMulticastSAMapReplies     OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAMapReplies     OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2465,9 +2471,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.11."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 10 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 10 }
 
-       docsBpi2CmtsIpMulticastSAMapRejects     OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAMapRejects     OBJECT-TYPE
             SYNTAX         Counter32
             MAX-ACCESS     read-only
             STATUS         current
@@ -2481,9 +2487,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 4.2.1.12."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 11 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 11 }
 
-       docsBpi2CmtsIpMulticastSAMapRejectErrorCode  OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAMapRejectErrorCode  OBJECT-TYPE
             SYNTAX         INTEGER {
                                    none(1),
                                    unknown(2),
@@ -2502,9 +2508,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.12 and 4.2.2.15."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 12 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 12 }
 
-       docsBpi2CmtsIpMulticastSAMapRejectErrorString     OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastSAMapRejectErrorString     OBJECT-TYPE
             SYNTAX         SnmpAdminString (SIZE (0..128))
             MAX-ACCESS     read-only
             STATUS         current
@@ -2517,9 +2523,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Sections 4.2.1.12 and 4.2.2.6."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 13 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 13 }
 
-       docsBpi2CmtsIpMulticastMapControl  OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastMapControl  OBJECT-TYPE
             SYNTAX         RowStatus
             MAX-ACCESS     read-create
             STATUS         current
@@ -2529,12 +2535,12 @@
             ability to change values in this row while the row is
             active.
             A created row can be set to active only after the
-            Corresponding instances of docsBpi2CmtsIpMulticastAddress,
-            docsBpi2CmtsIpMulticastMask, docsBpi2CmtsIpMulticastSAId
-            and docsBpi2CmtsIpMulticastSAType have all been set."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 14 }
+            Corresponding instances of docsIetfBpi2CmtsIpMulticastAddress,
+            docsIetfBpi2CmtsIpMulticastMask, docsIetfBpi2CmtsIpMulticastSAId
+            and docsIetfBpi2CmtsIpMulticastSAType have all been set."
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 14 }
 
-       docsBpi2CmtsIpMulticastMapStorageType     OBJECT-TYPE
+       docsIetfBpi2CmtsIpMulticastMapStorageType     OBJECT-TYPE
             SYNTAX         StorageType
             MAX-ACCESS     read-only
             STATUS         current
@@ -2542,7 +2548,7 @@
                  "The storage type for this conceptual row.
             Conceptual rows having the value 'permanent' need not allow
             write-access to any columnar objects in the row."
-            ::= { docsBpi2CmtsIpMulticastMapEntry 15 }
+            ::= { docsIetfBpi2CmtsIpMulticastMapEntry 15 }
 
        --
        -- The CMTS Multicast SAID Authorization Table,
@@ -2550,16 +2556,16 @@
        -- multicast SAID by CM MAC address
        --
 
-       docsBpi2CmtsMulticastAuthTable          OBJECT-TYPE
+       docsIetfBpi2CmtsMulticastAuthTable          OBJECT-TYPE
             SYNTAX         SEQUENCE OF DocsBpi2CmtsMulticastAuthEntry
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "This table describes the multicast SAID
             authorization for each CM on each CMTS MAC interface."
-            ::= { docsBpi2CmtsMulticastObjects 2 }
+            ::= { docsIetfBpi2CmtsMulticastObjects 2 }
 
-       docsBpi2CmtsMulticastAuthEntry          OBJECT-TYPE
+       docsIetfBpi2CmtsMulticastAuthEntry          OBJECT-TYPE
             SYNTAX         DocsBpi2CmtsMulticastAuthEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2569,57 +2575,57 @@
             for one CMTS MAC interface.
             Row entries persist after re-initialization of
             the managed system."
-            INDEX     { ifIndex, docsBpi2CmtsMulticastAuthSAId,
-                   docsBpi2CmtsMulticastAuthCmMacAddress }
-            ::= { docsBpi2CmtsMulticastAuthTable 1 }
+            INDEX     { ifIndex, docsIetfBpi2CmtsMulticastAuthSAId,
+                   docsIetfBpi2CmtsMulticastAuthCmMacAddress }
+            ::= { docsIetfBpi2CmtsMulticastAuthTable 1 }
 
        DocsBpi2CmtsMulticastAuthEntry ::= SEQUENCE
             {
-            docsBpi2CmtsMulticastAuthSAId                DocsSAId,
-            docsBpi2CmtsMulticastAuthCmMacAddress        MacAddress,
-            docsBpi2CmtsMulticastAuthControl             RowStatus
+            docsIetfBpi2CmtsMulticastAuthSAId                DocsSAId,
+            docsIetfBpi2CmtsMulticastAuthCmMacAddress        MacAddress,
+            docsIetfBpi2CmtsMulticastAuthControl             RowStatus
             }
 
-       docsBpi2CmtsMulticastAuthSAId OBJECT-TYPE
+       docsIetfBpi2CmtsMulticastAuthSAId OBJECT-TYPE
             SYNTAX         DocsSAId
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "This object represents the multicast SAID for
             authorization."
-            ::= { docsBpi2CmtsMulticastAuthEntry 1 }
+            ::= { docsIetfBpi2CmtsMulticastAuthEntry 1 }
 
-       docsBpi2CmtsMulticastAuthCmMacAddress   OBJECT-TYPE
+       docsIetfBpi2CmtsMulticastAuthCmMacAddress   OBJECT-TYPE
             SYNTAX         MacAddress
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "This object represents the MAC address of the CM
             to which the multicast SAID authorization applies."
-            ::= { docsBpi2CmtsMulticastAuthEntry 2 }
+            ::= { docsIetfBpi2CmtsMulticastAuthEntry 2 }
 
-       docsBpi2CmtsMulticastAuthControl   OBJECT-TYPE
+       docsIetfBpi2CmtsMulticastAuthControl   OBJECT-TYPE
             SYNTAX         RowStatus
             MAX-ACCESS     read-create
             STATUS         current
             DESCRIPTION
                  "The status of this conceptual row for the
             authorization of  multicast SAIDs to CMs. "
-            ::= { docsBpi2CmtsMulticastAuthEntry 3 }
+            ::= { docsIetfBpi2CmtsMulticastAuthEntry 3 }
 
 
        --
        -- CMTS Cert Objects
        --
 
-       docsBpi2CmtsCertObjects OBJECT IDENTIFIER
-            ::= { docsBpi2CmtsObjects 5 }
+       docsIetfBpi2CmtsCertObjects OBJECT IDENTIFIER
+            ::= { docsIetfBpi2CmtsObjects 5 }
 
        --
        -- CMTS Provisioned CM Cert Table
        --
 
-       docsBpi2CmtsProvisionedCmCertTable OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertTable OBJECT-TYPE
             SYNTAX         SEQUENCE OF
                             DocsBpi2CmtsProvisionedCmCertEntry
             MAX-ACCESS     not-accessible
@@ -2630,9 +2636,9 @@
             table has an overriding effect on the validity object of a
             certificate in the authorization table, as long as the
             entire contents of the two certificates are identical."
-            ::= { docsBpi2CmtsCertObjects 1 }
+            ::= { docsIetfBpi2CmtsCertObjects 1 }
 
-       docsBpi2CmtsProvisionedCmCertEntry OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertEntry OBJECT-TYPE
             SYNTAX         DocsBpi2CmtsProvisionedCmCertEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2644,28 +2650,28 @@
                  "Data-Over-Cable Service Interface Specifications:
             Operations Support System Interface Specification
             SP-OSSIv2.0-I05-040407, Section 6.2.14"
-            INDEX { docsBpi2CmtsProvisionedCmCertMacAddress }
-            ::= { docsBpi2CmtsProvisionedCmCertTable 1 }
+            INDEX { docsIetfBpi2CmtsProvisionedCmCertMacAddress }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertTable 1 }
 
        DocsBpi2CmtsProvisionedCmCertEntry ::= SEQUENCE
             {
-            docsBpi2CmtsProvisionedCmCertMacAddress MacAddress,
-            docsBpi2CmtsProvisionedCmCertTrust      INTEGER,
-            docsBpi2CmtsProvisionedCmCertSource     INTEGER,
-            docsBpi2CmtsProvisionedCmCertStatus     RowStatus,
-            docsBpi2CmtsProvisionedCmCert
+            docsIetfBpi2CmtsProvisionedCmCertMacAddress MacAddress,
+            docsIetfBpi2CmtsProvisionedCmCertTrust      INTEGER,
+            docsIetfBpi2CmtsProvisionedCmCertSource     INTEGER,
+            docsIetfBpi2CmtsProvisionedCmCertStatus     RowStatus,
+            docsIetfBpi2CmtsProvisionedCmCert
                                       DocsX509ASN1DEREncodedCertificate
             }
 
-       docsBpi2CmtsProvisionedCmCertMacAddress OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertMacAddress OBJECT-TYPE
             SYNTAX         MacAddress
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The index of this row."
-            ::= { docsBpi2CmtsProvisionedCmCertEntry 1 }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertEntry 1 }
 
-       docsBpi2CmtsProvisionedCmCertTrust      OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertTrust      OBJECT-TYPE
             SYNTAX    INTEGER {
                               trusted(1),
                               untrusted(2)
@@ -2681,9 +2687,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.1."
             DEFVAL { untrusted }
-            ::= { docsBpi2CmtsProvisionedCmCertEntry 2 }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertEntry 2 }
 
-       docsBpi2CmtsProvisionedCmCertSource     OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertSource     OBJECT-TYPE
             SYNTAX    INTEGER {
                               snmp(1),
                               configurationFile(2),
@@ -2699,18 +2705,18 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.1."
-            ::= { docsBpi2CmtsProvisionedCmCertEntry 3 }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertEntry 3 }
 
-       docsBpi2CmtsProvisionedCmCertStatus OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCertStatus OBJECT-TYPE
             SYNTAX  RowStatus
             MAX-ACCESS read-create
             STATUS  current
             DESCRIPTION
                  "The status of this conceptual row. Values in this row
             cannot be changed while the row is 'active'."
-            ::= { docsBpi2CmtsProvisionedCmCertEntry 4 }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertEntry 4 }
 
-       docsBpi2CmtsProvisionedCmCert OBJECT-TYPE
+       docsIetfBpi2CmtsProvisionedCmCert OBJECT-TYPE
             SYNTAX         DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS     read-create
             STATUS         current
@@ -2723,23 +2729,23 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2."
-            ::= { docsBpi2CmtsProvisionedCmCertEntry 5 }
+            ::= { docsIetfBpi2CmtsProvisionedCmCertEntry 5 }
 
 
        --
        -- CMTS CA Cert Table
        --
 
-       docsBpi2CmtsCACertTable OBJECT-TYPE
+       docsIetfBpi2CmtsCACertTable OBJECT-TYPE
             SYNTAX         SEQUENCE OF DocsBpi2CmtsCACertEntry
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The table of known Certificate Authority certificates
             acquired by this device."
-            ::= { docsBpi2CmtsCertObjects 2 }
+            ::= { docsIetfBpi2CmtsCertObjects 2 }
 
-       docsBpi2CmtsCACertEntry OBJECT-TYPE
+       docsIetfBpi2CmtsCACertEntry OBJECT-TYPE
             SYNTAX         DocsBpi2CmtsCACertEntry
             MAX-ACCESS     not-accessible
             STATUS         current
@@ -2752,31 +2758,31 @@
                  "Data-Over-Cable Service Interface Specifications:
             Operations Support System Interface Specification
             SP-OSSIv2.0-I05-040407, Section 6.2.14"
-            INDEX   { docsBpi2CmtsCACertIndex }
-            ::= {docsBpi2CmtsCACertTable 1 }
+            INDEX   { docsIetfBpi2CmtsCACertIndex }
+            ::= {docsIetfBpi2CmtsCACertTable 1 }
 
        DocsBpi2CmtsCACertEntry ::= SEQUENCE {
-            docsBpi2CmtsCACertIndex            Unsigned32,
-            docsBpi2CmtsCACertSubject          SnmpAdminString,
-            docsBpi2CmtsCACertIssuer           SnmpAdminString,
-            docsBpi2CmtsCACertSerialNumber     OCTET STRING,
-            docsBpi2CmtsCACertTrust            INTEGER,
-            docsBpi2CmtsCACertSource           INTEGER,
-            docsBpi2CmtsCACertStatus           RowStatus,
-            docsBpi2CmtsCACert
+            docsIetfBpi2CmtsCACertIndex            Unsigned32,
+            docsIetfBpi2CmtsCACertSubject          SnmpAdminString,
+            docsIetfBpi2CmtsCACertIssuer           SnmpAdminString,
+            docsIetfBpi2CmtsCACertSerialNumber     OCTET STRING,
+            docsIetfBpi2CmtsCACertTrust            INTEGER,
+            docsIetfBpi2CmtsCACertSource           INTEGER,
+            docsIetfBpi2CmtsCACertStatus           RowStatus,
+            docsIetfBpi2CmtsCACert
                                   DocsX509ASN1DEREncodedCertificate,
-            docsBpi2CmtsCACertThumbprint       OCTET STRING
+            docsIetfBpi2CmtsCACertThumbprint       OCTET STRING
        }
 
-       docsBpi2CmtsCACertIndex OBJECT-TYPE
+       docsIetfBpi2CmtsCACertIndex OBJECT-TYPE
             SYNTAX         Unsigned32 (1.. 4294967295)
             MAX-ACCESS     not-accessible
             STATUS         current
             DESCRIPTION
                  "The index for this row."
-            ::= { docsBpi2CmtsCACertEntry 1 }
+            ::= { docsIetfBpi2CmtsCACertEntry 1 }
 
-       docsBpi2CmtsCACertSubject OBJECT-TYPE
+       docsIetfBpi2CmtsCACertSubject OBJECT-TYPE
             SYNTAX         SnmpAdminString
             MAX-ACCESS     read-only
             STATUS         current
@@ -2798,9 +2804,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2.4"
-            ::= { docsBpi2CmtsCACertEntry 2 }
+            ::= { docsIetfBpi2CmtsCACertEntry 2 }
 
-       docsBpi2CmtsCACertIssuer OBJECT-TYPE
+       docsIetfBpi2CmtsCACertIssuer OBJECT-TYPE
             SYNTAX         SnmpAdminString
             MAX-ACCESS     read-only
             STATUS         current
@@ -2823,9 +2829,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2.4"
-            ::= { docsBpi2CmtsCACertEntry 3 }
+            ::= { docsIetfBpi2CmtsCACertEntry 3 }
 
-       docsBpi2CmtsCACertSerialNumber OBJECT-TYPE
+       docsIetfBpi2CmtsCACertSerialNumber OBJECT-TYPE
             SYNTAX         OCTET STRING (SIZE (1..32))
             MAX-ACCESS     read-only
             STATUS         current
@@ -2835,9 +2841,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2.2"
-            ::= { docsBpi2CmtsCACertEntry 4 }
+            ::= { docsIetfBpi2CmtsCACertEntry 4 }
 
-       docsBpi2CmtsCACertTrust OBJECT-TYPE
+       docsIetfBpi2CmtsCACertTrust OBJECT-TYPE
             SYNTAX    INTEGER {
                               trusted (1),
                               untrusted (2),
@@ -2858,9 +2864,9 @@
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.1"
             DEFVAL { chained }
-            ::= { docsBpi2CmtsCACertEntry 5 }
+            ::= { docsIetfBpi2CmtsCACertEntry 5 }
 
-       docsBpi2CmtsCACertSource OBJECT-TYPE
+       docsIetfBpi2CmtsCACertSource OBJECT-TYPE
             SYNTAX    INTEGER {
                       snmp (1),
                       configurationFile (2),
@@ -2878,9 +2884,9 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.1"
-            ::= { docsBpi2CmtsCACertEntry 6 }
+            ::= { docsIetfBpi2CmtsCACertEntry 6 }
 
-       docsBpi2CmtsCACertStatus OBJECT-TYPE
+       docsIetfBpi2CmtsCACertStatus OBJECT-TYPE
             SYNTAX         RowStatus
             MAX-ACCESS     read-create
             STATUS         current
@@ -2888,14 +2894,14 @@
                  "The status of this conceptual row. An attempt
             to set writable columnar values while this row is active
             behaves as follows:
-            - Sets to the object docsBpi2CmtsCACertTrust are allowed.
-            - Sets to the object docsBpi2CmtsCACert will return an
+            - Sets to the object docsIetfBpi2CmtsCACertTrust are allowed.
+            - Sets to the object docsIetfBpi2CmtsCACert will return an
               error inconsistentValue'.
             A newly create entry cannot be set to active until the
-            value of docsBpi2CmtsCACert is being set."
-            ::= { docsBpi2CmtsCACertEntry 7 }
+            value of docsIetfBpi2CmtsCACert is being set."
+            ::= { docsIetfBpi2CmtsCACertEntry 7 }
 
-       docsBpi2CmtsCACert  OBJECT-TYPE
+       docsIetfBpi2CmtsCACert  OBJECT-TYPE
             SYNTAX         DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS     read-create
             STATUS         current
@@ -2903,7 +2909,7 @@
                  "An X509 DER-encoded Certificate Authority
             certificate.
             To help identify certificates, either this object or
-            docsBpi2CmtsCACertThumbprint must be returned by a CMTS for
+            docsIetfBpi2CmtsCACertThumbprint must be returned by a CMTS for
             self-signed CA certificates.
 
             Note: The zero-length OCTET STRING must be returned, on
@@ -2912,16 +2918,16 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.2."
-            ::= { docsBpi2CmtsCACertEntry 8 }
+            ::= { docsIetfBpi2CmtsCACertEntry 8 }
 
-       docsBpi2CmtsCACertThumbprint OBJECT-TYPE
+       docsIetfBpi2CmtsCACertThumbprint OBJECT-TYPE
             SYNTAX         OCTET STRING (SIZE (20))
             MAX-ACCESS     read-only
             STATUS         current
             DESCRIPTION
                  "The SHA-1 hash of a CA certificate.
             To help identify certificates, either this object or
-            docsBpi2CmtsCACert must be returned by a CMTS for
+            docsIetfBpi2CmtsCACert must be returned by a CMTS for
             self-signed CA certificates.
 
             Note: The zero-length OCTET STRING must be returned, on
@@ -2930,7 +2936,7 @@
             REFERENCE
                  "DOCSIS Baseline Privacy Plus Interface Specification,
             Section 9.4.3"
-            ::= { docsBpi2CmtsCACertEntry 9 }
+            ::= { docsIetfBpi2CmtsCACertEntry 9 }
 
 
        --
@@ -2942,10 +2948,10 @@
        -- CM requirement only.
        --
 
-       docsBpi2CodeDownloadControl OBJECT IDENTIFIER
-            ::= { docsBpi2MIBObjects 4 }
+       docsIetfBpi2CodeDownloadControl OBJECT IDENTIFIER
+            ::= { docsIetfBpi2MIBObjects 4 }
 
-       docsBpi2CodeDownloadStatusCode     OBJECT-TYPE
+       docsIetfBpi2CodeDownloadStatusCode     OBJECT-TYPE
             SYNTAX    INTEGER {
                               configFileCvcVerified (1),
                               configFileCvcRejected (2),
@@ -2964,9 +2970,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.3.2 & D.3.5.1."
-            ::= { docsBpi2CodeDownloadControl 1 }
+            ::= { docsIetfBpi2CodeDownloadControl 1 }
 
-       docsBpi2CodeDownloadStatusString   OBJECT-TYPE
+       docsIetfBpi2CodeDownloadStatusString   OBJECT-TYPE
             SYNTAX         SnmpAdminString
             MAX-ACCESS     read-only
             STATUS         current
@@ -2978,9 +2984,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section TBD (see D.3.7)"
-            ::= { docsBpi2CodeDownloadControl 2 }
+            ::= { docsIetfBpi2CodeDownloadControl 2 }
 
-       docsBpi2CodeMfgOrgName   OBJECT-TYPE
+       docsIetfBpi2CodeMfgOrgName   OBJECT-TYPE
             SYNTAX         SnmpAdminString
             MAX-ACCESS     read-only
             STATUS         current
@@ -2990,9 +2996,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 3 }
+            ::= { docsIetfBpi2CodeDownloadControl 3 }
 
-       docsBpi2CodeMfgCodeAccessStart     OBJECT-TYPE
+       docsIetfBpi2CodeMfgCodeAccessStart     OBJECT-TYPE
             SYNTAX         DateAndTime  (SIZE(11))
             MAX-ACCESS     read-only
             STATUS         current
@@ -3004,9 +3010,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 4 }
+            ::= { docsIetfBpi2CodeDownloadControl 4 }
 
-       docsBpi2CodeMfgCvcAccessStart OBJECT-TYPE
+       docsIetfBpi2CodeMfgCvcAccessStart OBJECT-TYPE
             SYNTAX         DateAndTime (SIZE(11))
             MAX-ACCESS     read-only
             STATUS         current
@@ -3018,9 +3024,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 5 }
+            ::= { docsIetfBpi2CodeDownloadControl 5 }
 
-       docsBpi2CodeCoSignerOrgName   OBJECT-TYPE
+       docsIetfBpi2CodeCoSignerOrgName   OBJECT-TYPE
             SYNTAX         SnmpAdminString
             MAX-ACCESS     read-only
             STATUS         current
@@ -3031,9 +3037,9 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 6 }
+            ::= { docsIetfBpi2CodeDownloadControl 6 }
 
-       docsBpi2CodeCoSignerCodeAccessStart     OBJECT-TYPE
+       docsIetfBpi2CodeCoSignerCodeAccessStart     OBJECT-TYPE
             SYNTAX         DateAndTime (SIZE(11))
             MAX-ACCESS     read-only
             STATUS         current
@@ -3042,14 +3048,14 @@
             codeAccessStart value. This value always be referenced to
             Greenwich Mean Time (GMT) and the value format must contain
             TimeZone information (fields 8-10).
-            If docsBpi2CodeCoSignerOrgName is a zero
+            If docsIetfBpi2CodeCoSignerOrgName is a zero
             length string, the value of this object is meaningless."
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 7 }
+            ::= { docsIetfBpi2CodeDownloadControl 7 }
 
-       docsBpi2CodeCoSignerCvcAccessStart OBJECT-TYPE
+       docsIetfBpi2CodeCoSignerCvcAccessStart OBJECT-TYPE
             SYNTAX         DateAndTime (SIZE(11))
             MAX-ACCESS     read-only
             STATUS         current
@@ -3058,14 +3064,14 @@
             cvcAccessStart value. This value always be referenced to
             Greenwich Mean Time (GMT) and the value format must contain
             TimeZone information (fields 8-10).
-            If docsBpi2CodeCoSignerOrgName is a zero
+            If docsIetfBpi2CodeCoSignerOrgName is a zero
             length string, the value of this object is meaningless."
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 8 }
+            ::= { docsIetfBpi2CodeDownloadControl 8 }
 
-       docsBpi2CodeCvcUpdate    OBJECT-TYPE
+       docsIetfBpi2CodeCvcUpdate    OBJECT-TYPE
             SYNTAX         DocsX509ASN1DEREncodedCertificate
             MAX-ACCESS     read-write
             STATUS         current
@@ -3080,7 +3086,7 @@
             REFERENCE
                 "DOCSIS Baseline Privacy Plus Interface Specification,
             Section D.3.3.2.2."
-            ::= { docsBpi2CodeDownloadControl 9 }
+            ::= { docsIetfBpi2CodeDownloadControl 9 }
 
 
        --
@@ -3088,33 +3094,33 @@
        -- notifications)
        --
 
-       docsBpi2Notification     OBJECT IDENTIFIER
-            ::= { docsBpi2MIB 0 }
-       docsBpi2Conformance OBJECT IDENTIFIER
-            ::= { docsBpi2MIB 2 }
-       docsBpi2Compliances OBJECT IDENTIFIER
-            ::= { docsBpi2Conformance 1 }
-       docsBpi2Groups      OBJECT IDENTIFIER
-            ::= { docsBpi2Conformance 2 }
+       docsIetfBpi2Notification     OBJECT IDENTIFIER
+            ::= { docsIetfBpi2MIB 0 }
+       docsIetfBpi2Conformance OBJECT IDENTIFIER
+            ::= { docsIetfBpi2MIB 2 }
+       docsIetfBpi2Compliances OBJECT IDENTIFIER
+            ::= { docsIetfBpi2Conformance 1 }
+       docsIetfBpi2Groups      OBJECT IDENTIFIER
+            ::= { docsIetfBpi2Conformance 2 }
 
 
-       docsBpi2CmCompliance MODULE-COMPLIANCE
+       docsIetfBpi2CmCompliance MODULE-COMPLIANCE
             STATUS         current
             DESCRIPTION
                  "This is the compliance statement for CMs which
             implement the DOCSIS Baseline Privacy Interface Plus."
 
-            MODULE  -- docsBpi2MIB
+            MODULE  -- docsIetfBpi2MIB
 
             -- unconditionally mandatory group
             MANDATORY-GROUPS {
-                   docsBpi2CmGroup,
-                   docsBpi2CodeDownloadGroup
+                   docsIetfBpi2CmGroup,
+                   docsIetfBpi2CodeDownloadGroup
             }
 
 
        -- constrain on Encryption algorithms
-       --OBJECT docsBpi2CmTEKDataEncryptAlg
+       --OBJECT docsIetfBpi2CmTEKDataEncryptAlg
        --     SYNTAX    DocsBpkmDataEncryptAlg {
        --                            none(0),
        --                            des56CbcMode(1),
@@ -3125,7 +3131,7 @@
        --     des40CbcMode(2) for data encryption algorithms."
 
        -- constrain on Integrity algorithms
-       --OBJECT docsBpi2CmTEKDataAuthentAlg
+       --OBJECT docsIetfBpi2CmTEKDataAuthentAlg
        --     SYNTAX    DocsBpkmDataAuthentAlg {
        --                            none(0)
        --               }
@@ -3134,7 +3140,7 @@
        --     authentication algorithms."
 
        -- constrain on IP addressing
-       --OBJECT    docsBpi2CmIpMulticastAddressType
+       --OBJECT    docsIetfBpi2CmIpMulticastAddressType
        --     SYNTAX InetAddressType { ipv4(1) }
        --     DESCRIPTION
        --          "An implementation is only required to support IPv4
@@ -3142,7 +3148,7 @@
        --     future versions of this MIB module."
 
        -- constrain on IP addressing
-       OBJECT    docsBpi2CmIpMulticastAddress
+       OBJECT    docsIetfBpi2CmIpMulticastAddress
             SYNTAX  InetAddress (SIZE(4))
             DESCRIPTION
                  "An implementation is only required to support IPv4
@@ -3150,7 +3156,7 @@
             future versions of this MIB module."
 
        -- constrain on Encryption algorithms
-       --OBJECT docsBpi2CmCryptoSuiteDataEncryptAlg
+       --OBJECT docsIetfBpi2CmCryptoSuiteDataEncryptAlg
        --     SYNTAX    DocsBpkmDataEncryptAlg {
        --                            none(0),
        --                            des56CbcMode(1),
@@ -3161,7 +3167,7 @@
        --     and des40CbcMode(2) for data encryption algorithms."
 
        -- constrain on Integrity algorithms
-       OBJECT docsBpi2CmCryptoSuiteDataAuthentAlg
+       OBJECT docsIetfBpi2CmCryptoSuiteDataAuthentAlg
        --     SYNTAX    DocsBpkmDataAuthentAlg {
        --                            none(0)
        --               }
@@ -3169,23 +3175,23 @@
                    "It is compliant to not support data message
               authentication algorithms."
 
-       ::= { docsBpi2Compliances 1 }
+       ::= { docsIetfBpi2Compliances 1 }
 
 
-       docsBpi2CmtsCompliance MODULE-COMPLIANCE
+       docsIetfBpi2CmtsCompliance MODULE-COMPLIANCE
             STATUS         current
             DESCRIPTION
                  "This is the compliance statement for CMTSs which
             implement the DOCSIS Baseline Privacy Interface Plus."
-            MODULE  -- docsBpi2MIB
+            MODULE  -- docsIetfBpi2MIB
             -- unconditionally mandatory group
             MANDATORY-GROUPS {
-                   docsBpi2CmtsGroup
+                   docsIetfBpi2CmtsGroup
             }
 
 
        -- unconditionally optional group
-       GROUP     docsBpi2CodeDownloadGroup
+       GROUP     docsIetfBpi2CodeDownloadGroup
             DESCRIPTION
                  "This group is optional for CMTSs. The implementation
             decision of this group is left to the vendor"
@@ -3193,21 +3199,21 @@
 
 
        -- constrain on mandatory range
-       OBJECT    docsBpi2CmtsDefaultAuthLifetime
+       OBJECT    docsIetfBpi2CmtsDefaultAuthLifetime
             SYNTAX    Integer32 (86400..6048000)
             DESCRIPTION
                  "The refined range corresponds to the minimum and
             maximum values in operational networks."
 
        -- constrain on mandatory range
-       OBJECT    docsBpi2CmtsDefaultTEKLifetime
+       OBJECT    docsIetfBpi2CmtsDefaultTEKLifetime
             SYNTAX    Integer32 (1800..604800)
             DESCRIPTION
                 "The refined range corresponds to the minimum and
             maximum values in operational networks."
 
        -- constrain on mandatory range
-       OBJECT    docsBpi2CmtsAuthCmLifetime
+       OBJECT    docsIetfBpi2CmtsAuthCmLifetime
             SYNTAX    Integer32 (86400..6048000)
             DESCRIPTION
                 "The refined range corresponds to the minimum and
@@ -3217,7 +3223,7 @@
        -- commented out due to mib compile problem with syntax
        -- can't use enum in TC
        -- constrain on Encryption algorithms
-       -- OBJECT   docsBpi2CmtsTEKDataEncryptAlg
+       -- OBJECT   docsIetfBpi2CmtsTEKDataEncryptAlg
        --     SYNTAX    DocsBpkmDataEncryptAlg {
        --                            none(0),
        --                            des56CbcMode(1),
@@ -3229,7 +3235,7 @@
 
        -- constrain on Integrity algorithms
 
-       --OBJECT docsBpi2CmtsTEKDataAuthentAlg
+       --OBJECT docsIetfBpi2CmtsTEKDataAuthentAlg
        --     SYNTAX    DocsBpkmDataAuthentAlg {
        --                            none(0)
        --               }
@@ -3238,7 +3244,7 @@
        --     authentication algorithms."
 
        -- constrain on mandatory range
-       OBJECT    docsBpi2CmtsTEKLifetime
+       OBJECT    docsIetfBpi2CmtsTEKLifetime
             SYNTAX    Integer32 (1800..604800)
             DESCRIPTION
                 "The refined range corresponds to the minimum and
@@ -3247,7 +3253,7 @@
        -- constrain on access
        -- constrain on IP Addressing
 
-       --OBJECT    docsBpi2CmtsIpMulticastAddressType
+       --OBJECT    docsIetfBpi2CmtsIpMulticastAddressType
        --     SYNTAX      InetAddressType { ipv4(1) }
        --     MIN-ACCESS  read-only
        --     DESCRIPTION
@@ -3256,7 +3262,7 @@
        --     addresses. Other address types support may be defined in
        --     future versions of this MIB module."
 
-       OBJECT    docsBpi2CmtsIpMulticastAddress
+       OBJECT    docsIetfBpi2CmtsIpMulticastAddress
             SYNTAX  InetAddress (SIZE(4))
             MIN-ACCESS  read-only
             DESCRIPTION
@@ -3265,7 +3271,7 @@
             addresses. Other address types support may be defined in
             future versions of this MIB module."
 
-       OBJECT    docsBpi2CmtsIpMulticastMask
+       OBJECT    docsIetfBpi2CmtsIpMulticastMask
             SYNTAX  InetAddress (SIZE(4))
             MIN-ACCESS  read-only
             DESCRIPTION
@@ -3276,12 +3282,12 @@
 
        -- constrain on access
 
-       OBJECT    docsBpi2CmtsIpMulticastSAId
+       OBJECT    docsIetfBpi2CmtsIpMulticastSAId
             MIN-ACCESS  read-only
             DESCRIPTION
                 "Write access is not required."
 
-       OBJECT    docsBpi2CmtsIpMulticastSAType
+       OBJECT    docsIetfBpi2CmtsIpMulticastSAType
             MIN-ACCESS  read-only
             DESCRIPTION
                 "Write access is not required."
@@ -3289,7 +3295,7 @@
        -- constrain on access
        -- constrain on Encryption algorithms
 
-       --OBJECT    docsBpi2CmtsIpMulticastDataEncryptAlg
+       --OBJECT    docsIetfBpi2CmtsIpMulticastDataEncryptAlg
        --     SYNTAX    DocsBpkmDataEncryptAlg {
        --                            none(0),
        --                            des56CbcMode(1),
@@ -3304,7 +3310,7 @@
 
        -- constrain on access
        -- constrain on Integrity algorithms
-       --OBJECT    docsBpi2CmtsIpMulticastDataAuthentAlg
+       --OBJECT    docsIetfBpi2CmtsIpMulticastDataAuthentAlg
        --     SYNTAX    DocsBpkmDataAuthentAlg {
        --                            none(0)
        --               }
@@ -3315,179 +3321,179 @@
        --     authentication algorithms."
 
        -- constrain on access
-       OBJECT    docsBpi2CmtsMulticastAuthControl
+       OBJECT    docsIetfBpi2CmtsMulticastAuthControl
             MIN-ACCESS  read-only
             DESCRIPTION
            "Write access is not required."
 
-            ::= { docsBpi2Compliances 2 }
+            ::= { docsIetfBpi2Compliances 2 }
 
 
-       docsBpi2CmGroup     OBJECT-GROUP
+       docsIetfBpi2CmGroup     OBJECT-GROUP
             OBJECTS   {
-                 docsBpi2CmPrivacyEnable,
-                 docsBpi2CmPublicKey,
-                 docsBpi2CmAuthState,
-                 docsBpi2CmAuthKeySequenceNumber,
-                 docsBpi2CmAuthExpiresOld,
-                 docsBpi2CmAuthExpiresNew,
-                 docsBpi2CmAuthReset,
-                 docsBpi2CmAuthGraceTime,
-                 docsBpi2CmTEKGraceTime,
-                 docsBpi2CmAuthWaitTimeout,
-                 docsBpi2CmReauthWaitTimeout,
-                 docsBpi2CmOpWaitTimeout,
-                 docsBpi2CmRekeyWaitTimeout,
-                 docsBpi2CmAuthRejectWaitTimeout,
-                 docsBpi2CmSAMapWaitTimeout,
-                 docsBpi2CmSAMapMaxRetries,
-                 docsBpi2CmAuthentInfos,
-                 docsBpi2CmAuthRequests,
-                 docsBpi2CmAuthReplies,
-                 docsBpi2CmAuthRejects,
-                 docsBpi2CmAuthInvalids,
-                 docsBpi2CmAuthRejectErrorCode,
-                 docsBpi2CmAuthRejectErrorString,
-                 docsBpi2CmAuthInvalidErrorCode,
-                 docsBpi2CmAuthInvalidErrorString,
-                 docsBpi2CmTEKSAType,
-                 docsBpi2CmTEKDataEncryptAlg,
-                 docsBpi2CmTEKDataAuthentAlg,
-                 docsBpi2CmTEKState,
-                 docsBpi2CmTEKKeySequenceNumber,
-                 docsBpi2CmTEKExpiresOld,
-                 docsBpi2CmTEKExpiresNew,
-                 docsBpi2CmTEKKeyRequests,
-                 docsBpi2CmTEKKeyReplies,
-                 docsBpi2CmTEKKeyRejects,
-                 docsBpi2CmTEKInvalids,
-                 docsBpi2CmTEKAuthPends,
-                 docsBpi2CmTEKKeyRejectErrorCode,
-                 docsBpi2CmTEKKeyRejectErrorString,
-                 docsBpi2CmTEKInvalidErrorCode,
-                 docsBpi2CmTEKInvalidErrorString,
-                 docsBpi2CmIpMulticastAddressType,
-                 docsBpi2CmIpMulticastAddress,
-                 docsBpi2CmIpMulticastSAId,
-                 docsBpi2CmIpMulticastSAMapState,
-                 docsBpi2CmIpMulticastSAMapRequests,
-                 docsBpi2CmIpMulticastSAMapReplies,
-                 docsBpi2CmIpMulticastSAMapRejects,
-                 docsBpi2CmIpMulticastSAMapRejectErrorCode,
-                 docsBpi2CmIpMulticastSAMapRejectErrorString,
-                 docsBpi2CmDeviceCmCert,
-                 docsBpi2CmDeviceManufCert,
-                 docsBpi2CmCryptoSuiteDataEncryptAlg,
-                 docsBpi2CmCryptoSuiteDataAuthentAlg
+                 docsIetfBpi2CmPrivacyEnable,
+                 docsIetfBpi2CmPublicKey,
+                 docsIetfBpi2CmAuthState,
+                 docsIetfBpi2CmAuthKeySequenceNumber,
+                 docsIetfBpi2CmAuthExpiresOld,
+                 docsIetfBpi2CmAuthExpiresNew,
+                 docsIetfBpi2CmAuthReset,
+                 docsIetfBpi2CmAuthGraceTime,
+                 docsIetfBpi2CmTEKGraceTime,
+                 docsIetfBpi2CmAuthWaitTimeout,
+                 docsIetfBpi2CmReauthWaitTimeout,
+                 docsIetfBpi2CmOpWaitTimeout,
+                 docsIetfBpi2CmRekeyWaitTimeout,
+                 docsIetfBpi2CmAuthRejectWaitTimeout,
+                 docsIetfBpi2CmSAMapWaitTimeout,
+                 docsIetfBpi2CmSAMapMaxRetries,
+                 docsIetfBpi2CmAuthentInfos,
+                 docsIetfBpi2CmAuthRequests,
+                 docsIetfBpi2CmAuthReplies,
+                 docsIetfBpi2CmAuthRejects,
+                 docsIetfBpi2CmAuthInvalids,
+                 docsIetfBpi2CmAuthRejectErrorCode,
+                 docsIetfBpi2CmAuthRejectErrorString,
+                 docsIetfBpi2CmAuthInvalidErrorCode,
+                 docsIetfBpi2CmAuthInvalidErrorString,
+                 docsIetfBpi2CmTEKSAType,
+                 docsIetfBpi2CmTEKDataEncryptAlg,
+                 docsIetfBpi2CmTEKDataAuthentAlg,
+                 docsIetfBpi2CmTEKState,
+                 docsIetfBpi2CmTEKKeySequenceNumber,
+                 docsIetfBpi2CmTEKExpiresOld,
+                 docsIetfBpi2CmTEKExpiresNew,
+                 docsIetfBpi2CmTEKKeyRequests,
+                 docsIetfBpi2CmTEKKeyReplies,
+                 docsIetfBpi2CmTEKKeyRejects,
+                 docsIetfBpi2CmTEKInvalids,
+                 docsIetfBpi2CmTEKAuthPends,
+                 docsIetfBpi2CmTEKKeyRejectErrorCode,
+                 docsIetfBpi2CmTEKKeyRejectErrorString,
+                 docsIetfBpi2CmTEKInvalidErrorCode,
+                 docsIetfBpi2CmTEKInvalidErrorString,
+                 docsIetfBpi2CmIpMulticastAddressType,
+                 docsIetfBpi2CmIpMulticastAddress,
+                 docsIetfBpi2CmIpMulticastSAId,
+                 docsIetfBpi2CmIpMulticastSAMapState,
+                 docsIetfBpi2CmIpMulticastSAMapRequests,
+                 docsIetfBpi2CmIpMulticastSAMapReplies,
+                 docsIetfBpi2CmIpMulticastSAMapRejects,
+                 docsIetfBpi2CmIpMulticastSAMapRejectErrorCode,
+                 docsIetfBpi2CmIpMulticastSAMapRejectErrorString,
+                 docsIetfBpi2CmDeviceCmCert,
+                 docsIetfBpi2CmDeviceManufCert,
+                 docsIetfBpi2CmCryptoSuiteDataEncryptAlg,
+                 docsIetfBpi2CmCryptoSuiteDataAuthentAlg
                  }
             STATUS         current
             DESCRIPTION
                  "This collection of objects provides CM BPI+ status
             and control."
-       ::= { docsBpi2Groups 1 }
+       ::= { docsIetfBpi2Groups 1 }
 
-       docsBpi2CmtsGroup   OBJECT-GROUP
+       docsIetfBpi2CmtsGroup   OBJECT-GROUP
             OBJECTS {
-                 docsBpi2CmtsDefaultAuthLifetime,
-                 docsBpi2CmtsDefaultTEKLifetime,
-                 docsBpi2CmtsDefaultSelfSignedManufCertTrust,
-                 docsBpi2CmtsCheckCertValidityPeriods,
-                 docsBpi2CmtsAuthentInfos,
-                 docsBpi2CmtsAuthRequests,
-                 docsBpi2CmtsAuthReplies,
-                 docsBpi2CmtsAuthRejects,
-                 docsBpi2CmtsAuthInvalids,
-                 docsBpi2CmtsSAMapRequests,
-                 docsBpi2CmtsSAMapReplies,
-                 docsBpi2CmtsSAMapRejects,
-                 docsBpi2CmtsAuthCmBpiVersion,
-                 docsBpi2CmtsAuthCmPublicKey,
-                 docsBpi2CmtsAuthCmKeySequenceNumber,
-                 docsBpi2CmtsAuthCmExpiresOld,
-                 docsBpi2CmtsAuthCmExpiresNew,
-                 docsBpi2CmtsAuthCmLifetime,
-                 docsBpi2CmtsAuthCmReset,
-                 docsBpi2CmtsAuthCmInfos,
-                 docsBpi2CmtsAuthCmRequests,
-                 docsBpi2CmtsAuthCmReplies,
-                 docsBpi2CmtsAuthCmRejects,
-                 docsBpi2CmtsAuthCmInvalids,
-                 docsBpi2CmtsAuthRejectErrorCode,
-                 docsBpi2CmtsAuthRejectErrorString,
-                 docsBpi2CmtsAuthInvalidErrorCode,
-                 docsBpi2CmtsAuthInvalidErrorString,
-                 docsBpi2CmtsAuthPrimarySAId,
-                 docsBpi2CmtsAuthBpkmCmCertValid,
-                 docsBpi2CmtsAuthBpkmCmCert,
-                 docsBpi2CmtsAuthCACertIndexPtr,
-                 docsBpi2CmtsTEKSAType,
-                 docsBpi2CmtsTEKDataEncryptAlg,
-                 docsBpi2CmtsTEKDataAuthentAlg,
-                 docsBpi2CmtsTEKLifetime,
-                 docsBpi2CmtsTEKKeySequenceNumber,
-                 docsBpi2CmtsTEKExpiresOld,
-                 docsBpi2CmtsTEKExpiresNew,
-                 docsBpi2CmtsTEKReset,
-                 docsBpi2CmtsKeyRequests,
-                 docsBpi2CmtsKeyReplies,
-                 docsBpi2CmtsKeyRejects,
-                 docsBpi2CmtsTEKInvalids,
-                 docsBpi2CmtsKeyRejectErrorCode,
-                 docsBpi2CmtsKeyRejectErrorString,
-                 docsBpi2CmtsTEKInvalidErrorCode,
-                 docsBpi2CmtsTEKInvalidErrorString,
-                 docsBpi2CmtsIpMulticastAddressType,
-                 docsBpi2CmtsIpMulticastAddress,
-                 docsBpi2CmtsIpMulticastMask,
-                 docsBpi2CmtsIpMulticastSAId,
-                 docsBpi2CmtsIpMulticastSAType,
-                 docsBpi2CmtsIpMulticastDataEncryptAlg,
-                 docsBpi2CmtsIpMulticastDataAuthentAlg,
-                 docsBpi2CmtsIpMulticastSAMapRequests,
-                 docsBpi2CmtsIpMulticastSAMapReplies,
-                 docsBpi2CmtsIpMulticastSAMapRejects,
-                 docsBpi2CmtsIpMulticastSAMapRejectErrorCode,
-                 docsBpi2CmtsIpMulticastSAMapRejectErrorString,
-                 docsBpi2CmtsIpMulticastMapControl,
-                 docsBpi2CmtsIpMulticastMapStorageType,
-                 docsBpi2CmtsMulticastAuthControl,
-                 docsBpi2CmtsProvisionedCmCertTrust,
-                 docsBpi2CmtsProvisionedCmCertSource,
-                 docsBpi2CmtsProvisionedCmCertStatus,
-                 docsBpi2CmtsProvisionedCmCert,
-                 docsBpi2CmtsCACertSubject,
-                 docsBpi2CmtsCACertIssuer,
-                 docsBpi2CmtsCACertSerialNumber,
-                 docsBpi2CmtsCACertTrust,
-                 docsBpi2CmtsCACertSource,
-                 docsBpi2CmtsCACertStatus,
-                 docsBpi2CmtsCACert,
-                 docsBpi2CmtsCACertThumbprint
+                 docsIetfBpi2CmtsDefaultAuthLifetime,
+                 docsIetfBpi2CmtsDefaultTEKLifetime,
+                 docsIetfBpi2CmtsDefaultSelfSignedManufCertTrust,
+                 docsIetfBpi2CmtsCheckCertValidityPeriods,
+                 docsIetfBpi2CmtsAuthentInfos,
+                 docsIetfBpi2CmtsAuthRequests,
+                 docsIetfBpi2CmtsAuthReplies,
+                 docsIetfBpi2CmtsAuthRejects,
+                 docsIetfBpi2CmtsAuthInvalids,
+                 docsIetfBpi2CmtsSAMapRequests,
+                 docsIetfBpi2CmtsSAMapReplies,
+                 docsIetfBpi2CmtsSAMapRejects,
+                 docsIetfBpi2CmtsAuthCmBpiVersion,
+                 docsIetfBpi2CmtsAuthCmPublicKey,
+                 docsIetfBpi2CmtsAuthCmKeySequenceNumber,
+                 docsIetfBpi2CmtsAuthCmExpiresOld,
+                 docsIetfBpi2CmtsAuthCmExpiresNew,
+                 docsIetfBpi2CmtsAuthCmLifetime,
+                 docsIetfBpi2CmtsAuthCmReset,
+                 docsIetfBpi2CmtsAuthCmInfos,
+                 docsIetfBpi2CmtsAuthCmRequests,
+                 docsIetfBpi2CmtsAuthCmReplies,
+                 docsIetfBpi2CmtsAuthCmRejects,
+                 docsIetfBpi2CmtsAuthCmInvalids,
+                 docsIetfBpi2CmtsAuthRejectErrorCode,
+                 docsIetfBpi2CmtsAuthRejectErrorString,
+                 docsIetfBpi2CmtsAuthInvalidErrorCode,
+                 docsIetfBpi2CmtsAuthInvalidErrorString,
+                 docsIetfBpi2CmtsAuthPrimarySAId,
+                 docsIetfBpi2CmtsAuthBpkmCmCertValid,
+                 docsIetfBpi2CmtsAuthBpkmCmCert,
+                 docsIetfBpi2CmtsAuthCACertIndexPtr,
+                 docsIetfBpi2CmtsTEKSAType,
+                 docsIetfBpi2CmtsTEKDataEncryptAlg,
+                 docsIetfBpi2CmtsTEKDataAuthentAlg,
+                 docsIetfBpi2CmtsTEKLifetime,
+                 docsIetfBpi2CmtsTEKKeySequenceNumber,
+                 docsIetfBpi2CmtsTEKExpiresOld,
+                 docsIetfBpi2CmtsTEKExpiresNew,
+                 docsIetfBpi2CmtsTEKReset,
+                 docsIetfBpi2CmtsKeyRequests,
+                 docsIetfBpi2CmtsKeyReplies,
+                 docsIetfBpi2CmtsKeyRejects,
+                 docsIetfBpi2CmtsTEKInvalids,
+                 docsIetfBpi2CmtsKeyRejectErrorCode,
+                 docsIetfBpi2CmtsKeyRejectErrorString,
+                 docsIetfBpi2CmtsTEKInvalidErrorCode,
+                 docsIetfBpi2CmtsTEKInvalidErrorString,
+                 docsIetfBpi2CmtsIpMulticastAddressType,
+                 docsIetfBpi2CmtsIpMulticastAddress,
+                 docsIetfBpi2CmtsIpMulticastMask,
+                 docsIetfBpi2CmtsIpMulticastSAId,
+                 docsIetfBpi2CmtsIpMulticastSAType,
+                 docsIetfBpi2CmtsIpMulticastDataEncryptAlg,
+                 docsIetfBpi2CmtsIpMulticastDataAuthentAlg,
+                 docsIetfBpi2CmtsIpMulticastSAMapRequests,
+                 docsIetfBpi2CmtsIpMulticastSAMapReplies,
+                 docsIetfBpi2CmtsIpMulticastSAMapRejects,
+                 docsIetfBpi2CmtsIpMulticastSAMapRejectErrorCode,
+                 docsIetfBpi2CmtsIpMulticastSAMapRejectErrorString,
+                 docsIetfBpi2CmtsIpMulticastMapControl,
+                 docsIetfBpi2CmtsIpMulticastMapStorageType,
+                 docsIetfBpi2CmtsMulticastAuthControl,
+                 docsIetfBpi2CmtsProvisionedCmCertTrust,
+                 docsIetfBpi2CmtsProvisionedCmCertSource,
+                 docsIetfBpi2CmtsProvisionedCmCertStatus,
+                 docsIetfBpi2CmtsProvisionedCmCert,
+                 docsIetfBpi2CmtsCACertSubject,
+                 docsIetfBpi2CmtsCACertIssuer,
+                 docsIetfBpi2CmtsCACertSerialNumber,
+                 docsIetfBpi2CmtsCACertTrust,
+                 docsIetfBpi2CmtsCACertSource,
+                 docsIetfBpi2CmtsCACertStatus,
+                 docsIetfBpi2CmtsCACert,
+                 docsIetfBpi2CmtsCACertThumbprint
                  }
             STATUS         current
             DESCRIPTION
                  "This collection of objects provides CMTS BPI+ status
             and control."
-       ::= { docsBpi2Groups 2 }
+       ::= { docsIetfBpi2Groups 2 }
 
-       docsBpi2CodeDownloadGroup OBJECT-GROUP
+       docsIetfBpi2CodeDownloadGroup OBJECT-GROUP
                OBJECTS {
-                 docsBpi2CodeDownloadStatusCode,
-                 docsBpi2CodeDownloadStatusString,
-                 docsBpi2CodeMfgOrgName,
-                 docsBpi2CodeMfgCodeAccessStart,
-                 docsBpi2CodeMfgCvcAccessStart,
-                 docsBpi2CodeCoSignerOrgName,
-                 docsBpi2CodeCoSignerCodeAccessStart,
-                 docsBpi2CodeCoSignerCvcAccessStart,
-                 docsBpi2CodeCvcUpdate
+                 docsIetfBpi2CodeDownloadStatusCode,
+                 docsIetfBpi2CodeDownloadStatusString,
+                 docsIetfBpi2CodeMfgOrgName,
+                 docsIetfBpi2CodeMfgCodeAccessStart,
+                 docsIetfBpi2CodeMfgCvcAccessStart,
+                 docsIetfBpi2CodeCoSignerOrgName,
+                 docsIetfBpi2CodeCoSignerCodeAccessStart,
+                 docsIetfBpi2CodeCoSignerCvcAccessStart,
+                 docsIetfBpi2CodeCvcUpdate
                  }
             STATUS         current
             DESCRIPTION
                  "This collection of objects provide authenticated
             software
             download support."
-       ::= { docsBpi2Groups 3 }
+       ::= { docsIetfBpi2Groups 3 }
 
 
        END

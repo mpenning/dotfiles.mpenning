@@ -2,7 +2,7 @@
 -- CISCO-LWAPP-TC-MIB.my:  Cisco LWAPP MIBs Textual Conventions
 -- March 2006, Prasanna Viswakumar
 --   
--- Copyright (c) 2006,2007 by Cisco Systems, Inc.
+-- Copyright (c) 2006, 2007, 2010-2011 by Cisco Systems Inc.
 -- All rights reserved.
 -- *******************************************************************
 
@@ -18,12 +18,13 @@ IMPORTS
     ciscoMgmt
         FROM CISCO-SMI;
 
+
 -- ********************************************************************
 -- *  MODULE IDENTITY
 -- ********************************************************************
 
 ciscoLwappTextualConventions MODULE-IDENTITY
-    LAST-UPDATED    "200702050000Z"
+    LAST-UPDATED    "201109130000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems,
@@ -185,6 +186,16 @@ ciscoLwappTextualConventions MODULE-IDENTITY
 
         [4] Enhanced Wireless Consortium PHY Specification,
             v1.27."
+    REVISION        "201109130000Z"
+    DESCRIPTION
+        "Added new textual conventions CcxServiceVersion"
+    REVISION        "201002230000Z"
+    DESCRIPTION
+        "Added new textual conventions CLApDot11RadioRole,
+        CLClientPowerSaveMode,and CLApDot11RadioSubband."
+    REVISION        "200709110000Z"
+    DESCRIPTION
+        "Added new textual convention CLWebAuthType."
     REVISION        "200702050000Z"
     DESCRIPTION
         "Added new textual conventions CLDot11ChannelBandwidth,
@@ -197,6 +208,7 @@ ciscoLwappTextualConventions MODULE-IDENTITY
     DESCRIPTION
         "Initial version of this MIB module."
     ::= { ciscoMgmt 514 }
+
 
 
 -- ********************************************************************
@@ -234,7 +246,9 @@ CLDot11Channel ::= TEXTUAL-CONVENTION
         in one of the possible channels at any point of time
         for wireless data communication with 802.11 based
         wireless clients."
-    SYNTAX          Unsigned32 (1..14  |  34  |  36  |  38  |  40  |  42  |  44  |  46  |  48  |  52  |  56  |  60  |  64  |  149  |  153  |  157  |  161 )
+    SYNTAX          Unsigned32 (1..14 | 34 | 36 | 38 | 40 | 42 | 44 | 46
+                                | 48 | 52 | 56 | 60 | 64 | 149 | 153
+                                | 157 | 161)
 
 CLDot11ClientStatus ::= TEXTUAL-CONVENTION
     STATUS          current
@@ -612,6 +626,126 @@ CLApAssocFailureReason ::= TEXTUAL-CONVENTION
     SYNTAX          INTEGER  {
                         unknown(1),
                         notSupported(2)
+                    }
+
+CLWebAuthType ::= TEXTUAL-CONVENTION
+    STATUS          current
+    DESCRIPTION
+        "Represents either one of the following web auth types
+        internalDefault(1) -
+                The default login page will be
+        presented to the client for authentication.
+
+        internalCustom(2)  -
+                The administrator has created and
+        uploaded a custom login page and it will be
+        presented to the clients for authentication.
+
+        external(3) -
+                This value indicates that the login page
+        will be served from the external web server.  Note
+        that cLWAWebAuthType can be successfully set to this
+        value when the cLWAExternalWebAuthURL object has been
+        set to string with non-zero length."
+    SYNTAX          INTEGER  {
+                        internalDefault(1),
+                        internalCustom(2),
+                        external(3)
+                    }
+
+CLClientPowerSaveMode ::= TEXTUAL-CONVENTION
+    STATUS          current
+    DESCRIPTION
+        "This textual convention defines power management mode
+        of this client.
+        The possible two modes are:
+        active(1)    - The client is not in power-save mode 
+                       and it is actively sending or receiving
+                       data.
+        powersave(2) - The client is in power-save mode and it
+                       wakes up once a while to check for 
+                       pending data."
+    SYNTAX          INTEGER  {
+                        active(1),
+                        powersave(2)
+                    }
+
+CLApDot11RadioSubband ::= TEXTUAL-CONVENTION
+    STATUS          current
+    DESCRIPTION
+        "This textual convention defines the possible values
+        of subbands a radio can support.
+        Currently, this information is applicable to
+        A radios.
+        all(1) - This radio is a regular A radio that operates
+                 in the full A band spectrum in the frequency
+                 range 4940 Mhz - 5850 Mhz.
+        sub49(2) - This is an A radio that operates only in the
+                   public safety (4.9 Ghz) sub band in the
+                   frequency range 4940 Mhz - 5100 Mhz.
+        sub52(3) - This is an A radio that operates only in the
+                   5.2 Ghz sub band in the frequency range
+                   5250 Mhz - 5350 Mhz.
+        sub54(4) - This is an A radio that operates only in the
+                   5.4 Ghz sub band in the frequency range
+                   5470 Mhz - 5725 Mhz.
+        sub58(5) - This is an A radio that operates only in the
+                   5.8 Ghz sub band in the frequency range
+                   5725 Mhz - 5850 Mhz."
+    SYNTAX          INTEGER  {
+                        all(1),
+                        sub49(2),
+                        sub52(3),
+                        sub54(4),
+                        sub58(5)
+                    }
+
+CLApDot11RadioRole ::= TEXTUAL-CONVENTION
+    STATUS          current
+    DESCRIPTION
+        "This textual convention defines the possible values
+        of role a radio can support.
+        shutdown(0)         - This role states that the radio is 
+                              shut down.
+        upDownlink(1)       - This radio provides both uplink
+                              and downlink access.
+        uplink(2)           - This role is applicable only for Ethernet 
+                              ports. This radio provides uplink access.
+        downlink(3)         - This radio provides downlink access.
+                              downlink radio allows child APs to join.
+        access(4)           - This radio provides the access to the
+                              clients.
+        uplinkAccess(5)     - This radio role states that the radio 
+                              provides the uplink access to the clients.
+        downlinkAccess(6)   - This radio role states that the radio
+                              provides the downlink access to
+                              the clients.
+        upDownlinkAccess(7) - This radio role states that the radio 
+                              provides both uplink and downlink access 
+                              to the clients.
+        unknown(8)          - This radio role is unknown."
+    SYNTAX          INTEGER  {
+                        shutdown(0),
+                        upDownlink(1),
+                        uplink(2),
+                        downlink(3),
+                        access(4),
+                        uplinkAccess(5),
+                        downlinkAccess(6),
+                        upDownlinkAccess(7),
+                        unknown(8)
+                    }
+
+CcxServiceVersion ::= TEXTUAL-CONVENTION
+    STATUS          current
+    DESCRIPTION
+        "This textual convention defines the service versions
+        supported by a CCX Next client. The supported services
+        include foundation, location, management and voice."
+    SYNTAX          INTEGER  {
+                        none(1),
+                        version1(2),
+                        version2(3)
                     }
 
 END

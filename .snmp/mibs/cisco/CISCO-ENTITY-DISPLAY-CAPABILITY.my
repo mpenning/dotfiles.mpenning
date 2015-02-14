@@ -4,7 +4,7 @@
 --   
 -- March 2004, Dipesh Gorashia
 --   
--- Copyright (c) 2004, 2007 by Cisco Systems Inc.
+-- Copyright (c) 2004, 2007, 2010 by Cisco Systems Inc.
 -- All rights reserved.
 -- ****************************************************************
 
@@ -20,7 +20,7 @@ IMPORTS
 
 
 ciscoEntityDisplayCapability MODULE-IDENTITY
-    LAST-UPDATED    "200707160000Z"
+    LAST-UPDATED    "201011090000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems
@@ -37,9 +37,13 @@ ciscoEntityDisplayCapability MODULE-IDENTITY
     DESCRIPTION
         "The capabilities description of
         CISCO-ENTITY-DISPLAY-MIB."
-   REVISION        "200707160000Z"
-   DESCRIPTION
-       "Added the agent capabilities statement
+    REVISION        "201011090000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
+        cEntDisplayCapV12R0250SYPCat6k."
+    REVISION        "200707160000Z"
+    DESCRIPTION
+        "Added the agent capabilities statement
         cEntDisplayCapV12R0233SXHPCat6k."
     REVISION        "200403300000Z"
     DESCRIPTION
@@ -64,7 +68,7 @@ cEntDisplayCapCatOSV08R0301Cat6k AGENT-CAPABILITIES
     ::= { ciscoEntityDisplayCapability 1 }
 
 cEntDisplayCapV12R0233SXHPCat6k AGENT-CAPABILITIES
-    PRODUCT-RELEASE     "Cisco IOS 12.2(33)SXH on Catalyst 6000/6500
+    PRODUCT-RELEASE "Cisco IOS 12.2(33)SXH on Catalyst 6000/6500
                          series devices."
     STATUS          current
     DESCRIPTION
@@ -78,4 +82,23 @@ cEntDisplayCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                     }
     ::= { ciscoEntityDisplayCapability 2 }
 
+cEntDisplayCapV12R0250SYPCat6k AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(50)SY on Catalyst 6000/6500
+                     series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-ENTITY-DISPLAY-MIB capabilities."
+
+    SUPPORTS        CISCO-ENTITY-DISPLAY-MIB
+    INCLUDES        {
+                        ceDisplayGroup,
+                        ceDisplayLEDGroup,
+                        ceDisplayAlphaNumericGroup,
+                        ceDisplayBeaconGroup
+                    }
+    ::= { ciscoEntityDisplayCapability 3 }
+
 END
+
+
+

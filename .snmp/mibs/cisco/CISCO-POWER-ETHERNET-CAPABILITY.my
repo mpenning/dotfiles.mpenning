@@ -4,7 +4,7 @@
 --   
 -- June 2004, Seth Wang
 --   
--- Copyright (c) 2004, 2006-2007 by Cisco Systems Inc.
+-- Copyright (c) 2004, 2006-2007, 2009-2012 by Cisco Systems Inc.
 -- All rights reserved.
 -- ****************************************************************
 
@@ -15,32 +15,48 @@ IMPORTS
         FROM SNMPv2-SMI
     AGENT-CAPABILITIES
         FROM SNMPv2-CONF
-    TruthValue
-        FROM SNMPv2-TC
     ciscoAgentCapability
         FROM CISCO-SMI;
 
-
 ciscoPowerEthernetCapability MODULE-IDENTITY
-    LAST-UPDATED    "200707090000Z"
+    LAST-UPDATED    "201209040000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
-            "Cisco Systems
-            Customer Service
+            "       Cisco Systems
+                    Customer Service
 
             Postal: 170 West Tasman Drive
-            San Jose, CA  95134
-            USA
+                    San Jose, CA  95134
+                    USA
 
-            Tel: +1 800 553-NETS
+               Tel: +1 800 553-NETS
 
             E-mail: cs-lan-switch-snmp@cisco.com"
     DESCRIPTION
         "The capabilities description of
         POWER-ETHERNET-MIB."
+    REVISION        "201209040000Z"
+    DESCRIPTION
+        "Added capability statement
+        cPowerEthernetCapV15RO101SYPCat6K."
+    REVISION        "201204060000Z"
+    DESCRIPTION
+        "Added capability statement 
+        cPowerEthernetCapV12RO233SXJ2PCat6K.
+         
+        Modified VARIATION of pethPsePortPowerPairs in 
+        cPowerEthernetCapV12RO233SXHPCat6K.
+
+        Removed VARIATION of pethPsePortPowerPairsControlAbility 
+        from cPowerEthernetCapCatOSV08R0401 and 
+        cPowerEthernetCapV12RO233SXHPCat6K."
+    REVISION        "200902140000Z"
+    DESCRIPTION
+        "Added capability statement
+        cPowerEthernetCapV12RO252SGPCat4K."
     REVISION        "200707090000Z"
     DESCRIPTION
-        "Added the statement
+        "Added capability statement
         cPowerEthernetCapV12RO233SXHPCat6K."
     REVISION        "200702080000Z"
     DESCRIPTION
@@ -72,11 +88,6 @@ cPowerEthernetCapCatOSV08R0401 AGENT-CAPABILITIES
                         pethMainPseGroup,
                         pethMainPowerNotificationGroup
                     }
-    VARIATION       pethPsePortPowerPairsControlAbility
-    SYNTAX          TruthValue
-    DESCRIPTION
-        "Only a limited set of enumerated values
-        is supported."
 
     VARIATION       pethPsePortPowerPairs
     SYNTAX          INTEGER  {
@@ -168,37 +179,130 @@ cPowerEthernetCapV12RO233SXHPCat6K AGENT-CAPABILITIES
                         pethNotificationControlGroup,
                         pethMainPseGroup
                     }
-    VARIATION       pethPsePortPowerPairsControlAbility
-    SYNTAX          TruthValue {
-                        false(2)
-                    }
-    DESCRIPTION
-        "Only a limited set of enumerated values
-        is supported."
 
     VARIATION       pethPsePortPowerPairs
-    SYNTAX          INTEGER  {
-                        signal(1)
-                    }
+    ACCESS          read-only
     DESCRIPTION
-        "Only a limited set of enumerated values
-        is supported."
+        "Write access is not supported."
 
     VARIATION       pethPsePortType
     ACCESS          read-only
     DESCRIPTION
-        "Unable to set this."
+        "Write access is not supported."
 
     VARIATION       pethPsePortPowerPriority
     ACCESS          read-only
     DESCRIPTION
-        "Unable to set this."
+        "Write access is not supported."
 
     VARIATION       pethMainPseUsageThreshold
+    ACCESS          not-implemented
     DESCRIPTION
-        "Not supported."
+        "This object is not supported."
 
     ::= { ciscoPowerEthernetCapability 3 }
 
+cPowerEthernetCapV12RO252SGPCat4K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(52)SG on CAT4K family
+                    switches."
+    STATUS          current
+    DESCRIPTION
+        "POWER-ETHERNET-MIB capabilities."
+
+    SUPPORTS        POWER-ETHERNET-MIB
+    INCLUDES        {
+                        pethPsePortGroup,
+                        pethPsePortNotificationGroup,
+                        pethNotificationControlGroup,
+                        pethMainPseGroup
+                    }
+    VARIATION       pethPsePortPowerPairs
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethPsePortType
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethPsePortPowerPriority
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethMainPseUsageThreshold
+    ACCESS          not-implemented
+    DESCRIPTION
+        "This object is not supported."
+
+    ::= { ciscoPowerEthernetCapability 4 }
+
+cPowerEthernetCapV12RO233SXJ2PCat6K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(33)SXJ2 on Catalyst 6000/6500
+                    series devices."
+    STATUS          current
+    DESCRIPTION
+        "POWER-ETHERNET-MIB capabilities."
+
+    SUPPORTS        POWER-ETHERNET-MIB
+    INCLUDES        {
+                        pethPsePortGroup,
+                        pethPsePortNotificationGroup,
+                        pethNotificationControlGroup,
+                        pethMainPseGroup
+                    }
+
+    VARIATION       pethPsePortPowerPairs
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethPsePortType
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethMainPseUsageThreshold
+    ACCESS          not-implemented
+    DESCRIPTION
+        "This object is not supported."
+
+    ::= { ciscoPowerEthernetCapability 5 }
+
+cPowerEthernetCapV15RO101SYPCat6K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 15.1(1)SY on Catalyst 6000/6500
+                    series devices."
+    STATUS          current
+    DESCRIPTION
+        "POWER-ETHERNET-MIB capabilities."
+
+    SUPPORTS        POWER-ETHERNET-MIB
+    INCLUDES        {
+                        pethPsePortGroup,
+                        pethPsePortNotificationGroup,
+                        pethNotificationControlGroup,
+                        pethMainPseGroup
+                    }
+
+    VARIATION       pethPsePortPowerPairs
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethPsePortType
+    ACCESS          read-only
+    DESCRIPTION
+        "Write access is not supported."
+
+    VARIATION       pethMainPseUsageThreshold
+    ACCESS          not-implemented
+    DESCRIPTION
+        "This object is not supported."
+
+    ::= { ciscoPowerEthernetCapability 6 }
 END
+
+
+
 

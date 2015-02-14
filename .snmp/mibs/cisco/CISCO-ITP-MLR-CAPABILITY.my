@@ -127,4 +127,3 @@ ciscoMlrCapabilityV12R0411SW AGENT-CAPABILITIES
     ::= { ciscoMlrCapability 4 }
 
 END
-

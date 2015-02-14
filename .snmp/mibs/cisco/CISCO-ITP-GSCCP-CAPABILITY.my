@@ -272,4 +272,3 @@ ciscoGsccpCapabilityV12R0411SW AGENT-CAPABILITIES
     ::= { ciscoGsccpCapability 7 }
 
 END
-

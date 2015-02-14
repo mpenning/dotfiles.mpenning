@@ -4,7 +4,7 @@
 --   
 -- August 2003, Binh Le
 --   
--- Copyright (c) 2003-2005, 2007 by Cisco Systems Inc.
+-- Copyright (c) 2003-2010 by Cisco Systems Inc.
 -- All rights reserved.
 -- ****************************************************************
 
@@ -19,9 +19,8 @@ IMPORTS
     ciscoAgentCapability
         FROM CISCO-SMI;
 
-
 ciscoL2TunnelConfigCapability MODULE-IDENTITY
-    LAST-UPDATED    "200707090000Z"
+    LAST-UPDATED    "201005140000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems
@@ -38,6 +37,14 @@ ciscoL2TunnelConfigCapability MODULE-IDENTITY
     DESCRIPTION
         "The capabilities description of
         CISCO-L2-TUNNEL-CONFIG-MIB."
+    REVISION        "201005140000Z"
+    DESCRIPTION
+        "Added capability statement
+        cL2TunnelConfigCapV12R0254SGPCat4K."
+    REVISION        "200810270000Z"
+    DESCRIPTION
+        "Added capability statement
+        cL2TunnelConfigCapV12R0233SXIPCat6K."
     REVISION        "200707090000Z"
     DESCRIPTION
         "Added capability statement
@@ -54,8 +61,6 @@ ciscoL2TunnelConfigCapability MODULE-IDENTITY
     DESCRIPTION
         "Initial version of this MIB module."
     ::= { ciscoAgentCapability 334 }
-
-
 
 cL2TunConfCapCatOSV07R0501Cat6k AGENT-CAPABILITIES
     PRODUCT-RELEASE "Cisco CatOS 7.5(1) on Catalyst 6000/6500
@@ -201,19 +206,116 @@ cL2TunnelConfigCapV12R0233SXHPCat6k AGENT-CAPABILITIES
                         stp(2)
                     }
     DESCRIPTION
-        "The BITS values supported are all those
-        defined at the time this clause was written."
+        "Only a limited set of values is supported."
 
     VARIATION       cltcTunnelDropThreshold
-    SYNTAX          Unsigned32 (0..4096 )
+    SYNTAX          Unsigned32 (0..4096)
     DESCRIPTION
         "Only a limited set of values is supported."
 
     VARIATION       cltcTunnelShutdownThreshold
-    SYNTAX          Unsigned32 (0..4096 )
+    SYNTAX          Unsigned32 (0..4096)
     DESCRIPTION
         "Only a limited set of values is supported."
 
     ::= { ciscoL2TunnelConfigCapability 5 }
+
+cL2TunnelConfigCapV12R0233SXIPCat6K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(33)SXI on Catalyst 6000/6500
+                    series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-L2-TUNNEL-CONFIG-MIB capabilities."
+
+    SUPPORTS        CISCO-L2-TUNNEL-CONFIG-MIB
+    INCLUDES        {
+                        cltcDot1qTunnelGroup,
+                        cltcTunneledProtocolGroup,
+                        cltcTunnelThresholdGroup,
+                        cltcTunnelStatisticsGroup,
+                        cltcDot1qAllTaggedGroup,
+                        cltcNotifsEnableGroup,
+                        cltcTunnelDropStatisticsGroup,
+                        cltcTunnelThresholdNotifsGroup,
+                        cltcTunnelTotalDropGroup,
+                        cltcTunnelSysDropNotifEnableGroup,
+                        cltcTunnelSysDropGroup,
+                        cltcTunnelSysDropNotifGroup
+                    }
+    VARIATION       cltcTunneledProtocolType
+    SYNTAX          BITS {
+                        cdp(0),
+                        vtp(1),
+                        stp(2),
+                        lldp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelDropThreshold
+    SYNTAX          Unsigned32 (0..4096)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelShutdownThreshold
+    SYNTAX          Unsigned32 (0..4096)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelSysDropThreshold
+    SYNTAX          Unsigned32 (0 | 100..20000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    ::= { ciscoL2TunnelConfigCapability 6 }
+
+cL2TunnelConfigCapV12R0254SGPCat4K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(54)SG on CAT4K family switches,
+                    except LAN Base images."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-L2-TUNNEL-CONFIG-MIB capabilities."
+
+    SUPPORTS        CISCO-L2-TUNNEL-CONFIG-MIB
+    INCLUDES        {
+                        cltcDot1qTunnelGroup,
+                        cltcTunneledProtocolGroup,
+                        cltcTunnelThresholdGroup,
+                        cltcTunnelStatisticsGroup,
+                        cltcDot1qAllTaggedGroup,
+                        cltcNotifsEnableGroup,
+                        cltcTunnelDropStatisticsGroup,
+                        cltcTunnelThresholdNotifsGroup,
+                        cltcTunnelSysDropNotifEnableGroup,
+                        cltcTunnelSysDropGroup,
+                        cltcTunnelSysDropNotifGroup
+                    }
+
+    VARIATION       cltcTunneledProtocolType
+    SYNTAX          BITS {
+                        cdp(0),
+                        vtp(1),
+                        stp(2),
+                        lldp(4)
+                    }
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelDropThreshold
+    SYNTAX          Unsigned32 (0..4096)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelShutdownThreshold
+    SYNTAX          Unsigned32 (0..4096)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    VARIATION       cltcTunnelSysDropThreshold
+    SYNTAX          Unsigned32 (0 | 100..20000)
+    DESCRIPTION
+        "Only a limited set of values is supported."
+
+    ::= { ciscoL2TunnelConfigCapability 7 }
 
 END

@@ -8,9 +8,9 @@
 -- 
 -- *****************************************************************
 --
---	This file was extracted from RFC 1903
---	All macro definitions have been removed because they are
---	predefined in the mib compiler
+--  This file was extracted from RFC 1903
+--  All macro definitions have been removed because they are
+--  predefined in the mib compiler
 
 
 SNMPv2-TC DEFINITIONS ::= BEGIN
@@ -726,3 +726,4 @@ TAddress ::= TEXTUAL-CONVENTION
 
 
 END
+

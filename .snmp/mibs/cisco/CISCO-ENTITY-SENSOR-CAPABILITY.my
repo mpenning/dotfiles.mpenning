@@ -5,7 +5,7 @@
 --   
 -- March 2003, Feng Luo
 --   
--- Copyright(c) 2003, 2004, 2005, 2006 ,2007 by Cisco Systems,Inc.
+-- Copyright(c) 2003-2011 by Cisco Systems,Inc.
 --   
 -- *********************************************************************
 
@@ -22,7 +22,7 @@ IMPORTS
 
 
 ciscoEntitySensorCapability MODULE-IDENTITY
-    LAST-UPDATED    "200707090000Z"
+    LAST-UPDATED    "201102030000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems
@@ -38,6 +38,14 @@ ciscoEntitySensorCapability MODULE-IDENTITY
             cs-core-mibs@cisco.com"
     DESCRIPTION
         "The Agent capabilities for CISCO-ENTITY-SENSOR-MIB."
+    REVISION        "201102030000Z"
+    DESCRIPTION
+        "Added capability statement
+        cEntitySensorCapV12R0250SYPCat6K."
+    REVISION        "200810060000Z"
+    DESCRIPTION
+        "Added capability statement
+        cEntitySensorCapV12R0250SE."
     REVISION        "200707090000Z"
     DESCRIPTION
         "* Added capability statement
@@ -50,7 +58,6 @@ ciscoEntitySensorCapability MODULE-IDENTITY
            entSensorThresholdRelation, entSensorThresholdValue 
            are read-only objects for 
            cEntitySensorCapDCOSNEXUS."
-
     REVISION        "200706290000Z"
     DESCRIPTION
         "The capability statement cEntitySensorCapIOSXRV3R06CRS1
@@ -251,7 +258,7 @@ cEntitySensorCapabilityV5R015 AGENT-CAPABILITIES
         "Not supported."
 
     VARIATION       entSensorThresholdValue
-    SYNTAX          Integer32 (-55..3000 )
+    SYNTAX          Integer32 (-55..3000)
     DESCRIPTION
         "Limited data range supported by VXSM."
 
@@ -463,5 +470,43 @@ cEntitySensorCapDCOSNEXUS AGENT-CAPABILITIES
 
     ::= { ciscoEntitySensorCapability 10 }
 
-END
+cEntitySensorCapV12R0250SE AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(50)SE"
+    STATUS          current
+    DESCRIPTION
+        "MIB Capability from IOS release 12.2(50)SE."
 
+    SUPPORTS        CISCO-ENTITY-SENSOR-MIB
+    INCLUDES        { entitySensorValueGroup }
+    ::= { ciscoEntitySensorCapability 11 }
+
+cEntitySensorCapV12R0250SYPCat6K AGENT-CAPABILITIES
+    PRODUCT-RELEASE "Cisco IOS 12.2(50)SY on Catalyst 6000/6500
+                    series devices."
+    STATUS          current
+    DESCRIPTION
+        "CISCO-ENTITY-SENSOR-MIB capabilities."
+
+    SUPPORTS            CISCO-ENTITY-SENSOR-MIB
+    INCLUDES        {
+                        entitySensorValueGroup,
+                        entitySensorThresholdGroup,
+                        entitySensorThresholdNotificationGroup,
+                        entitySensorValueGroupSup1,
+                        entitySensorNotifCtrlGlobalGroup
+                    }
+
+    VARIATION       entSensorThresholdSeverity
+    DESCRIPTION
+        "write access is not supported."
+
+    VARIATION       entSensorThresholdRelation
+    DESCRIPTION
+        "write access is not supported."
+
+    VARIATION       entSensorThresholdValue
+    DESCRIPTION
+        "write access is not supported."
+
+    ::= { ciscoEntitySensorCapability 12 }
+END

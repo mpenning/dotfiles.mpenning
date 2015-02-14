@@ -3,8 +3,8 @@
 -- CISCO-GGSN-MIB.my: MIB file for GGSN
 --   
 -- Dec 2001, Rajesh M. L.
---   
--- Copyright (c) 2000-2006, 2008 by Cisco Systems, Inc.
+-- Jan 2010, Raagavendran Sridharan
+-- Copyright (c) 2000-2012 by Cisco Systems Inc.
 -- All rights reserved.
 -- ********************************************************************
 -- $Endlog$
@@ -25,7 +25,8 @@ IMPORTS
     OBJECT-GROUP,
     NOTIFICATION-GROUP
         FROM SNMPv2-CONF
-    InterfaceIndexOrZero
+    InterfaceIndexOrZero,
+    ifIndex
         FROM IF-MIB
     DisplayString,
     TruthValue,
@@ -34,7 +35,8 @@ IMPORTS
         FROM SNMPv2-TC
     InetAddressType,
     InetAddress,
-    InetAddressDNS
+    InetAddressDNS,
+    InetAddressPrefixLength
         FROM INET-ADDRESS-MIB
     SnmpAdminString
         FROM SNMP-FRAMEWORK-MIB
@@ -50,7 +52,7 @@ IMPORTS
 
 
 cGgsnMIB MODULE-IDENTITY
-    LAST-UPDATED    "200802040000Z"
+    LAST-UPDATED    "201205040000Z"
     ORGANIZATION    "Cisco Systems, Inc."
     CONTACT-INFO
             "Cisco Systems
@@ -158,6 +160,56 @@ cGgsnMIB MODULE-IDENTITY
         [5] 3GPP: Technical Specification Group Core Network;
             Policy control over Go interface (Release 5).
             3GPP TS 29.207 V5.2.0"
+    REVISION        "201205040000Z"
+    DESCRIPTION
+        "Modified description for cGgsnSentSigMessages and
+        cGgsnReceivedSigMessages."
+    REVISION        "201201110000Z"
+    DESCRIPTION
+        "Modified description for cGgsnSlbVserAddrType."
+    REVISION        "201103210000Z"
+    DESCRIPTION
+        "Added the following objects to cGgsnIpDupProtectTable
+
+        cGgsnMsExcludeRangeStartIpv6Prefixlen,
+        cGgsnMsExcludeRangeEndIpv6Prefixlen.
+
+        Added the following objects to cGgsnPlmnIpAddrRangeTable
+
+        cGgsnPlmnAddrRangeFirstIpv6Prefixlen,
+        cGgsnPlmnAddrRangeLastIpv6Prefixlen.
+
+        Modified the description of the following objects
+
+        cGgsnMsExcludeRangeStartIpType,
+        cGgsnMsExcludeRangeEndIpType,
+        cGgsnPlmnAddrRangeIpAddrType,
+        cGgsnIpDupProtectRowStatus and
+        cGgsnPlmnAddrRangeRowStatus.
+
+
+        Added a OBJECT-GROUP cGgsnConfigurationsGroupSup1.
+
+        Deprecated the compliance group cGgsnMIBComplianceRev9 and 
+        added a new compliance group cGgsnMIBComplianceRev10."
+    REVISION        "201103010000Z"
+    DESCRIPTION
+        "Modified description for cGgsnSlbVserNextHopAddrType
+        and cGgsnDefaultAggregIpAddrType."
+    REVISION        "201003230000Z"
+    DESCRIPTION
+        "Added the 'release100' enumeration to cGgsnVersion."
+    REVISION        "201002190000Z"
+    DESCRIPTION
+        "Added new table cGgsnGtpEncapsuTable.
+
+        Added OBJECT-GROUP cGgsnStatusGroupR90.
+
+        Added MODULE-COMPLIANCE cGgsnMIBComplianceRev9, which
+        deprecates cGgsnMIBComplianceRev8."
+    REVISION        "200811030000Z"
+    DESCRIPTION
+        "Added the 'release90' enumeration to cGgsnVersion."
     REVISION        "200802040000Z"
     DESCRIPTION
         "Deprecated cGgsnCompliance3GppGgsn.
@@ -326,10 +378,10 @@ cGgsnSentSigMessages OBJECT-TYPE
     MAX-ACCESS      read-only
     STATUS          current
     DESCRIPTION
-        "The number of GTP signalling messages sent.
+        "The number of GTPv0 and GTPv1 signalling messages sent.
 
         Trigger Condition: This counter is updated whenever a 
-        GTP signalling messages is sent out, including retries." 
+        GTPv0 and GTPv1 signalling messages is sent out, including retries." 
     ::= { cGgsnStatistics 1 }
 
 cGgsnReceivedSigMessages OBJECT-TYPE
@@ -338,10 +390,10 @@ cGgsnReceivedSigMessages OBJECT-TYPE
     MAX-ACCESS      read-only
     STATUS          current
     DESCRIPTION
-        "The number of GTP signalling messages received.
+        "The number of GTPv0 and GTPv1 signalling messages received.
 
         Trigger Condition: This counter is updated whenever a 
-        GTP signalling message is received." 
+        GTPv0 and GTPv1 signalling message is received." 
     ::= { cGgsnStatistics 2 }
 
 cGgsnUnexpectedSigMessages OBJECT-TYPE
@@ -916,7 +968,7 @@ CGgsnSgsnStatEntry ::= SEQUENCE {
 }
 
 cGgsnSgsnThruPutInterval OBJECT-TYPE
-    SYNTAX          Integer32 (1..65535 )
+    SYNTAX          Integer32 (1..65535)
     UNITS           "minutes"
     MAX-ACCESS      not-accessible
     STATUS          current
@@ -928,7 +980,7 @@ cGgsnSgsnThruPutInterval OBJECT-TYPE
     ::= { cGgsnSgsnStatEntry 1 }
 
 cGgsnSgsnThruPutLastCollected OBJECT-TYPE
-    SYNTAX          Integer32 (0..65535 )
+    SYNTAX          Integer32 (0..65535)
     UNITS           "minutes"
     MAX-ACCESS      read-only
     STATUS          current
@@ -1505,7 +1557,7 @@ cGgsnIgnoredAlarms OBJECT-TYPE
     ::= { cGgsnNotifMgmt 4 }
 
 cGgsnHistNotifMaxLength OBJECT-TYPE
-    SYNTAX          Integer32 (1..2147483647 )
+    SYNTAX          Integer32 (1..2147483647)
     UNITS           "entries"
     MAX-ACCESS      read-write
     STATUS          current
@@ -1517,7 +1569,7 @@ cGgsnHistNotifMaxLength OBJECT-TYPE
     ::= { cGgsnNotifMgmt 5 }
 
 cGgsnHistNotifLatestIndex OBJECT-TYPE
-    SYNTAX          Unsigned32 (1..4294967295 )
+    SYNTAX          Unsigned32 (1..4294967295)
     MAX-ACCESS      read-only
     STATUS          current
     DESCRIPTION
@@ -1550,7 +1602,7 @@ cGgsnHistNotifEntry OBJECT-TYPE
 
 CGgsnHistNotifEntry ::= SEQUENCE {
         cGgsnHistNotifIndex          Unsigned32,
-        cGgsnHistNotifType           INTEGER ,
+        cGgsnHistNotifType           INTEGER,
         cGgsnHistNotifSeverity       CiscoAlarmSeverity,
         cGgsnHistNotifTimestamp      TimeStamp,
         cGgsnHistNotifGgsnIpAddrType InetAddressType,
@@ -1559,7 +1611,7 @@ CGgsnHistNotifEntry ::= SEQUENCE {
 }
 
 cGgsnHistNotifIndex OBJECT-TYPE
-    SYNTAX          Unsigned32 (1..4294967295 )
+    SYNTAX          Unsigned32 (1..4294967295)
     MAX-ACCESS      not-accessible
     STATUS          current
     DESCRIPTION
@@ -1746,7 +1798,7 @@ cGgsnDefaultIpAllocationMethod OBJECT-TYPE
     ::= { cGgsnConfigurations 1 }
 
 cGgsnIdlePdpPurgeTimer OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..255 )
+    SYNTAX          Unsigned32 (0..255)
     UNITS           "hours"
     MAX-ACCESS      read-write
     STATUS          current
@@ -1789,11 +1841,13 @@ cGgsnIpDupProtectEntry OBJECT-TYPE
     ::= { cGgsnIpDupProtectTable 1 }
 
 CGgsnIpDupProtectEntry ::= SEQUENCE {
-        cGgsnMsExcludeRangeStartIpType InetAddressType,
-        cGgsnMsExcludeRangeStartIp     InetAddress,
-        cGgsnMsExcludeRangeEndIpType   InetAddressType,
-        cGgsnMsExcludeRangeEndIp       InetAddress,
-        cGgsnIpDupProtectRowStatus     RowStatus
+        cGgsnMsExcludeRangeStartIpType        InetAddressType,
+        cGgsnMsExcludeRangeStartIp            InetAddress,
+        cGgsnMsExcludeRangeEndIpType          InetAddressType,
+        cGgsnMsExcludeRangeEndIp              InetAddress,
+        cGgsnIpDupProtectRowStatus            RowStatus,
+        cGgsnMsExcludeRangeStartIpv6Prefixlen InetAddressPrefixLength,
+        cGgsnMsExcludeRangeEndIpv6Prefixlen   InetAddressPrefixLength
 }
 
 cGgsnMsExcludeRangeStartIpType OBJECT-TYPE
@@ -1803,8 +1857,7 @@ cGgsnMsExcludeRangeStartIpType OBJECT-TYPE
     DESCRIPTION
         "The type of Internet address by which
         cGgsnMsExcludeRangeStartIp is reachable. The value of this 
-        object should be same as cGgsnMsExcludeRangeEndIpType.
-        Only ipv4(1) addresses are supported." 
+        object should be same as cGgsnMsExcludeRangeEndIpType." 
     ::= { cGgsnIpDupProtectEntry 1 }
 
 cGgsnMsExcludeRangeStartIp OBJECT-TYPE
@@ -1822,8 +1875,7 @@ cGgsnMsExcludeRangeEndIpType OBJECT-TYPE
     DESCRIPTION
         "The type of Internet address by which cGgsnMsExcludeRangeEndIp
         is reachable. The value of this object should be same as
-        cGgsnMsExcludeRangeStartIpType. Only ipv4(1) addresses are 
-        supported." 
+        cGgsnMsExcludeRangeStartIpType." 
     ::= { cGgsnIpDupProtectEntry 3 }
 
 cGgsnMsExcludeRangeEndIp OBJECT-TYPE
@@ -1842,9 +1894,32 @@ cGgsnIpDupProtectRowStatus OBJECT-TYPE
         "This object is used to create a new row or delete an
         existing row in this table.
 
-        To create a row, set this object to 'createAndGo'.
+        To create a row, set this object to 'createAndGo' and the
+        objects cGgsnMsExcludeRangeStartIpv6Prefixlen and
+        cGgsnMsExcludeRangeEndIpv6Prefixlen should be set to valid
+        values.
         To delete a row, set this object to 'destroy'." 
     ::= { cGgsnIpDupProtectEntry 5 }
+
+cGgsnMsExcludeRangeStartIpv6Prefixlen OBJECT-TYPE
+    SYNTAX          InetAddressPrefixLength
+    MAX-ACCESS      read-create
+    STATUS          current
+    DESCRIPTION
+        "This object represents the IPv6 prefix length supplied for
+        the cGgsnMsExcludeRangeStartIp.The value of this object
+        will be zero when cGgsnMsExcludeRangeStartIpType is IPv4." 
+    ::= { cGgsnIpDupProtectEntry 6 }
+
+cGgsnMsExcludeRangeEndIpv6Prefixlen OBJECT-TYPE
+    SYNTAX          InetAddressPrefixLength
+    MAX-ACCESS      read-create
+    STATUS          current
+    DESCRIPTION
+        "This object represents the IPv6 prefix length supplied for
+        the cGgsnMsExcludeRangeEndIp.The value of this object
+        will be zero when cGgsnMsExcludeRangeEndIpType is IPv4." 
+    ::= { cGgsnIpDupProtectEntry 7 }
  
 
 
@@ -1890,7 +1965,7 @@ cGgsnDefaultAggregIpAddrType OBJECT-TYPE
     STATUS          current
     DESCRIPTION
         "This object specifies the type of Internet address denoted by
-        cGgsnDefaultAggregIpAddr. Only ipv4(1) addresses are supported." 
+        cGgsnDefaultAggregIpAddr." 
     ::= { cGgsnDefaultAggregEntry 1 }
 
 cGgsnDefaultAggregIpAddr OBJECT-TYPE
@@ -1996,11 +2071,13 @@ cGgsnPlmnIpAddrRangeEntry OBJECT-TYPE
     ::= { cGgsnPlmnIpAddrRangeTable 1 }
 
 CGgsnPlmnIpAddrRangeEntry ::= SEQUENCE {
-        cGgsnPlmnAddrRangeIpAddrType InetAddressType,
-        cGgsnPlmnAddrRangeFirstIp    InetAddress,
-        cGgsnPlmnAddrRangeLastIp     InetAddress,
-        cGgsnPlmnAddrRangeRowStatus  RowStatus,
-        cGgsnPlmnAddrRangeUsage      INTEGER 
+        cGgsnPlmnAddrRangeIpAddrType         InetAddressType,
+        cGgsnPlmnAddrRangeFirstIp            InetAddress,
+        cGgsnPlmnAddrRangeLastIp             InetAddress,
+        cGgsnPlmnAddrRangeRowStatus          RowStatus,
+        cGgsnPlmnAddrRangeUsage              INTEGER,
+        cGgsnPlmnAddrRangeFirstIpv6Prefixlen InetAddressPrefixLength,
+        cGgsnPlmnAddrRangeLastIpv6Prefixlen  InetAddressPrefixLength
 }
 
 cGgsnPlmnAddrRangeIpAddrType OBJECT-TYPE
@@ -2009,8 +2086,7 @@ cGgsnPlmnAddrRangeIpAddrType OBJECT-TYPE
     STATUS          current
     DESCRIPTION
         "The address type for cGgsnPlmnAddrRangeFirstIp and
-        cGgsnPlmnAddrRangeLastIp addresses. Only ipv4(1) addresses are
-        supported." 
+        cGgsnPlmnAddrRangeLastIp addresses." 
     ::= { cGgsnPlmnIpAddrRangeEntry 1 }
 
 cGgsnPlmnAddrRangeFirstIp OBJECT-TYPE
@@ -2037,7 +2113,10 @@ cGgsnPlmnAddrRangeRowStatus OBJECT-TYPE
         "This object is used to create a new row or delete an
         existing row in this table.
 
-        To create a row, set this object to 'createAndGo'.
+        To create a row, set this object to 'createAndGo' and the
+        objects cGgsnPlmnAddrRangeFirstIpv6Prefixlen and
+        cGgsnPlmnAddrRangeLastIpv6Prefixlen should be set to valid
+        values.
         To delete a row, set this object to 'destroy'.
         To modify a row, the row needs to be deleted and created fresh
         with new values." 
@@ -2062,6 +2141,26 @@ cGgsnPlmnAddrRangeUsage OBJECT-TYPE
         range in the local PLMN which can be used to check roaming MS."
     DEFVAL          { security } 
     ::= { cGgsnPlmnIpAddrRangeEntry 5 }
+
+cGgsnPlmnAddrRangeFirstIpv6Prefixlen OBJECT-TYPE
+    SYNTAX          InetAddressPrefixLength
+    MAX-ACCESS      read-create
+    STATUS          current
+    DESCRIPTION
+        "This object represents the IPv6 prefix length supplied for
+        the cGgsnPlmnAddrRangeFirstIp .The value of this object
+        will be zero when cGgsnPlmnAddrRangeFirstIpType is IPv4." 
+    ::= { cGgsnPlmnIpAddrRangeEntry 6 }
+
+cGgsnPlmnAddrRangeLastIpv6Prefixlen OBJECT-TYPE
+    SYNTAX          InetAddressPrefixLength
+    MAX-ACCESS      read-create
+    STATUS          current
+    DESCRIPTION
+        "This object represents the IPv6 prefix length supplied for
+        the cGgsnPlmnAddrRangeLastIp .The value of this object
+        will be zero when cGgsnPlmnAddrRangeLastIpType is IPv4." 
+    ::= { cGgsnPlmnIpAddrRangeEntry 7 }
  
 
 -- IMS Configurations
@@ -2166,7 +2265,7 @@ cGgsnPdfRowStatus OBJECT-TYPE
     ::= { cGgsnPdfEntry 5 }
 
 cGgsnPdfReconnectTimeOut OBJECT-TYPE
-    SYNTAX          Unsigned32 (1..60 )
+    SYNTAX          Unsigned32 (1..60)
     UNITS           "minutes"
     MAX-ACCESS      read-create
     STATUS          deprecated
@@ -2180,7 +2279,7 @@ cGgsnPdfReconnectTimeOut OBJECT-TYPE
     ::= { cGgsnPdfEntry 6 }
 
 cGgsnPdfReconnectRetries OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..10  | 65535)
+    SYNTAX          Unsigned32 (0..10 | 65535)
     MAX-ACCESS      read-create
     STATUS          deprecated
     DESCRIPTION
@@ -2206,7 +2305,7 @@ cGgsnPdfReconExpPdpDelete OBJECT-TYPE
     ::= { cGgsnPdfEntry 8 }
 
 cGgsnPdfReqRetryTimeOut OBJECT-TYPE
-    SYNTAX          Unsigned32 (1..60 )
+    SYNTAX          Unsigned32 (1..60)
     UNITS           "seconds"
     MAX-ACCESS      read-create
     STATUS          deprecated
@@ -2218,7 +2317,7 @@ cGgsnPdfReqRetryTimeOut OBJECT-TYPE
     ::= { cGgsnPdfEntry 9 }
 
 cGgsnPdfReqRetries OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..10 )
+    SYNTAX          Unsigned32 (0..10)
     MAX-ACCESS      read-create
     STATUS          deprecated
     DESCRIPTION
@@ -2313,7 +2412,7 @@ cGgsnPcscfRowStatus OBJECT-TYPE
 
 
 cGgsnMemoryThreshold OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..1024 )
+    SYNTAX          Unsigned32 (0..1024)
     UNITS           "98304Bytes"
     MAX-ACCESS      read-write
     STATUS          current
@@ -2401,7 +2500,7 @@ CGgsnPlmnEntry ::= SEQUENCE {
         cGgsnPlmnMcc       SnmpAdminString,
         cGgsnPlmnMnc       SnmpAdminString,
         cGgsnPlmnRowStatus RowStatus,
-        cGgsnPlmnScope     INTEGER 
+        cGgsnPlmnScope     INTEGER
 }
 
 cGgsnPlmnMcc OBJECT-TYPE
@@ -2460,7 +2559,7 @@ cGgsnPlmnScope OBJECT-TYPE
 
 
 cGgsnSessionTimeout OBJECT-TYPE
-    SYNTAX          Unsigned32 (0 |  30..4294967 )
+    SYNTAX          Unsigned32 (0 | 30..4294967)
     UNITS           "seconds"
     MAX-ACCESS      read-write
     STATUS          current
@@ -2475,7 +2574,7 @@ cGgsnSessionTimeout OBJECT-TYPE
     ::= { cGgsnConfigurations 14 }
 
 cGgsnThruputIntervalOne OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..65535 )
+    SYNTAX          Unsigned32 (0..65535)
     UNITS           "minutes"
     MAX-ACCESS      read-write
     STATUS          current
@@ -2504,7 +2603,7 @@ cGgsnThruputIntervalOne OBJECT-TYPE
     ::= { cGgsnConfigurations 15 }
 
 cGgsnThruputIntervalTwo OBJECT-TYPE
-    SYNTAX          Unsigned32 (0..65535 )
+    SYNTAX          Unsigned32 (0..65535)
     UNITS           "minutes"
     MAX-ACCESS      read-write
     STATUS          current
@@ -2718,8 +2817,7 @@ cGgsnSlbVserAddrType OBJECT-TYPE
     MAX-ACCESS      not-accessible
     STATUS          current
     DESCRIPTION
-        "This object specifies the address type of the vserver.
-        IP address of type ipv(4) is only supported." 
+        "This object specifies the address type of the vserver." 
     ::= { cGgsnSlbVserverEntry 1 }
 
 cGgsnSlbVserAddress OBJECT-TYPE
@@ -2744,7 +2842,7 @@ cGgsnSlbVserNextHopAddrType OBJECT-TYPE
     STATUS          current
     DESCRIPTION
         "This object specifies the IP address type to reach the
-        virtual server.  IP address of type ipv(4) is only supported."
+        virtual server."
     DEFVAL          { ipv4 } 
     ::= { cGgsnSlbVserverEntry 3 }
 
@@ -2821,7 +2919,9 @@ cGgsnVersion OBJECT-TYPE
                         release50(5),
                         release60(6),
                         release70(7),
-                        release80(8)
+                        release80(8),
+                        release90(9),
+                        release100(10)
                     }
     MAX-ACCESS      read-only
     STATUS          current
@@ -2918,7 +3018,7 @@ cGgsnGtpEncapInterface OBJECT-TYPE
     STATUS          current
     DESCRIPTION
         "This object represents the ifIndex of the interface on which
-        which gtp encapsulation is configured. Only one interface can
+        gtp encapsulation is configured. Only one interface can
         be configured with gtp encapsulation on the GGSN. A zero value
         indicates that no interface is configured with gtp 
         encapsulation." 
@@ -3009,6 +3109,48 @@ cGgsnActivatedIpv6Ms OBJECT-TYPE
         "This object represents the current number of MS with active
         IPv6 PDPs." 
     ::= { cGgsnStatus 15 }
+
+cGgsnGtpEncapsuTable OBJECT-TYPE
+    SYNTAX          SEQUENCE OF CGgsnGtpEncapsuEntry 
+    MAX-ACCESS      not-accessible
+    STATUS          current
+    DESCRIPTION
+        "This table contains information about ifIndex of the
+        interfaces on which gtp encapsulation is configured."
+    ::= { cGgsnStatus 16 }
+
+cGgsnGtpEncapsuEntry OBJECT-TYPE
+    SYNTAX          CGgsnGtpEncapsuEntry
+    MAX-ACCESS      not-accessible
+    STATUS          current
+    DESCRIPTION
+        "The cGgsnGtpEncapsuEntry represents the ifIndex of the
+        interface on which gtp encapsulation is configured.
+        Only one interface can be configured with gtp
+        encapsulation on the GGSN. Entry in the table created whenever
+        interface is configured with gtp encapsulation, 
+        Entry is deleted whenever unconfiguring the gtp
+        encapsulation  from the interface."
+    INDEX           { ifIndex } 
+    ::= { cGgsnGtpEncapsuTable 1 }
+
+CGgsnGtpEncapsuEntry ::= SEQUENCE {
+        cGgsnGtpEncapsuInterface InterfaceIndexOrZero
+}
+
+cGgsnGtpEncapsuInterface OBJECT-TYPE
+    SYNTAX          InterfaceIndexOrZero
+    MAX-ACCESS      read-only
+    STATUS          current
+    DESCRIPTION
+        "This object represents the ifIndex of the interface on
+        which gtp encapsulation is configured. Only one interface can
+        be configured with gtp encapsulation on the GGSN. A zero value
+        indicates that no interface is configured with gtp 
+        encapsulation." 
+    ::= { cGgsnGtpEncapsuEntry 1 }
+ 
+
 
 -- Notif Info
 
@@ -3924,10 +4066,11 @@ cGgsnMIBComplianceRev7 MODULE-COMPLIANCE
     ::= { cGgsnMIBCompliances 8 }
 
 cGgsnMIBComplianceRev8 MODULE-COMPLIANCE
-    STATUS          current
+    STATUS          deprecated
     DESCRIPTION
         "The compliance statements for entities which
-        implement the CISCO GGSN MIB."
+        implement the CISCO GGSN MIB.This is deprecated by
+        cGgsnMIBComplianceRev9."
     MODULE          -- this module
     MANDATORY-GROUPS {
                         cGgsnStatisticsGroupRev2,
@@ -3942,6 +4085,30 @@ cGgsnMIBComplianceRev8 MODULE-COMPLIANCE
                         cGgsnNotifInfoGroupR60,
                         cGgsnConfigurationsGroupR60Rev1,
                         cGgsnStatusGroupR70
+                    }
+    ::= { cGgsnMIBCompliances 9 }
+
+cGgsnMIBComplianceRev9 MODULE-COMPLIANCE
+    STATUS          deprecated
+    DESCRIPTION
+        "The compliance statements for entities which
+        implement the CISCO GGSN MIB.This is deprecated by
+        cGgsnMIBComplianceRev10."
+    MODULE          -- this module
+    MANDATORY-GROUPS {
+                        cGgsnStatisticsGroupRev2,
+                        cGgsnNotifMgmtGroupRev2,
+                        cGgsnConfigurationsGroupRev4,
+                        cGgsnNotifGroupRev3,
+                        cGgsnStatusGroupRev1,
+                        cGgsnNotifInfoGroupRev2,
+                        cGgsnStatusGroupConfigVer,
+                        cGgsnStatisticsGroupR60,
+                        cGgsnStatusGroupR60,
+                        cGgsnNotifInfoGroupR60,
+                        cGgsnConfigurationsGroupR60Rev1,
+                        cGgsnStatusGroupR70,
+                        cGgsnStatusGroupR90
                     }
 
     GROUP           cGgsnUmtsGroup
@@ -4015,7 +4182,103 @@ cGgsnMIBComplianceRev8 MODULE-COMPLIANCE
     DESCRIPTION
         "The states notInService(2), notReady(3) and
         createAndWait(5) need not be supported."
-    ::= { cGgsnMIBCompliances 9 }
+    ::= { cGgsnMIBCompliances 10 }
+
+cGgsnMIBComplianceRev10 MODULE-COMPLIANCE
+    STATUS          current
+    DESCRIPTION
+        "The compliance statements for entities which
+        implement the CISCO GGSN MIB."
+    MODULE          -- this module
+    MANDATORY-GROUPS {
+                        cGgsnStatisticsGroupRev2,
+                        cGgsnNotifMgmtGroupRev2,
+                        cGgsnConfigurationsGroupRev4,
+                        cGgsnNotifGroupRev3,
+                        cGgsnStatusGroupRev1,
+                        cGgsnNotifInfoGroupRev2,
+                        cGgsnStatusGroupConfigVer,
+                        cGgsnStatisticsGroupR60,
+                        cGgsnStatusGroupR60,
+                        cGgsnNotifInfoGroupR60,
+                        cGgsnConfigurationsGroupR60Rev1,
+                        cGgsnStatusGroupR70,
+                        cGgsnStatusGroupR90,
+                        cGgsnConfigurationsGroupSup1
+                    }
+
+    GROUP           cGgsnUmtsGroup
+    DESCRIPTION
+        "This group is mandatory for a GGSN that supports GTP v1."
+
+    OBJECT          cGgsnHistNotifGgsnIpAddrType
+    SYNTAX          INTEGER  {
+                        unknown(0),
+                        ipv4(1)
+                    }
+    DESCRIPTION
+        "Support for ipv6(2) and dns(16) is not mandatory."
+
+    OBJECT          cGgsnIpDupProtectRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+
+    OBJECT          cGgsnDefaultAggregRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+
+    OBJECT          cGgsnPlmnAddrRangeRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+
+    OBJECT          cGgsnPcscfRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+
+    OBJECT          cGgsnPlmnRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+
+    OBJECT          cGgsnSlbVserRowStatus
+    SYNTAX          INTEGER  {
+                        active(1),
+                        createAndGo(4),
+                        destroy(6)
+                    }
+    DESCRIPTION
+        "The states notInService(2), notReady(3) and
+        createAndWait(5) need not be supported."
+    ::= { cGgsnMIBCompliances 11 }
 
 -- units of conformance
 
@@ -4565,4 +4828,78 @@ cGgsnConfigurationsGroupRev4 OBJECT-GROUP
         "A collection of objects related with configurations on GGSN."
     ::= { cGgsnMIBGroups 28 }
 
+cGgsnStatusGroupR90 OBJECT-GROUP
+    OBJECTS         { cGgsnGtpEncapsuInterface }
+    STATUS          current
+    DESCRIPTION
+        "A collection of objects which maintains the mapping
+        between CGSN interfaces and gtp encapsulated interfaces."
+    ::= { cGgsnMIBGroups 29 }
+
+cGgsnConfigurationsGroupSup1 OBJECT-GROUP
+    OBJECTS         {
+                        cGgsnMsExcludeRangeStartIpv6Prefixlen,
+                        cGgsnMsExcludeRangeEndIpv6Prefixlen,
+                        cGgsnPlmnAddrRangeFirstIpv6Prefixlen,
+                        cGgsnPlmnAddrRangeLastIpv6Prefixlen
+                    }
+    STATUS          current
+    DESCRIPTION
+        "This group is supplementary to cGgsnConfigurationsGroupRev4."
+    ::= { cGgsnMIBGroups 30 }
+
 END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

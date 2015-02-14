@@ -1,3 +1,11 @@
+-- *****************************************************************
+-- POWER-ETHERNET-MIB
+--
+-- This mib was extracted from RFC 3621
+--
+-- Copyright (c) 2006, 2009 by Cisco Systems, Inc.
+-- All rights reserved.
+-- *****************************************************************
 POWER-ETHERNET-MIB DEFINITIONS ::= BEGIN
 
 IMPORTS
@@ -618,3 +626,4 @@ pethPsePortNotificationGroup NOTIFICATION-GROUP
       ::= { pethGroups 5 }
 
 END
+
