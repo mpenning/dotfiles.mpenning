@@ -2,6 +2,7 @@
 " set nocompatible " disable vi compat... DONT put below the 1st vimrc line
 set nocompatible
 let loaded_matchparen = 1 " Stop auto-paren highlighting (if enabled)
+let g:netrw_dirhistmax=0  " disable ~/.vim/.netrwhist
 set backspace=indent,eol,start
 "" Show line numbers
 " set number 
