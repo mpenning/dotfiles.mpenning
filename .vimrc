@@ -37,7 +37,7 @@ set undolevels=1000
 set title
 set visualbell
 set showcmd     " shows what you type for a command
-set modeline    " Enable modeline display
+"set modeline    " Enable modeline display  (it's best to avoid modeline)
 set ruler " Show ruler
 set noerrorbells
 set cmdheight=1 " the command bar is 1 high
