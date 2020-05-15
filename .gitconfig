@@ -6,5 +6,8 @@
 [alias]
         tree = log --graph --tags --abbrev-commit --decorate --date=relative --all --tags
         wdiff = diff --word-diff --word-diff-regex='\\w+'
+[pager]
+        # https://stackoverflow.com/a/15149253/667301
+        diff = diff-highlight | less
 [core]
         editor = vim
