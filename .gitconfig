@@ -1,3 +1,10 @@
 [user]
 	name = mpenning
 	email = mike@pennington.net
+[push]
+	default = matching
+[alias]
+        tree = log --graph --tags --abbrev-commit --decorate --date=relative --all --tags
+        wdiff = diff --word-diff --word-diff-regex='\\w+'
+[core]
+        editor = vim
