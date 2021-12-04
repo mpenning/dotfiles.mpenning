@@ -21,8 +21,9 @@ alias 'rebash'='source ~/.bash_profile'
 alias 'awhois'='gwhois -h whois.arin.net'
 # Call the cwhois_fn with the arg...
 alias 'cwhois'=cwhois_fn
+# do NOT force ssh to always allocate a tty... explained -> https://serverfault.com/a/593419/78702
 # ssh -t -> attempt to force ssh to allocate a tty
-alias 'ssh'='ssh -t -o "ServerAliveInterval 60" -o "ConnectTimeout 2"'
+alias 'ssh'='ssh -o "ServerAliveInterval 60" -o "ConnectTimeout 2"'
 
 # Use vi for term line edits
 set -o vi
